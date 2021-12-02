@@ -1,9 +1,4 @@
-/**
-* Template Name: Personal - v4.6.0
-* Template URL: https://bootstrapmade.com/personal-free-resume-bootstrap-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
+
 
 /*--------------------------------------------------------------
 # General
@@ -46,6 +41,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Raleway", sans-serif;
 }
 
+
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
@@ -68,6 +64,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1;
   font-weight: 700;
   font-family: "Poppins", sans-serif;
+  text-align: center;
 }
 #header h1 a, #header h1 a:hover {
   color: #fff;
@@ -77,13 +74,18 @@ h1, h2, h3, h4, h5, h6 {
 #header h2 {
   font-size: 24px;
   margin-top: 20px;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 1);
+  text-align: center;
 }
 #header h2 span {
   color: #fff;
   border-bottom: 2px solid #18d26e;
   padding-bottom: 6px;
 }
+#header .typewrite a { 
+ color:#006600; 
+ text-decoration: none;
+ }
 #header img {
   padding: 0;
   margin: 0;
@@ -91,19 +93,21 @@ h1, h2, h3, h4, h5, h6 {
 #header .social-links {
   margin-top: 40px;
   display: flex;
+  justify-content: center;
 }
 #header .social-links a {
-  font-size: 16px;
+  font-size: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
   line-height: 1;
-  margin-right: 8px;
+  margin-right: 25px;
   border-radius: 50%;
   width: 40px;
   height: 40px;
+  
 }
 #header .social-links a:hover {
   background: #18d26e;
@@ -122,7 +126,7 @@ h1, h2, h3, h4, h5, h6 {
   #header .container {
     display: flex;
     flex-direction: column;
-    align-items: centerr;
+    align-items: center;
   }
 }
 
@@ -174,6 +178,9 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   list-style: none;
   align-items: center;
+  position: relative;
+  left: 50%;
+  transform: translatex(-50%);
 }
 .navbar li {
   position: relative;
@@ -187,9 +194,9 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: space-between;
   padding: 0;
   font-family: "Poppins", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 1);
   white-space: nowrap;
   transition: 0.3s;
 }
@@ -302,7 +309,7 @@ section.section-show {
   padding-bottom: 45px;
 }
 section .container {
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.65);
   padding: 30px;
 }
 @media (max-width: 768px) {
@@ -439,7 +446,7 @@ section .container {
 .skills .progress-bar {
   width: 1px;
   height: 10px;
-  transition: 0.9s;
+  transition: 3.5s;
   background-color: #18d26e;
 }
 
