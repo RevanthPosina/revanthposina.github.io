@@ -42,7 +42,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*--------------------------------------------------------------
-# Preloader
+# Pre Loader
 --------------------------------------------------------------*/
 .preloader {
 position: absolute;
@@ -53,7 +53,7 @@ right:0;
 width: 100%;
 height: 100vh;
 z-index: 99999999;
-background-image: url('../img/preloader.gif'); 
+background-image: url('../img/preloader.gif'); /* your icon gif file path */
 background-repeat: no-repeat;
 background-color: #FFF;
 background-position: center;
