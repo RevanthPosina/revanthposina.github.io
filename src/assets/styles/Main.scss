@@ -1,0 +1,145 @@
+.mainContainer {
+  background-color: #0a0a0a;
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  padding: 20px;
+  background-color: transparent;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #f0f0f0;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+.introSection {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  width: 100%;
+  padding: 50px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.introText {
+  max-width: 600px;
+  margin-right: 40px;
+}
+
+.introText h3 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #ab47bc;
+}
+
+.introText h1 {
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+  color: #e0e0e0;
+}
+
+.typewriter-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.inline-text {
+  font-size: 2rem;
+  color: #bbbbbb;
+  margin: 0;
+  padding: 0;
+}
+
+.typewriter-component {
+  font-size: 1.9rem;
+  color: #ab47bc;
+  padding: 0;
+}
+
+.introText .highlight {
+  color: #ab47bc;
+}
+
+.introText h2 {
+  font-size: 1.6rem;
+  color: #bbbbbb;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.introText p {
+  color: #cccccc;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 25px;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+
+.socialIcons a {
+  color: #ffffff;
+  font-size: 2rem;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.socialIcons a:hover {
+  transform: scale(1.15);
+  color: #ab47bc;;
+}
+
+.illustrationWrapper {
+  max-width: 400px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.devIllustration {
+  width: 80%;
+  height: auto;
+}
+
+.wave {
+  animation: wave-animation 2.5s infinite;
+  transform-origin: 70% 70%;
+  display: inline-block;
+}
+
+@keyframes wave-animation {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  30% { transform: rotate(14deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+  60% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
