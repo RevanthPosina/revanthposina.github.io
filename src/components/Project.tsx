@@ -18,7 +18,7 @@ import sales from '../assets/images/sales.gif';
 import Stockpriceanalysis from '../assets/images/Stockpriceanalysis.gif';
 import coursedelivery from '../assets/images/coursedelivery.gif';
 import houseprice from '../assets/images/houseprice.gif';
-import awssa003 from '../assets/images/housepriceaws-certified-solutions-architect-associate.png';
+import awssa003 from '../assets/images/aws-certified-solutions-architect-associate.png';
 import '../assets/styles/Project.scss';
 
 function Project() {
@@ -111,7 +111,7 @@ function Project() {
         },
         {
             img: awssa003,
-            title: "Tableau for Data Science",
+            title: "Certified AWS Solution Architect-CSA-003",
             description: "Completed Tableau certification to enhance business analytics skills and master advanced visualizations. Developed an interactive dashboard for the Tesla Stock Price Analysis project, enabling users to filter and visualize fluctuating stock price trends across various months and years for actionable insights.",
             link: "",
             category: "CERTIFICATIONS"
