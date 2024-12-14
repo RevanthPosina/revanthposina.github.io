@@ -75,7 +75,7 @@ function Timeline() {
             iconStyle={{ background: '#5000ca', color: 'rgb(39, 40, 34)' }}
             icon={<FontAwesomeIcon icon={faBriefcase} />}
           >
-            <h3 className="vertical-timeline-element-title">Software Engineer</h3>
+            <h3 className="vertical-timeline-element-title">Data Engineer</h3>
             <h4 className="vertical-timeline-element-subtitle">Ivy Comptech, Entain • Hyderabad, India</h4>
             <p>
               • Spearheaded 3 Data Migration projects, transferring over 7 million user records within US regulatory markets.<br />
