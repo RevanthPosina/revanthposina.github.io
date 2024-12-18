@@ -111,8 +111,8 @@ function Project() {
         },
         {
             img: awssa003,
-            title: "Certified AWS Solution Architect-CSA-003",
-            description: "Completed Tableau certification to enhance business analytics skills and master advanced visualizations. Developed an interactive dashboard for the Tesla Stock Price Analysis project, enabling users to filter and visualize fluctuating stock price trends across various months and years for actionable insights.",
+            title: "Certified AWS Solution Architect",
+            description: "Gained expertise in designing distributed systems and implementing scalable, AWS architectures. Demonstrated proficiency in deploying applications on AWS platforms using services like EC2, S3, RDS, and Lambda. Validated skills to architect cloud solutions aligned with business requirements and industry standards.",
             link: "",
             category: "CERTIFICATIONS"
         },
