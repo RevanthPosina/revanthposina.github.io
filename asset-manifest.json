@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.05b93851.css",
-    "main.js": "/static/js/main.8a1a995f.js",
+    "main.js": "/static/js/main.89a5b9c9.js",
     "static/js/453.b05d8aa5.chunk.js": "/static/js/453.b05d8aa5.chunk.js",
     "static/media/houseprice.gif": "/static/media/houseprice.0762f50ba681371b00dc.gif",
     "static/media/vlsiint.gif": "/static/media/vlsiint.356d9ce7cb0f7122a33b.gif",
@@ -19,17 +19,18 @@
     "static/media/trafficsign.gif": "/static/media/trafficsign.77836f33dbae17fbabdb.gif",
     "static/media/ads.png": "/static/media/ads.0cde3fd5640ccd414df9.png",
     "static/media/dev.svg": "/static/media/dev.541f8179af8209ce03ccf2178fe62dbf.svg",
+    "static/media/aws-certified-solutions-architect-associate.png": "/static/media/aws-certified-solutions-architect-associate.8fc5d326b3a6198c2637.png",
     "static/media/pega.png": "/static/media/pega.9b268f6cc3fc07cc6905.png",
     "static/media/ssa.png": "/static/media/ssa.315e95f70b6f7ed568e6.png",
     "static/media/ibm.png": "/static/media/ibm.b53b19f3c1c2e1fb317b.png",
     "static/media/ml.png": "/static/media/ml.c498b98f18af5075aedf.png",
     "index.html": "/index.html",
     "main.05b93851.css.map": "/static/css/main.05b93851.css.map",
-    "main.8a1a995f.js.map": "/static/js/main.8a1a995f.js.map",
+    "main.89a5b9c9.js.map": "/static/js/main.89a5b9c9.js.map",
     "453.b05d8aa5.chunk.js.map": "/static/js/453.b05d8aa5.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.05b93851.css",
-    "static/js/main.8a1a995f.js"
+    "static/js/main.89a5b9c9.js"
   ]
 }
