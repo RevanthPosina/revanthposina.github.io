@@ -18,6 +18,7 @@ import sales from '../assets/images/sales.gif';
 import Stockpriceanalysis from '../assets/images/Stockpriceanalysis.gif';
 import coursedelivery from '../assets/images/coursedelivery.gif';
 import houseprice from '../assets/images/houseprice.gif';
+import awssa003 from '../assets/images/aws-certified-solutions-architect-associate.png';
 import '../assets/styles/Project.scss';
 
 function Project() {
@@ -107,6 +108,13 @@ function Project() {
             description: "At ECIL, Gained expertise in Digital System Design, Computer Organization and Architecture, and CMOS VLSI concepts. Worked with Verilog HDL and Microwind software to implement a prototype project: FPGA Implementation of Traffic Light Control Based on Sensor Data in VLSI.",
             link: "",
             category: "INTERNSHIPS"
+        },
+        {
+            img: awssa003,
+            title: "Certified AWS Solution Architect-CSA-003",
+            description: "Completed Tableau certification to enhance business analytics skills and master advanced visualizations. Developed an interactive dashboard for the Tesla Stock Price Analysis project, enabling users to filter and visualize fluctuating stock price trends across various months and years for actionable insights.",
+            link: "",
+            category: "CERTIFICATIONS"
         },
         {
             img: tableau,

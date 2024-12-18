@@ -66,7 +66,7 @@ function Timeline() {
               • Social Media Mining, Search, Advanced Database Technologies, VR<br />
             </p>
           </VerticalTimelineElement>
-           {/* Software Engineer */}
+           {/* Data Engineer */}
            <VerticalTimelineElement
             className="vertical-timeline-element--work"
             contentStyle={{ background: 'white', color: 'rgb(39, 40, 34)' }}
@@ -75,13 +75,14 @@ function Timeline() {
             iconStyle={{ background: '#5000ca', color: 'rgb(39, 40, 34)' }}
             icon={<FontAwesomeIcon icon={faBriefcase} />}
           >
-            <h3 className="vertical-timeline-element-title">Data Engineer</h3>
+            <h3 className="vertical-timeline-element-title">Data Engineer - Ops</h3>
             <h4 className="vertical-timeline-element-subtitle">Ivy Comptech, Entain • Hyderabad, India</h4>
             <p>
               • Spearheaded 3 Data Migration projects, transferring over 7 million user records within US regulatory markets.<br />
-              • Extracted and transformed user data, reducing redundancies and ensuring alignment with product specifications.<br />
-              • Conducted comprehensive pre-period data analysis to build migration workflows, while also enhancing gameplay
-              and user engagement through A/B testing, risk analysis, and validations on Big Data.
+              • Designed and implemented scalable data pipelines using SQL and Oracle SQL, automating workflows to enhance performance and reduce manual intervention.<br />
+              • Conducted node-level deployments using SSH for efficient system updates, ensuring secure and reliable implementation across production environments.<br />
+              • Built dashboards and reports with Tableau and Power BI to deliver actionable insights, enabling data-driven decision-making.<br />
+              • Collaborated with cross-functional teams to enhance RESTful APIs and resolve data-related production issues, ensuring high system reliability and operational continuity.
             </p>
           </VerticalTimelineElement>
          
@@ -94,11 +95,12 @@ function Timeline() {
             iconStyle={{ background: '#5000ca', color: 'rgb(39, 40, 34)' }}
             icon={<FontAwesomeIcon icon={faBriefcase} />}
           >
-            <h3 className="vertical-timeline-element-title">Trainee Software Engineer</h3>
+            <h3 className="vertical-timeline-element-title">Trainee Software Engineer - Data Ops</h3>
             <h4 className="vertical-timeline-element-subtitle">Ivy Comptech, Entain • Hyderabad, India</h4>
             <p>
-              • Worked on Back End Development with the tech stack like SQL, Oracle SQL, Mongo DB, Java, SOAP API, SSH nodes and frameworks like Spring MVC, Spring Data JPA to make code optimizations.<br />
-              • Developed “Compliance" features like KYC Verification, User Workflow, Responsible Gaming Functionalities and Geolocation services for the product as per the regulatory requirements of the respective countries in business and was an active part of successfully delivering 15+ labels/projects (for Gaming Platforms like BWIN, Eurobet, BetMGM and Ladbrokes).
+              • Contributed to 15+ White Label Building projects, focusing on regulatory compliance and user registration data flows for brands like Bwin, BetMGM, and Ladbrokes.<br/>
+              • Automated repetitive tasks using VBA macros, improving efficiency in data analysis and reporting workflows.<br/>
+              • Gained hands-on experience with SSH nodes for secure deployments and optimized data communication between systems.
             </p>
           </VerticalTimelineElement>
            {/* Bachelor of Technology in Electronics and Communication Engineering */}
@@ -114,8 +116,8 @@ function Timeline() {
             <h4 className="vertical-timeline-element-subtitle">K L University • Guntur, India</h4>
             <p>
               • <strong>Specialized in Signal and Image Processing</strong><br />
-              • <strong>Relavent Courses:</strong> Machine Learning, Artificial Neural Networks, Pattern Recognition.<br />
-              • Java, Data Structures, SQL, Python, C<br />
+              • <strong>Relavent Courses:</strong> Database Systems, Machine Learning, Artificial Neural Networks, Pattern Recognition.<br />
+              • SQL, Python, Java, Data Structures, C<br />
               • DSD, AECD, Computer Netwoks, Signals and Systems
             </p>
           </VerticalTimelineElement>
