@@ -111,7 +111,7 @@ function Project() {
         },
         {
             img: awssa003,
-            title: "Certified AWS Solution Architect",
+            title: "AWS Certified Solutions Architect",
             description: "Gained expertise in designing distributed systems and implementing scalable, AWS architectures. Demonstrated proficiency in deploying applications on AWS platforms using services like EC2, S3, RDS, and Lambda. Validated skills to architect cloud solutions aligned with business requirements and industry standards.",
             link: "",
             category: "CERTIFICATIONS"
