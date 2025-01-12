@@ -15,8 +15,8 @@ const dataEngineering = [
     "SSRS",
     "PySpark",
     "SparkSQL",
-    "DDL",
-    "DML"
+    "Snowflake",
+    "Kafka"
 ];
 
 const devOpsAndTools = [
@@ -24,12 +24,13 @@ const devOpsAndTools = [
     "Bitbucket",
     "SourceTree",
     "Jira",
+    "Airflow",
     "Jenkins",
     "JSON",
     "AWS S3",
     "AWS IAM",
     "AWS Redshift",
-    "Java"
+    "AWS Glue"
 ];
 
 const analyticsAndAI = [

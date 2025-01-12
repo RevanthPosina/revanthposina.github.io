@@ -20,14 +20,13 @@ function Timeline() {
             iconStyle={{ background: '#5000ca', color: 'rgb(39, 40, 34)' }}
             icon={<FontAwesomeIcon icon={faBriefcase} />}
           >
-            <h3 className="vertical-timeline-element-title">Database Engineer I</h3>
+            <h3 className="vertical-timeline-element-title">Data Engineer I</h3>
             <h4 className="vertical-timeline-element-subtitle">Bloom Insurance • Bloomington, Indiana</h4>
             <p>
-              • Structured health plan data from multiple client sources<br />
-              • Optimized large-scale data processing with Python, Spark, and AWS S3, boosting retrieval speed and efficiency.<br />
-              • Resolved critical production issues within SLAs, minimizing downtime and ensuring continuous data flow.<br />
-              • Analyzed, preprocessed, and transformed client data from different sources for seamless integration into internal
-              databases, ensuring accuracy and meeting 100% operational and business requirements.
+              • Optimized OLAP workflows and automated data pipelines using Snowflake, Airflow, and CI/CD tools.<br />
+              • Designed scalable health data solutions with PySpark and Databricks.<br />
+              • Migrated enterprise ETL processes to AWS S3 and Snowflake for improved performance.<br />
+              • Built robust data validation frameworks ensuring accuracy across datasets.
             </p>
           </VerticalTimelineElement>
 
@@ -46,7 +45,7 @@ function Timeline() {
               • Maintained ETL pipelines, worked on 100+ SSIS packages<br />
               • Engineered T-SQL driven ETL processes<br />
               • Produced 20+ client-facing SSRS, Power BI reports<br />
-              • Identified and resolved data discrepancies
+              • Identified and resolved data discrepancies, deployed complex stored procedures handling large scale transformations.
             </p>
           </VerticalTimelineElement>
           {/* Master of Science in Data Science */}
@@ -78,11 +77,10 @@ function Timeline() {
             <h3 className="vertical-timeline-element-title">Data Engineer - Ops</h3>
             <h4 className="vertical-timeline-element-subtitle">Ivy Comptech, Entain • Hyderabad, India</h4>
             <p>
-              • Spearheaded 3 Data Migration projects, transferring over 7 million user records within US regulatory markets.<br />
-              • Designed and implemented scalable data pipelines using SQL and Oracle SQL, automating workflows to enhance performance and reduce manual intervention.<br />
+              • Migrated user records to cloud systems with AWS S3 and Redshift.<br />
+              • Streamlined workflows using SQL, Python, and Airflow.<br />
               • Conducted node-level deployments using SSH for efficient system updates, ensuring secure and reliable implementation across production environments.<br />
-              • Built dashboards and reports with Tableau and Power BI to deliver actionable insights, enabling data-driven decision-making.<br />
-              • Collaborated with cross-functional teams to enhance RESTful APIs and resolve data-related production issues, ensuring high system reliability and operational continuity.
+              • Delivered optimized white-label platforms and enhanced API performance.
             </p>
           </VerticalTimelineElement>
          
