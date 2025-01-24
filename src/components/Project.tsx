@@ -19,12 +19,36 @@ import Stockpriceanalysis from '../assets/images/Stockpriceanalysis.gif';
 import coursedelivery from '../assets/images/coursedelivery.gif';
 import houseprice from '../assets/images/houseprice.gif';
 import awssa003 from '../assets/images/aws-certified-solutions-architect-associate.png';
+import spotifyetl from '../assets/images/music-spotify.gif';
+import DeliveryOptimization from '../assets/images/DeliveryOptimization.gif';
+import MarketingCampaign from '../assets/images/MarketingCampaign.gif';
 import '../assets/styles/Project.scss';
 
 function Project() {
     const [filter, setFilter] = useState('ALL');
 
     const projects = [
+        {
+            img: spotifyetl,
+            title: "SpotiFlow Data Stream",
+            description: "SpotiFlow Data Stream is a serverless ETL (Extract, Transform, Load) pipeline that processes Spotify data using AWS cloud services. The project automatically collects, transforms, and analyzes Spotify track, artist, and album data, making it available for analytics through Amazon Athena and extendable to Snowflake for advanced analytics capabilities.",
+            link: "https://github.com/RevanthPosina/SpotiFlow-Data-Stream",
+            category: "PROJECTS"
+        },
+        {
+            img: DeliveryOptimization,
+            title: "Retail Delivery Optimization",
+            description: "Designed and managed AWS S3 data lake and ETL pipelines using Python, SQL, Airflow, and Spark to streamline retail analytics. Automated workflows to transform and load data, enabling daily actionable insights and improving delivery and operational efficiency.",
+            link: "https://github.com/RevanthPosina/Retail-Delivery-Optimization",
+            category: "PROJECTS"
+        },
+        {
+            img: MarketingCampaign,
+            title: "Customer Reach and Store Performance Analytics",
+            description: "Utilized SAS to analyze customer travel patterns and store performance, identifying optimal marketing radii and product preferences. Delivered insights to target customers within 5km, tailor strategies by store performance, and optimize marketing spend for maximum impact.",
+            link: "https://github.com/RevanthPosina/MarketingCampaign",
+            category: "PROJECTS"
+        },
         {
             img: houseprice,
             title: "House Prices Prediction – using advanced Regression Techniques",
