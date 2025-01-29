@@ -19,15 +19,9 @@ function About() {
             ABOUT
             <span className="underline"></span>
           </h2>
-          <p>
-            Hello! I'm Rev (Revanth Posina), a data professional with a Master's in Data Science from Indiana University Bloomington. I have a passion for transforming complex data into actionable insights that drive business growth and inform strategic decision-making. With expertise spanning data analytics, business intelligence, and data engineering, I excel at turning raw data into meaningful narratives that make an impact.
-          </p>
-          <p>
-            Throughout my career, I've designed scalable ETL pipelines, processed large datasets, and optimized data infrastructures to enhance accessibility and performance. Proficient in Python and SQL, I've developed efficient workflows, crafted algorithms, and written optimized queries for seamless data integration. I've also automated repetitive data tasks, saving time and improving efficiency. Using tools like SSIS, SSRS, Tableau, Excel and Power BI, I create visualizations, reports and dashboards that empower organizations to make data-driven decisions.
-          </p>
-          <p>
-            This portfolio reflects my journey and showcases the work that fuels my passion for data. Outside of work, I enjoy delving into topics like space, technology, comics, and anime—always curious to explore and learn something new!
-          </p>
+          <p>Hello! I'm Rev (Revanth Posina), a data professional with a Master's in Data Science from Indiana University Bloomington. My journey in the data world is driven by a singular passion: transforming complex information into compelling stories that drive real business value.</p>
+<p>As a data engineer, I specialize in designing cloud-native data architectures and implementing Delta Lake solutions that bring reliability and performance to large-scale data operations. From optimizing Spark workloads to modernizing legacy systems into scalable cloud architectures, I focus on creating solutions that make data insights accessible to everyone. Through workflow optimization and automated quality frameworks, I build ML-ready data platforms that enable both analysts and data scientists to accelerate their insights while empowering business teams to make data-driven decisions.</p>
+<p>When I'm not working with data, you'll find me exploring space exploration, emerging technologies, comics, and anime – areas that fuel my imagination and drive for innovation. Let's build something amazing together!</p>
         </div>
       </div>
     </div>

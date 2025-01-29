@@ -22,12 +22,12 @@ function Timeline() {
           >
             <h3 className="vertical-timeline-element-title">Data Engineer I</h3>
             <h4 className="vertical-timeline-element-subtitle">Bloom Insurance • Bloomington, Indiana</h4>
-            <p>
+            {/* <p>
               • Optimized OLAP workflows and automated data pipelines using Snowflake, Airflow, and CI/CD tools.<br />
               • Designed scalable health data solutions with PySpark and Databricks.<br />
               • Migrated enterprise ETL processes to AWS S3 and Snowflake for improved performance.<br />
               • Built robust data validation frameworks ensuring accuracy across datasets.
-            </p>
+            </p> */}
           </VerticalTimelineElement>
 
           {/* Data Engineer Intern */}
@@ -41,12 +41,12 @@ function Timeline() {
           >
             <h3 className="vertical-timeline-element-title">Data Engineer Intern</h3>
             <h4 className="vertical-timeline-element-subtitle">Bloom Insurance • Bloomington, Indiana</h4>
-            <p>
+            {/* <p>
               • Maintained ETL pipelines, worked on 100+ SSIS packages<br />
               • Engineered T-SQL driven ETL processes<br />
               • Produced 20+ client-facing SSRS, Power BI reports<br />
               • Identified and resolved data discrepancies, deployed complex stored procedures handling large scale transformations.
-            </p>
+            </p> */}
           </VerticalTimelineElement>
           {/* Master of Science in Data Science */}
           <VerticalTimelineElement
@@ -61,8 +61,8 @@ function Timeline() {
             <h4 className="vertical-timeline-element-subtitle">Indiana University • Bloomington, Indiana</h4>
             <p>
               • <strong>Specialized in Computational and Analytical tracks</strong><br />
-              • <strong>Relavent Courses:</strong> Advanced Database, Data Mining, Data Visualization, Applied Algorithms, Statistics.<br />
-              • Social Media Mining, Search, Advanced Database Technologies, VR<br />
+              • <strong>Relavent Courses:</strong> Advanced Database, Data Mining, Data Visualization, Applied Algorithms, Statistics,
+                 Social Media Mining, Search, Advanced Database Technologies, VR<br />
             </p>
           </VerticalTimelineElement>
            {/* Data Engineer */}
@@ -76,12 +76,12 @@ function Timeline() {
           >
             <h3 className="vertical-timeline-element-title">Data Engineer - Ops</h3>
             <h4 className="vertical-timeline-element-subtitle">Ivy Comptech, Entain • Hyderabad, India</h4>
-            <p>
+            {/* <p>
               • Migrated user records to cloud systems with AWS S3 and Redshift.<br />
               • Streamlined workflows using SQL, Python, and Airflow.<br />
               • Conducted node-level deployments using SSH for efficient system updates, ensuring secure and reliable implementation across production environments.<br />
               • Delivered optimized white-label platforms and enhanced API performance.
-            </p>
+            </p> */}
           </VerticalTimelineElement>
          
            {/* Trainee Software Engineer */}
@@ -95,11 +95,11 @@ function Timeline() {
           >
             <h3 className="vertical-timeline-element-title">Trainee Software Engineer - Data Ops</h3>
             <h4 className="vertical-timeline-element-subtitle">Ivy Comptech, Entain • Hyderabad, India</h4>
-            <p>
+            {/* <p>
               • Contributed to 15+ White Label Building projects, focusing on regulatory compliance and user registration data flows for brands like Bwin, BetMGM, and Ladbrokes.<br/>
               • Automated repetitive tasks using VBA macros, improving efficiency in data analysis and reporting workflows.<br/>
               • Gained hands-on experience with SSH nodes for secure deployments and optimized data communication between systems.
-            </p>
+            </p> */}
           </VerticalTimelineElement>
            {/* Bachelor of Technology in Electronics and Communication Engineering */}
            <VerticalTimelineElement
@@ -114,9 +114,8 @@ function Timeline() {
             <h4 className="vertical-timeline-element-subtitle">K L University • Guntur, India</h4>
             <p>
               • <strong>Specialized in Signal and Image Processing</strong><br />
-              • <strong>Relavent Courses:</strong> Database Systems, Machine Learning, Artificial Neural Networks, Pattern Recognition.<br />
-              • SQL, Python, Java, Data Structures, C<br />
-              • DSD, AECD, Computer Netwoks, Signals and Systems
+              • <strong>Relavent Courses:</strong> Database Systems, Machine Learning, Artificial Neural Networks, Pattern Recognition, SQL, Python, Java, Data Structures, C
+    
             </p>
           </VerticalTimelineElement>
 
