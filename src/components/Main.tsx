@@ -24,7 +24,7 @@ const MainPage = () => {
            <Type />
           </div>
             </div>
-            <p>Basically, I help turning data into insights to drive impactful decisions.</p>
+            <p>Basically, I love turning data into insights that drive impactful decisions.</p>
             <div className="socialIcons">
               <a href="https://github.com/RevanthPosina" target="_blank" rel="noopener noreferrer"><GitHubIcon /></a>
               <a href="https://www.linkedin.com/in/revanth-p/" target="_blank" rel="noopener noreferrer"><LinkedInIcon /></a>
