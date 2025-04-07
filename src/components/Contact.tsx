@@ -1,116 +1,182 @@
-import React, { useRef, useState } from 'react';
+import React, { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faUser, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { Snackbar } from '@mui/material';
+import MuiAlert from '@mui/material/Alert';
 import '../assets/styles/Contact.scss';
-// import emailjs from '@emailjs/browser';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
-import TextField from '@mui/material/TextField';
 
-function Contact() {
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
 
-  const [name, setName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [message, setMessage] = useState<string>('');
+const Contact: React.FC = () => {
+  const form = useRef<HTMLFormElement>(null);
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: '',
+    severity: 'success' as 'success' | 'error'
+  });
 
-  const [nameError, setNameError] = useState<boolean>(false);
-  const [emailError, setEmailError] = useState<boolean>(false);
-  const [messageError, setMessageError] = useState<boolean>(false);
+  const validateEmail = (email: string): boolean => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
 
-  const form = useRef();
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    // Clear error when user starts typing
+    if (errors[name as keyof FormData]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
+  };
 
-  const sendEmail = (e: any) => {
+  const handleCloseSnackbar = () => {
+    setSnackbar(prev => ({
+      ...prev,
+      open: false
+    }));
+  };
+
+  const sendEmail = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate inputs
+    const newErrors: Partial<FormData> = {};
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!validateEmail(formData.email)) {
+      newErrors.email = 'Please enter a valid email';
+    }
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    }
 
-    setNameError(name === '');
-    setEmailError(email === '');
-    setMessageError(message === '');
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
 
-    /* Uncomment below if you want to enable the emailJS */
+    try {
+      if (form.current) {
+        await emailjs.sendForm(
+          'service_xxxxxxx', // Replace with your EmailJS service ID
+          'template_xxxxxxx', // Replace with your EmailJS template ID
+          form.current,
+          'your_public_key' // Replace with your EmailJS public key
+        );
 
-    // if (name !== '' && email !== '' && message !== '') {
-    //   var templateParams = {
-    //     name: name,
-    //     email: email,
-    //     message: message
-    //   };
+        setSnackbar({
+          open: true,
+          message: 'Message sent successfully!',
+          severity: 'success'
+        });
 
-    //   console.log(templateParams);
-    //   emailjs.send('service_id', 'template_id', templateParams, 'api_key').then(
-    //     (response) => {
-    //       console.log('SUCCESS!', response.status, response.text);
-    //     },
-    //     (error) => {
-    //       console.log('FAILED...', error);
-    //     },
-    //   );
-    //   setName('');
-    //   setEmail('');
-    //   setMessage('');
-    // }
+        // Clear form
+        setFormData({
+          name: '',
+          email: '',
+          message: ''
+        });
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      setSnackbar({
+        open: true,
+        message: 'Failed to send message. Please try again.',
+        severity: 'error'
+      });
+    }
   };
 
   return (
-    <div id="contact">
-      <div className="items-container">
-        <div className="contact_wrapper">
-          <h1>Contact Me</h1>
-          <p>Got a project waiting to be realized? Let's collaborate and make it happen!</p>
-          <Box
-            ref={form}
-            component="form"
-            noValidate
-            autoComplete="off"
-            className='contact-form'
-          >
-            <div className='form-flex'>
-              <TextField
-                required
-                id="outlined-required"
-                label="Your Name"
-                placeholder="What's your name?"
-                value={name}
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-                error={nameError}
-                helperText={nameError ? "Please enter your name" : ""}
-              />
-              <TextField
-                required
-                id="outlined-required"
-                label="Email / Phone"
-                placeholder="How can I reach you?"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-                error={emailError}
-                helperText={emailError ? "Please enter your email or phone number" : ""}
+    <section id="contact">
+      <div className="contact-container">
+        <h2 className="section-title">Contact Me</h2>
+        <form ref={form} onSubmit={sendEmail} className="contact-form">
+          <div className="form-group">
+            <div className="input-group">
+              <FontAwesomeIcon icon={faUser} className="input-icon" />
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                placeholder="Your Name"
+                className={errors.name ? 'error' : ''}
               />
             </div>
-            <TextField
-              required
-              id="outlined-multiline-static"
-              label="Message"
-              placeholder="Send me any inquiries or questions"
-              multiline
-              rows={10}
-              className="body-form"
-              value={message}
-              onChange={(e) => {
-                setMessage(e.target.value);
-              }}
-              error={messageError}
-              helperText={messageError ? "Please enter the message" : ""}
+            {errors.name && <span className="error-message">{errors.name}</span>}
+          </div>
+
+          <div className="form-group">
+            <div className="input-group">
+              <FontAwesomeIcon icon={faEnvelope} className="input-icon" />
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                placeholder="Your Email"
+                className={errors.email ? 'error' : ''}
+              />
+            </div>
+            {errors.email && <span className="error-message">{errors.email}</span>}
+          </div>
+
+          <div className="form-group">
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleInputChange}
+              placeholder="Your Message"
+              className={errors.message ? 'error' : ''}
             />
-            <Button variant="contained" endIcon={<SendIcon />} onClick={sendEmail}>
-              Send
-            </Button>
-          </Box>
-        </div>
+            {errors.message && <span className="error-message">{errors.message}</span>}
+          </div>
+
+          <button type="submit" className="submit-btn">
+            <FontAwesomeIcon icon={faPaperPlane} className="btn-icon" />
+            Send Message
+          </button>
+        </form>
       </div>
-    </div>
+
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={handleCloseSnackbar}
+          severity={snackbar.severity}
+        >
+          {snackbar.message}
+        </MuiAlert>
+      </Snackbar>
+    </section>
   );
-}
+};
 
 export default Contact;

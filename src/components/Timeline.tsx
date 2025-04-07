@@ -1,130 +1,116 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBriefcase } from '@fortawesome/free-solid-svg-icons';
+import { faBriefcase, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import '../assets/styles/Timeline.scss';
 
 function Timeline() {
+  const darkThemeStyles = {
+    background: 'rgba(255, 255, 255, 0.03)',
+    color: '#fff',
+    border: '1px solid rgba(171, 71, 188, 0.1)',
+    borderRadius: '16px',
+    boxShadow: '0 3px 10px rgba(0, 0, 0, 0.1)'
+  };
+
+  const darkThemeArrow = { borderRight: '7px solid rgba(171, 71, 188, 0.1)' };
+  const iconStyle = { background: '#ab47bc', color: '#fff' };
+
   return (
-    <div id="history">
+    <section id="history">
       <div className="items-container">
         <h1>Career History</h1>
-        <VerticalTimeline>
-          {/* Database Engineer 1 */}
+        <VerticalTimeline lineColor="rgba(171, 71, 188, 0.2)">
+          {/* Data Engineer 1 */}
           <VerticalTimelineElement
-            className="vertical-timeline-element--work"
-            contentStyle={{ background: 'white', color: 'rgb(39, 40, 34)' }}
-            contentArrowStyle={{ borderRight: '7px solid white' }}
+            className="vertical-timeline-element"
+            contentStyle={darkThemeStyles}
+            contentArrowStyle={darkThemeArrow}
             date="Jul 2024 - Present"
-            iconStyle={{ background: '#5000ca', color: 'rgb(39, 40, 34)' }}
+            iconStyle={iconStyle}
             icon={<FontAwesomeIcon icon={faBriefcase} />}
           >
-            <h3 className="vertical-timeline-element-title">Data Engineer I</h3>
-            <h4 className="vertical-timeline-element-subtitle">Bloom Insurance • Bloomington, Indiana</h4>
-            {/* <p>
-              • Optimized OLAP workflows and automated data pipelines using Snowflake, Airflow, and CI/CD tools.<br />
-              • Designed scalable health data solutions with PySpark and Databricks.<br />
-              • Migrated enterprise ETL processes to AWS S3 and Snowflake for improved performance.<br />
-              • Built robust data validation frameworks ensuring accuracy across datasets.
-            </p> */}
+            <h3>Data Engineer I</h3>
+            <h4>Bloom Insurance • Bloomington, Indiana</h4>
           </VerticalTimelineElement>
 
           {/* Data Engineer Intern */}
           <VerticalTimelineElement
-            className="vertical-timeline-element--work"
-            contentStyle={{ background: 'white', color: 'rgb(39, 40, 34)' }}
-            contentArrowStyle={{ borderRight: '7px solid white' }}
+            className="vertical-timeline-element"
+            contentStyle={darkThemeStyles}
+            contentArrowStyle={darkThemeArrow}
             date="May 2023 - Dec 2023"
-            iconStyle={{ background: '#5000ca', color: 'rgb(39, 40, 34)' }}
+            iconStyle={iconStyle}
             icon={<FontAwesomeIcon icon={faBriefcase} />}
           >
-            <h3 className="vertical-timeline-element-title">Data Engineer Intern</h3>
-            <h4 className="vertical-timeline-element-subtitle">Bloom Insurance • Bloomington, Indiana</h4>
-            {/* <p>
-              • Maintained ETL pipelines, worked on 100+ SSIS packages<br />
-              • Engineered T-SQL driven ETL processes<br />
-              • Produced 20+ client-facing SSRS, Power BI reports<br />
-              • Identified and resolved data discrepancies, deployed complex stored procedures handling large scale transformations.
-            </p> */}
+            <h3>Data Engineer Intern</h3>
+            <h4>Bloom Insurance • Bloomington, Indiana</h4>
           </VerticalTimelineElement>
-          {/* Master of Science in Data Science */}
+
+          {/* Master of Science */}
           <VerticalTimelineElement
-            className="vertical-timeline-element--work"
-            contentStyle={{ background: 'white', color: 'rgb(39, 40, 34)' }}
-            contentArrowStyle={{ borderRight: '7px solid white' }}
+            className="vertical-timeline-element"
+            contentStyle={darkThemeStyles}
+            contentArrowStyle={darkThemeArrow}
             date="Aug 2022 - May 2024"
-            iconStyle={{ background: '#5000ca', color: 'rgb(39, 40, 34)' }}
-            icon={<FontAwesomeIcon icon={faBriefcase} />}
+            iconStyle={iconStyle}
+            icon={<FontAwesomeIcon icon={faGraduationCap} />}
           >
-            <h3 className="vertical-timeline-element-title">Master of Science in Data Science</h3>
-            <h4 className="vertical-timeline-element-subtitle">Indiana University • Bloomington, Indiana</h4>
+            <h3>Master of Science in Data Science</h3>
+            <h4>Indiana University • Bloomington, Indiana</h4>
             <p>
               • <strong>Specialized in Computational and Analytical tracks</strong><br />
-              • <strong>Relavent Courses:</strong> Advanced Database, Data Mining, Data Visualization, Applied Algorithms, Statistics,
-                 Social Media Mining, Search, Advanced Database Technologies, VR<br />
-            </p>
-          </VerticalTimelineElement>
-           {/* Data Engineer */}
-           <VerticalTimelineElement
-            className="vertical-timeline-element--work"
-            contentStyle={{ background: 'white', color: 'rgb(39, 40, 34)' }}
-            contentArrowStyle={{ borderRight: '7px solid white' }}
-            date="Feb 2021 - Jul 2022"
-            iconStyle={{ background: '#5000ca', color: 'rgb(39, 40, 34)' }}
-            icon={<FontAwesomeIcon icon={faBriefcase} />}
-          >
-            <h3 className="vertical-timeline-element-title">Data Engineer - Ops</h3>
-            <h4 className="vertical-timeline-element-subtitle">Ivy Comptech, Entain • Hyderabad, India</h4>
-            {/* <p>
-              • Migrated user records to cloud systems with AWS S3 and Redshift.<br />
-              • Streamlined workflows using SQL, Python, and Airflow.<br />
-              • Conducted node-level deployments using SSH for efficient system updates, ensuring secure and reliable implementation across production environments.<br />
-              • Delivered optimized white-label platforms and enhanced API performance.
-            </p> */}
-          </VerticalTimelineElement>
-         
-           {/* Trainee Software Engineer */}
-           <VerticalTimelineElement
-            className="vertical-timeline-element--work"
-            contentStyle={{ background: 'white', color: 'rgb(39, 40, 34)' }}
-            contentArrowStyle={{ borderRight: '7px solid white' }}
-            date="June 2020 - Feb 2021"
-            iconStyle={{ background: '#5000ca', color: 'rgb(39, 40, 34)' }}
-            icon={<FontAwesomeIcon icon={faBriefcase} />}
-          >
-            <h3 className="vertical-timeline-element-title">Trainee Software Engineer - Data Ops</h3>
-            <h4 className="vertical-timeline-element-subtitle">Ivy Comptech, Entain • Hyderabad, India</h4>
-            {/* <p>
-              • Contributed to 15+ White Label Building projects, focusing on regulatory compliance and user registration data flows for brands like Bwin, BetMGM, and Ladbrokes.<br/>
-              • Automated repetitive tasks using VBA macros, improving efficiency in data analysis and reporting workflows.<br/>
-              • Gained hands-on experience with SSH nodes for secure deployments and optimized data communication between systems.
-            </p> */}
-          </VerticalTimelineElement>
-           {/* Bachelor of Technology in Electronics and Communication Engineering */}
-           <VerticalTimelineElement
-            className="vertical-timeline-element--work"
-            contentStyle={{ background: 'white', color: 'rgb(39, 40, 34)' }}
-            contentArrowStyle={{ borderRight: '7px solid white' }}
-            date="June 2016 - May 2020"
-            iconStyle={{ background: '#5000ca', color: 'rgb(39, 40, 34)' }}
-            icon={<FontAwesomeIcon icon={faBriefcase} />}
-          >
-            <h3 className="vertical-timeline-element-title">Bachelor of Technology in Electronics and Communication Engineering</h3>
-            <h4 className="vertical-timeline-element-subtitle">K L University • Guntur, India</h4>
-            <p>
-              • <strong>Specialized in Signal and Image Processing</strong><br />
-              • <strong>Relavent Courses:</strong> Database Systems, Machine Learning, Artificial Neural Networks, Pattern Recognition, SQL, Python, Java, Data Structures, C
-    
+              • <strong>Relevant Courses:</strong> Advanced Database, Data Mining, Data Visualization, Applied Algorithms, Statistics,
+                 Social Media Mining, Search, Advanced Database Technologies, VR
             </p>
           </VerticalTimelineElement>
 
-          {/* Continue with other positions following the same pattern... */}
-          {/* Add the rest of your work history following the same format */}
-          
+          {/* Data Engineer */}
+          <VerticalTimelineElement
+            className="vertical-timeline-element"
+            contentStyle={darkThemeStyles}
+            contentArrowStyle={darkThemeArrow}
+            date="Feb 2021 - Jul 2022"
+            iconStyle={iconStyle}
+            icon={<FontAwesomeIcon icon={faBriefcase} />}
+          >
+            <h3>Data Engineer - Ops</h3>
+            <h4>Ivy Comptech, Entain • Hyderabad, India</h4>
+          </VerticalTimelineElement>
+
+          {/* Trainee Software Engineer */}
+          <VerticalTimelineElement
+            className="vertical-timeline-element"
+            contentStyle={darkThemeStyles}
+            contentArrowStyle={darkThemeArrow}
+            date="June 2020 - Feb 2021"
+            iconStyle={iconStyle}
+            icon={<FontAwesomeIcon icon={faBriefcase} />}
+          >
+            <h3>Trainee Software Engineer - Data Ops</h3>
+            <h4>Ivy Comptech, Entain • Hyderabad, India</h4>
+          </VerticalTimelineElement>
+
+          {/* Bachelor of Technology */}
+          <VerticalTimelineElement
+            className="vertical-timeline-element"
+            contentStyle={darkThemeStyles}
+            contentArrowStyle={darkThemeArrow}
+            date="June 2016 - May 2020"
+            iconStyle={iconStyle}
+            icon={<FontAwesomeIcon icon={faGraduationCap} />}
+          >
+            <h3>Bachelor of Technology in Electronics and Communication Engineering</h3>
+            <h4>K L University • Guntur, India</h4>
+            <p>
+              • <strong>Specialized in Signal and Image Processing</strong><br />
+              • <strong>Relevant Courses:</strong> Database Systems, Machine Learning, Artificial Neural Networks, Pattern Recognition, SQL, Python, Java, Data Structures, C
+            </p>
+          </VerticalTimelineElement>
         </VerticalTimeline>
       </div>
-    </div>
+    </section>
   );
 }
 

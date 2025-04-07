@@ -144,10 +144,10 @@ function Navigation({parentToChild, modeChange}: any) {
             bottom: '2rem',
             right: '2rem',
             zIndex: 1000,
-            bgcolor: mode === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)',
+            bgcolor: mode === 'dark' ? 'rgba(255, 255, 255, 255)' : 'rgba(0, 0, 0, 0)',
             color: mode === 'dark' ? '#fff' : '#000',
             '&:hover': {
-              bgcolor: mode === 'dark' ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.12)',
+              bgcolor: mode === 'dark' ? 'rgba(255, 255, 255, 255)' : 'rgba(0, 0, 0, 0)',
             },
           }}
           aria-label="back to top"

@@ -9,6 +9,10 @@ import DevIllustration from '../assets/images/dev.svg';
 import Type from "./Type";
 
 const MainPage = () => {
+  const handleContactClick = () => {
+    window.location.href = 'mailto:posinarevanth@gmail.com?subject=Hello Revanth&body=I came across your portfolio and would like to connect...';
+  };
+
   return (
     <div className="mainContainer">
       <header className="header">
@@ -19,12 +23,28 @@ const MainPage = () => {
             <h3>Hey There! <span className="wave">👋</span></h3>
             <h1>I'm <span className="highlight">Revanth Posina</span></h1>
             <div className="typewriter-wrapper">
-          <span className="inline-text"><h2>I work on</h2></span>
-          <div className="typewriter-component">
-           <Type />
-          </div>
+              <span className="inline-text"><h2>I work on</h2></span>
+              <div className="typewriter-component">
+                <Type />
+              </div>
             </div>
-            <p>Basically, I love turning data into insights that drive impactful decisions.</p>
+            <p>I specialize in transforming complex data into clear insights and building efficient data pipelines.</p>
+            
+            <div className="button-group">
+              <a 
+                href="#projects" 
+                className="primary-button"
+              >
+                View My Work
+              </a>
+              <button 
+                onClick={handleContactClick}
+                className="secondary-button"
+              >
+                Contact Me
+              </button>
+            </div>
+
             <div className="socialIcons">
               <a href="https://github.com/RevanthPosina" target="_blank" rel="noopener noreferrer"><GitHubIcon /></a>
               <a href="https://www.linkedin.com/in/revanth-p/" target="_blank" rel="noopener noreferrer"><LinkedInIcon /></a>

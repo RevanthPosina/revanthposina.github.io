@@ -15,7 +15,7 @@ code {
 
 .main-container {
   position: relative;
-  background-color: #0d1116;
+  background-color: #000000;
 
 }
 
@@ -24,7 +24,7 @@ a {
 }
 
 a:hover {
-  color: #5000ca;
+  color: #ab47bc;
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
 }
 
@@ -51,7 +51,7 @@ p, a, h1, h2, h3, h4, h5, label, button {
 
 .navigation-bar-responsive {
   span, p {
-    color: #0d1116;
+    color: #000000;
     font-family: "Lato", sans-serif;
   }
 }
@@ -104,12 +104,12 @@ p, a, h1, h2, h3, h4, h5, label, button {
   }
 
   a:hover {
-    color: #5000ca;
+    color: #ab47bc;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
   }
 
   .navigation-bar svg {
-    color: #0d1116;
+    color: #000000;
   }
 
   .about-section {

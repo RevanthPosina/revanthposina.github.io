@@ -1,19 +1,44 @@
 #history {
     background-color: #0a0a0a;
     min-height: 100vh;
-    padding: 60px 0;
+    padding: 80px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   
     .items-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
+      width: 100%;
+      max-width: 1400px;
+      padding: 0 40px;
   
       h1 {
         color: white;
         font-size: 2.5rem;
-        margin-bottom: 60px;
-        font-weight: 700;
+        margin-bottom: 3rem;
+        text-align: center;
+        font-weight: bold;
+        position: relative;
+        display: inline-block;
+        left: 50%;
+        transform: translateX(-50%);
+  
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -10px;
+          left: 0;
+          width: 100%;
+          height: 4px;
+          background: #ab47bc;
+          border-radius: 2px;
+        }
       }
+    }
+  }
+  
+  .vertical-timeline {
+    &::before {
+      background: rgba(171, 71, 188, 0.2) !important;
     }
   }
   
@@ -27,33 +52,162 @@
   }
   
   .vertical-timeline-element {
-    p {
-      color: rgb(39, 40, 34);
+    .vertical-timeline-element-icon {
+      box-shadow: 0 0 0 4px #ab47bc, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05) !important;
+      
+      .svg-inline--fa {
+        color: white;
+      }
     }
   
-    h3 {
-      color: rgb(39, 40, 34);
-    }
+    .vertical-timeline-element-content {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(171, 71, 188, 0.1);
+      border-radius: 16px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
   
-    h4 {
-      color: rgb(39, 40, 34);
-    }
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+          circle at center,
+          rgba(171, 71, 188, 0.1) 0%,
+          transparent 70%
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+      }
+      
+      &:hover {
+        transform: translateY(-5px);
+        border-color: rgba(171, 71, 188, 0.3);
+        box-shadow: 0 10px 30px rgba(171, 71, 188, 0.15);
   
-    span {
-      color: rgb(39, 40, 34);
-    }
+        &::before {
+          opacity: 1;
+        }
+      }
   
-    .vertical-timeline-element-date {
-      color: white;
+      .vertical-timeline-element-content-arrow {
+        border-right-color: rgba(171, 71, 188, 0.1);
+      }
+  
+      h3 {
+        color: #ab47bc;
+        font-size: 1.3rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+  
+      h4 {
+        color: #e0e0e0;
+        font-size: 1.1rem;
+        font-weight: 400;
+        margin-bottom: 1rem;
+      }
+  
+      p {
+        color: #e0e0e0;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        opacity: 0.9;
+        margin-bottom: 0;
+  
+        strong {
+          color: #ab47bc;
+        }
+      }
+  
+      .vertical-timeline-element-date {
+        color: #e0e0e0;
+        font-family: 'Roboto', sans-serif;
+        opacity: 0.9;
+        font-size: 1rem;
+      }
     }
   }
   
-  .svg-inline--fa {
-    color: white;
+  // Light mode styles
+  .light-mode {
+    #history {
+      background-color: #ffffff;
+  
+      h1 {
+        color: #0a0a0a;
+      }
+    }
+  
+    .vertical-timeline {
+      &::before {
+        background: rgba(171, 71, 188, 0.2) !important;
+      }
+    }
+  
+    .vertical-timeline-element {
+      .vertical-timeline-element-icon {
+        .svg-inline--fa {
+          color: white;
+        }
+      }
+  
+      .vertical-timeline-element-content {
+        background: rgba(0, 0, 0, 0.02);
+        border: 1px solid rgba(171, 71, 188, 0.1);
+  
+        &:hover {
+          background: rgba(0, 0, 0, 0.03);
+        }
+  
+        h3 {
+          color: #ab47bc;
+        }
+  
+        h4 {
+          color: #2d3748;
+        }
+  
+        p {
+          color: #4a5568;
+  
+          strong {
+            color: #ab47bc;
+          }
+        }
+  
+        .vertical-timeline-element-date {
+          color: #4a5568;
+        }
+      }
+    }
   }
   
   @media screen and (max-width: 1170px) {
-    .vertical-timeline-element .vertical-timeline-element-date {
-      color: rgb(39, 40, 34);
+    #history {
+      padding: 60px 0;
+  
+      .items-container {
+        padding: 0 20px;
+  
+        h1 {
+          font-size: 2rem;
+          margin-bottom: 2rem;
+        }
+      }
+    }
+  
+    .vertical-timeline-element {
+      .vertical-timeline-element-content {
+        .vertical-timeline-element-date {
+          margin-top: 1rem;
+        }
+      }
     }
   }

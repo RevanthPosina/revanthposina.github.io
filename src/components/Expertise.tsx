@@ -1,96 +1,104 @@
-import React from "react";
-import '@fortawesome/free-regular-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDatabase, faGears, faBrain } from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
 import '../assets/styles/Expertise.scss';
+import { 
+  Storage as StorageIcon,
+  CloudQueue as CloudIcon,
+  QueryStats as AnalyticsIcon,
+  DataObject as DataIcon,
+  Architecture as ArchitectureIcon,
+  AutoGraph as AutomationIcon
+} from '@mui/icons-material';
 
-const dataEngineering = [
-    "MySQL",
-    "MS SQL Server",
-    "Oracle",
-    "PostgreSQL",
-    "MongoDB",
-    "SSIS",
-    "SSMS",
-    "SSRS",
-    "PySpark",
-    "SparkSQL",
-    "Snowflake",
-    "Kafka"
-];
-
-const devOpsAndTools = [
-    "Git",
-    "Bitbucket",
-    "SourceTree",
-    "Jira",
-    "Airflow",
-    "Jenkins",
-    "JSON",
-    "AWS S3",
-    "AWS IAM",
-    "AWS Redshift",
-    "AWS Glue"
-];
-
-const analyticsAndAI = [
-    "Python",
-    "SQL",
-    "R",
-    "Tableau",
-    "PowerBI",
-    "Looker",
-    "Excel",
-    "ML"
+const expertiseData = [
+  {
+    icon: <StorageIcon />,
+    title: "Data Engineering",
+    description: "Building robust data pipelines and ETL processes using modern tools and technologies.",
+    techStack: [
+      "MySQL", "MS SQL Server", "Oracle", "PostgreSQL", "MongoDB",
+      "SSIS", "SSMS", "SSRS", "PySpark", "SparkSQL", "Snowflake", "Kafka"
+    ]
+  },
+  {
+    icon: <CloudIcon />,
+    title: "Cloud Architecture",
+    description: "Designing and implementing scalable cloud-native solutions on AWS and Azure.",
+    techStack: [
+      "AWS S3", "AWS IAM", "AWS Redshift", "AWS Glue", "Azure Data Factory",
+      "Azure Synapse", "Docker", "Kubernetes", "Terraform"
+    ]
+  },
+  {
+    icon: <AnalyticsIcon />,
+    title: "Data Analytics",
+    description: "Transforming raw data into actionable insights using advanced analytics techniques.",
+    techStack: [
+      "Python", "R", "SQL", "Tableau", "PowerBI", "Looker",
+      "Excel", "Statistical Analysis", "Data Visualization"
+    ]
+  },
+  {
+    icon: <DataIcon />,
+    title: "Big Data",
+    description: "Processing and analyzing large-scale datasets using distributed computing frameworks.",
+    techStack: [
+      "Hadoop", "Spark", "Hive", "PySpark", "Databricks",
+      "Delta Lake", "Data Lakes", "EMR"
+    ]
+  },
+  {
+    icon: <ArchitectureIcon />,
+    title: "Data Architecture",
+    description: "Designing efficient data models and warehouses for optimal performance.",
+    techStack: [
+      "Data Modeling", "ETL Design", "Data Warehousing", "Schema Design",
+      "Dimensional Modeling", "Data Lakes", "Data Governance"
+    ]
+  },
+  {
+    icon: <AutomationIcon />,
+    title: "Automation",
+    description: "Creating automated workflows and processes for data operations and ML pipelines.",
+    techStack: [
+      "Airflow", "Jenkins", "Git", "CI/CD", "Python Scripting",
+      "Shell Scripting", "MLOps", "DataOps"
+    ]
+  }
 ];
 
 function Expertise() {
-    return (
-    <div className="container" id="expertise">
-        <h1>Expertise</h1>
-        <div className="skills-grid">
-            <div className="skill">
-                <FontAwesomeIcon icon={faDatabase} />
-                <h3>Data Engineering & ETL</h3>
-                <p>Experienced in building and optimizing data pipelines, implementing ETL processes, 
-                   and managing complex database systems. Proficient in both relational and NoSQL databases 
-                   with strong SQL expertise.</p>
-                <div className="tech-stack">
-                    <span>Tech stack:</span>
-                    {dataEngineering.map((tech, index) => (
-                        <div key={index} className="tech-tag">{tech}</div>
-                    ))}
-                </div>
-            </div>
+  return (
+    <section className="expertise-container" id="expertise">
+      <div className="expertise-content">
+        <h2 className="section-title">
+          Expertise
+          <div className="title-underline"></div>
+        </h2>
 
-            <div className="skill">
-                <FontAwesomeIcon icon={faGears} />
-                <h3>DevOps & Cloud Infrastructure</h3>
-                <p>Skilled in implementing CI/CD pipelines, version control systems, and cloud infrastructure 
-                   management. Strong experience with AWS services and development tools.</p>
-                <div className="tech-stack">
-                    <span>Tech stack:</span>
-                    {devOpsAndTools.map((tech, index) => (
-                        <div key={index} className="tech-tag">{tech}</div>
-                    ))}
+        <div className="expertise-grid">
+          {expertiseData.map((item, index) => (
+            <div className="expertise-card" key={index}>
+              <div className="card-icon">
+                {item.icon}
+              </div>
+              <h3 className="card-title">{item.title}</h3>
+              <p className="card-description">{item.description}</p>
+              <div className="tech-stack">
+                <span>Tech Stack:</span>
+                <div className="tech-tags">
+                  {item.techStack.map((tech, techIndex) => (
+                    <div key={techIndex} className="tech-tag">
+                      {tech}
+                    </div>
+                  ))}
                 </div>
+              </div>
             </div>
-
-            <div className="skill">
-                <FontAwesomeIcon icon={faBrain} />
-                <h3>Analytics & Business Intelligence</h3>
-                <p>Proficient in data visualization, business intelligence tools, and analytics platforms. 
-                   Experience in transforming raw data into actionable insights using modern BI tools.</p>
-                <div className="tech-stack">
-                    <span>Tech stack:</span>
-                    {analyticsAndAI.map((tech, index) => (
-                        <div key={index} className="tech-tag">{tech}</div>
-                    ))}
-                </div>
-            </div>
+          ))}
         </div>
-    </div>
-    );
+      </div>
+    </section>
+  );
 }
 
 export default Expertise;

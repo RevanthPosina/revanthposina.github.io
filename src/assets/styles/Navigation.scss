@@ -1,31 +1,30 @@
 .nav-link {
-    color: #ffffff;  // default color for navigation links
-    text-decoration: none;
-    position: relative;
-    padding: 0 10px;
-    transition: color 0.3s;
-  
-    &:hover {
-      color: #ab47bc;
-    }
-  
-    &:after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -5px; // Adjust to place the underline below the text
-      width: 100%;
-      height: 3px; // Adjust for the thickness of the underline
-      background-color: #ab47bc;
-      border-radius: 2px; // Rounded corners like in the screenshot
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 0.3s ease;
-    }
-  
-    &:hover:after {
-      transform: scaleX(1);
-      transform-origin: left;
-    }
+  color: #ffffff;  // default color for navigation links
+  text-decoration: none;
+  position: relative;
+  padding: 0 10px;
+  transition: color 0.3s;
+
+  &:hover {
+    color: #ab47bc;
   }
-  
+
+  &:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px; // Adjust to place the underline below the text
+    width: 100%;
+    height: 3px; // Adjust for the thickness of the underline
+    background-color: #ab47bc;
+    border-radius: 2px; // Rounded corners like in the screenshot
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover:after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}

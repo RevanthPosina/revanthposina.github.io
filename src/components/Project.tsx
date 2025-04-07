@@ -115,7 +115,7 @@ function Project() {
         {
             img: kpmgint,
             title: "Data Analytics Consulting Internship",
-            description: "Virtual Internship at KPMG, Assessed data quality for Sprocket Central Pty Ltd’s Customer Demographics, Segmentation, and Transaction datasets, identifying high-value customers using targeted insights. Delivered a data-driven presentation with dashboards and visualizations to support strategic decision-making.",
+            description: "Virtual Internship at KPMG, Assessed data quality for Sprocket Central Pty Ltd's Customer Demographics, Segmentation, and Transaction datasets, identifying high-value customers using targeted insights. Delivered a data-driven presentation with dashboards and visualizations to support strategic decision-making.",
             link: "",
             category: "INTERNSHIPS"
         },
@@ -197,53 +197,55 @@ function Project() {
 
     return(
         <div className="projects-container" id="projects">
-            <h1>Personal Projects</h1>
-            
-            <div className="filter-buttons">
-                <button 
-                    className={`filter-btn ${filter === 'ALL' ? 'active' : ''}`}
-                    onClick={() => setFilter('ALL')}
-                >
-                    ALL
-                </button>
-                <button 
-                    className={`filter-btn ${filter === 'PROJECTS' ? 'active' : ''}`}
-                    onClick={() => setFilter('PROJECTS')}
-                >
-                    PROJECTS
-                </button>
-                <button 
-                    className={`filter-btn ${filter === 'INTERNSHIPS' ? 'active' : ''}`}
-                    onClick={() => setFilter('INTERNSHIPS')}
-                >
-                    INTERNSHIPS
-                </button>
-                <button 
-                    className={`filter-btn ${filter === 'PUBLICATION' ? 'active' : ''}`}
-                    onClick={() => setFilter('PUBLICATION')}
-                >
-                    PUBLICATION
-                </button>
-                <button 
-                    className={`filter-btn ${filter === 'CERTIFICATIONS' ? 'active' : ''}`}
-                    onClick={() => setFilter('CERTIFICATIONS')}
-                >
-                    CERTIFICATIONS
-                </button>
-            </div>
+            <div className="content-wrapper">
+                <h1>Personal Projects</h1>
+                
+                <div className="filter-buttons">
+                    <button 
+                        className={`filter-btn ${filter === 'ALL' ? 'active' : ''}`}
+                        onClick={() => setFilter('ALL')}
+                    >
+                        ALL
+                    </button>
+                    <button 
+                        className={`filter-btn ${filter === 'PROJECTS' ? 'active' : ''}`}
+                        onClick={() => setFilter('PROJECTS')}
+                    >
+                        PROJECTS
+                    </button>
+                    <button 
+                        className={`filter-btn ${filter === 'INTERNSHIPS' ? 'active' : ''}`}
+                        onClick={() => setFilter('INTERNSHIPS')}
+                    >
+                        INTERNSHIPS
+                    </button>
+                    <button 
+                        className={`filter-btn ${filter === 'PUBLICATION' ? 'active' : ''}`}
+                        onClick={() => setFilter('PUBLICATION')}
+                    >
+                        PUBLICATION
+                    </button>
+                    <button 
+                        className={`filter-btn ${filter === 'CERTIFICATIONS' ? 'active' : ''}`}
+                        onClick={() => setFilter('CERTIFICATIONS')}
+                    >
+                        CERTIFICATIONS
+                    </button>
+                </div>
 
-            <div className="projects-grid">
-                {filteredProjects.map((project, index) => (
-                    <div className="project" key={index}>
-                        <a href={project.link} target="_blank" rel="noreferrer">
-                            <img src={project.img} className="zoom" alt="thumbnail" width="100%"/>
-                        </a>
-                        <a href={project.link} target="_blank" rel="noreferrer">
-                            <h2>{project.title}</h2>
-                        </a>
-                        <p>{project.description}</p>
-                    </div>
-                ))}
+                <div className="projects-grid">
+                    {filteredProjects.map((project, index) => (
+                        <div className="project" key={index}>
+                            <a href={project.link} target="_blank" rel="noreferrer">
+                                <img src={project.img} className="zoom" alt="thumbnail" width="100%"/>
+                            </a>
+                            <a href={project.link} target="_blank" rel="noreferrer">
+                                <h2>{project.title}</h2>
+                            </a>
+                            <p>{project.description}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );
