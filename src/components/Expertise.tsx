@@ -24,16 +24,16 @@ const expertiseData = [
     title: "Cloud Architecture",
     description: "Designing and implementing scalable cloud-native solutions on AWS and Azure.",
     techStack: [
-      "AWS S3", "AWS IAM", "AWS Redshift", "AWS Glue", "Azure Data Factory",
-      "Azure Synapse", "Docker", "Kubernetes", "Terraform"
+      "S3", "IAM", "Redshift", "Glue","Lambda", "Sagemaker", "Cloudwatch", "Azure Data Factory",
+      "Synapse", "Docker", "Terraform"
     ]
   },
   {
     icon: <AnalyticsIcon />,
-    title: "Data Analytics",
-    description: "Transforming raw data into actionable insights using advanced analytics techniques.",
+    title: "Analytics & ML",
+    description: "Transforming raw data into actionable insights using advanced analytics, machine learning, and LLM techniques.",
     techStack: [
-      "Python", "R", "SQL", "Tableau", "PowerBI", "Looker",
+      "Python", "R", "Tableau", "PowerBI", "Scikit-learn","XGBoost", "LLMs", "Hugging Face",
       "Excel", "Statistical Analysis", "Data Visualization"
     ]
   },
@@ -57,11 +57,11 @@ const expertiseData = [
   },
   {
     icon: <AutomationIcon />,
-    title: "Automation",
-    description: "Creating automated workflows and processes for data operations and ML pipelines.",
+    title: "MLOps & Automation",
+    description: "Creating automated workflows and production-grade pipelines for ML models and LLM applications.",
     techStack: [
-      "Airflow", "Jenkins", "Git", "CI/CD", "Python Scripting",
-      "Shell Scripting", "MLOps", "DataOps"
+      "Airflow", "Jenkins", "Git", "CI/CD", "MLflow", "FastAPI", "Embeddings", "Prompt Tuning",
+      "Shell", "SHAP", "DataOps"
     ]
   }
 ];
