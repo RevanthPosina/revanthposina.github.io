@@ -19,9 +19,10 @@ function About() {
             ABOUT
             <span className="underline"></span>
           </h2>
-          <p>Hello! I'm Rev (Revanth Posina), a data professional with a Master's in Data Science from Indiana University Bloomington. My journey in the data world is driven by a singular passion: transforming complex information into compelling stories that drive real business value.</p>
-<p>As a data engineer, I specialize in designing cloud-native data architectures and implementing Delta Lake solutions that bring reliability and performance to large-scale data operations. From optimizing Spark workloads to modernizing legacy systems into scalable cloud architectures, I focus on creating solutions that make data insights accessible to everyone. Through workflow optimization and automated quality frameworks, I build ML-ready data platforms that enable both analysts and data scientists to accelerate their insights while empowering business teams to make data-driven decisions.</p>
-<p>When I'm not working with data, you'll find me exploring space exploration, emerging technologies, comics, and anime – areas that fuel my imagination and drive for innovation. Let's build something amazing together!</p>
+          <p>Hi, I'm Rev, a data and ML engineer with a Master's in Data Science from Indiana University. I'm passionate about building scalable, maintainable data and machine learning pipelines that help teams turn raw data into real-world impact.</p>
+<p>My experience spans on working with cloud-native architectures, implementing ETL solutions, and optimizing Spark and ML workflows for analytics and production. I enjoy solving data challenges—whether it's modernizing legacy systems, automating data quality/BI reports, or making ML-ready data accessible for teams across the business.</p>
+<p>I believe the best data platforms are those that empower both technical and non-technical users to make better decisions. My work focuses on bridging that gap, enabling analysts, data scientists, and business leaders to move faster and with more confidence.</p>
+<p>Outside of work, I'm curious about emerging tech, mythology, anime, F1, and cricket—interests that keep me engaged. If you're interested in building smarter data or ML/AI solutions, let's connect!</p>
         </div>
       </div>
     </div>
