@@ -35,7 +35,7 @@ const MainPage = () => {
                 <Type />
               </div>
             </div>
-            <p>I specialize in transforming complex data into clear insights and building efficient data pipelines.</p>
+            <p>I build data and ML pipelines that turn complex data into insights to support better business decisions.</p>
             
             <div className="button-group">
               <a 
