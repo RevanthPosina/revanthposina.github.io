@@ -28,3 +28,43 @@
     transform-origin: left;
   }
 }
+
+// Add styles for active navigation item
+.nav-item-active {
+  color: #ab47bc;
+  
+  &:after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+// Special highlight for About section
+.about-highlight {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: rgba(171, 71, 188, 0.1);
+    border-radius: 4px;
+    z-index: -1;
+    animation: pulse 2s infinite;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(171, 71, 188, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(171, 71, 188, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(171, 71, 188, 0);
+  }
+}

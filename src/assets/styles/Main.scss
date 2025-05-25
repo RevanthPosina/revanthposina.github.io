@@ -7,6 +7,31 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .light-mode & {
+    background-color: #f8f9fa;
+    color: #0d1116;
+
+    .introSection {
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .introText {
+      h1, h2, p {
+        color: #0d1116;
+      }
+
+      .inline-text {
+        color: #4a4a4a;
+      }
+    }
+
+    .socialIcons a {
+      color: #0d1116;
+    }
+  }
 }
 
 .header {

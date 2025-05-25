@@ -88,6 +88,48 @@
   color: #ffffff;
   padding: 100px 20px;
   min-height: 100vh;
+
+  .light-mode & {
+    background-color: #f8f9fa;
+    color: #0d1116;
+
+    .expertise-content {
+      .section-title {
+        color: #0d1116;
+      }
+    }
+
+    .expertise-card {
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        border-color: rgba(171, 71, 188, 0.3);
+        box-shadow: 0 10px 30px rgba(171, 71, 188, 0.15);
+      }
+
+      .card-title {
+        color: #0d1116;
+      }
+
+      .card-description {
+        color: #4a4a4a;
+      }
+
+      .card-icon {
+        color: #0d1116;
+      }
+    }
+
+    .tech-stack {
+      .tech-tag {
+        color: #4a4a4a;
+        background: rgba(171, 71, 188, 0.08);
+        border: 1px solid rgba(171, 71, 188, 0.15);
+      }
+    }
+  }
 }
 
 .expertise-content {

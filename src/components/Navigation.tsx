@@ -21,7 +21,7 @@ import '../assets/styles/Navigation.scss';
 
 const drawerWidth = 240;
 const navItems = [
-  ['Home', 'main'], // Added Home as first navigation item
+  ['Home', 'main'],
   ['About', 'about'],
   ['Expertise', 'expertise'], 
   ['History', 'history'], 
@@ -34,6 +34,7 @@ function Navigation({parentToChild, modeChange}: any) {
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
   const [showBackToTop, setShowBackToTop] = useState<boolean>(false);
+  const [activeSection, setActiveSection] = useState<string>('main');
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -46,6 +47,21 @@ function Navigation({parentToChild, modeChange}: any) {
         const scrolled = window.scrollY > navbar.clientHeight;
         setScrolled(scrolled);
         setShowBackToTop(window.scrollY > 300);
+      }
+
+      // Update active section based on scroll position
+      const sections = navItems.map(item => item[1]);
+      const currentSection = sections.find(section => {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top <= 100 && rect.bottom >= 100;
+        }
+        return false;
+      });
+
+      if (currentSection) {
+        setActiveSection(currentSection);
       }
     };
 
@@ -65,7 +81,7 @@ function Navigation({parentToChild, modeChange}: any) {
 
   const scrollToSection = (section: string) => {
     if (section === 'main') {
-      scrollToTop(); // If Home is clicked, scroll to top
+      scrollToTop();
       return;
     }
     const element = document.getElementById(section);
@@ -81,7 +97,11 @@ function Navigation({parentToChild, modeChange}: any) {
       <List>
         {navItems.map((item) => (
           <ListItem key={item[0]} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }} onClick={() => scrollToSection(item[1])}>
+            <ListItemButton 
+              sx={{ textAlign: 'center' }} 
+              onClick={() => scrollToSection(item[1])}
+              className={activeSection === item[1] ? 'nav-item-active' : ''}
+            >
               <ListItemText primary={item[0]} />
             </ListItemButton>
           </ListItem>
@@ -112,7 +132,31 @@ function Navigation({parentToChild, modeChange}: any) {
             )}
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
               {navItems.map((item) => (
-                <Button key={item[0]} onClick={() => scrollToSection(item[1])} sx={{ color: '#fff' }}>
+                <Button 
+                  key={item[0]} 
+                  onClick={() => scrollToSection(item[1])} 
+                  sx={{ 
+                    color: '#fff',
+                    position: 'relative',
+                    '&.nav-item-active': {
+                      color: '#ab47bc',
+                      '&::after': {
+                        content: '""',
+                        position: 'absolute',
+                        left: 0,
+                        bottom: -5,
+                        width: '100%',
+                        height: '3px',
+                        backgroundColor: '#ab47bc',
+                        borderRadius: '2px',
+                        transform: 'scaleX(1)',
+                        transformOrigin: 'left',
+                        transition: 'transform 0.3s ease'
+                      }
+                    }
+                  }}
+                  className={activeSection === item[1] ? 'nav-item-active' : ''}
+                >
                   {item[0]}
                 </Button>
               ))}

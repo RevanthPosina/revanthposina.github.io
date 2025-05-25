@@ -13,6 +13,13 @@ const MainPage = () => {
     window.location.href = 'mailto:posinarevanth@gmail.com?subject=Hello Revanth&body=I came across your portfolio and would like to connect...';
   };
 
+  const handleSmoothScroll = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="mainContainer">
       <header className="header">
@@ -32,8 +39,16 @@ const MainPage = () => {
             
             <div className="button-group">
               <a 
-                href="#projects" 
+                href="#about" 
                 className="primary-button"
+                onClick={e => { e.preventDefault(); handleSmoothScroll('about'); }}
+              >
+                About Me
+              </a>
+              <a 
+                href="#projects" 
+                className="secondary-button"
+                onClick={e => { e.preventDefault(); handleSmoothScroll('projects'); }}
               >
                 View My Work
               </a>

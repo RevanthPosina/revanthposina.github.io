@@ -22,12 +22,28 @@ import awssa003 from '../assets/images/aws-certified-solutions-architect-associa
 import spotifyetl from '../assets/images/music-spotify.gif';
 import DeliveryOptimization from '../assets/images/DeliveryOptimization.gif';
 import MarketingCampaign from '../assets/images/MarketingCampaign.gif';
+import heartrisk from '../assets/images/heartrisk.gif';
+import trail from '../assets/images/trail.gif';
 import '../assets/styles/Project.scss';
 
 function Project() {
     const [filter, setFilter] = useState('ALL');
 
     const projects = [
+        {
+            img: heartrisk,
+            title: "Heart Attack Risk Prediction - Behavioral Data",
+            description: "End-to-end machine learning pipeline to predict heart attack risk using CDC BRFSS 2023 data. Features XGBoost modeling, SHAP explainability, AWS SageMaker deployment, MLflow tracking, Airflow retraining, and GenAI-powered insights.",
+            link: "https://github.com/RevanthPosina/Heart-Attack-Risk-Prediction",
+            category: "PROJECTS"
+        },
+        {
+            img: trail,
+            title: "TrailRun Advisor Agent",
+            description: "TrailRun Advisor is a lightweight AI agent built with n8n that uses real-time weather, air quality, and calendar data to recommend the best trail for running, sending personalized suggestions via email based on local trail attributes and live conditions.",
+            link: "https://github.com/RevanthPosina/trailrun-advisor-agent",
+            category: "PROJECTS"
+        },
         {
             img: spotifyetl,
             title: "SpotiFlow Data Stream",

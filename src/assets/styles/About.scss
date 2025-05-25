@@ -8,6 +8,27 @@
   color: #ffffff;
   min-height: 100vh;
   width: 100%;
+
+  .light-mode & {
+    background-color: #f8f9fa;
+    color: #0d1116;
+
+    .about-content {
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-text {
+      .about-title {
+        color: #0d1116;
+      }
+
+      p {
+        color: #4a4a4a;
+      }
+    }
+  }
 }
 
 .about-content {
