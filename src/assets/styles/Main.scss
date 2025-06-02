@@ -63,29 +63,53 @@
   border-radius: 15px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.15);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 30px 20px;
+    text-align: center;
+  }
 }
 
 .introText {
   max-width: 600px;
   margin-right: 40px;
+
+  @media (max-width: 768px) {
+    margin-right: 0;
+    margin-bottom: 30px;
+  }
 }
 
 .introText h3 {
   font-size: 1.8rem;
   margin-bottom: 10px;
   color: #ab47bc;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 }
 
 .introText h1 {
   font-size: 3.5rem;
   margin-bottom: 10px;
   color: #e0e0e0;
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
 }
 
 .typewriter-wrapper {
   display: inline-flex;
   align-items: center;
   gap: 5px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .inline-text {
@@ -93,12 +117,20 @@
   color: #bbbbbb;
   margin: 0;
   padding: 0;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 }
 
 .typewriter-component {
   font-size: 1.9rem;
   color: #ab47bc;
   padding: 0;
+
+  @media (max-width: 768px) {
+    font-size: 1.4rem;
+  }
 }
 
 .introText .highlight {
@@ -112,6 +144,11 @@
   display: flex;
   align-items: center;
   gap: 5px;
+
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+    justify-content: center;
+  }
 }
 
 .introText p {
@@ -119,6 +156,10 @@
   font-size: 1.2rem;
   line-height: 1.6;
   margin-bottom: 30px;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 }
 
 .socialIcons {
@@ -126,6 +167,11 @@
   gap: 25px;
   justify-content: flex-start;
   margin-top: 20px;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+    gap: 20px;
+  }
 }
 
 .socialIcons a:focus-visible {
@@ -151,11 +197,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    max-width: 300px;
+  }
 }
 
 .devIllustration {
   width: 80%;
   height: auto;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 }
 
 .wave {
@@ -179,6 +233,12 @@
   display: flex;
   gap: 20px;
   margin: 30px 0;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
 }
 
 .primary-button,
@@ -194,6 +254,12 @@
   align-items: center;
   justify-content: center;
   min-width: 160px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 280px;
+    font-size: 1rem;
+  }
 }
 
 .primary-button {
