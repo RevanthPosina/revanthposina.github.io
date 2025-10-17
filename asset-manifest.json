@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.92242add.css",
-    "main.js": "/static/js/main.fc95064c.js",
+    "main.js": "/static/js/main.859da077.js",
     "static/js/453.b05d8aa5.chunk.js": "/static/js/453.b05d8aa5.chunk.js",
     "static/media/houseprice.gif": "/static/media/houseprice.0762f50ba681371b00dc.gif",
     "static/media/vlsiint.gif": "/static/media/vlsiint.356d9ce7cb0f7122a33b.gif",
@@ -14,6 +14,7 @@
     "static/media/coursedelivery.gif": "/static/media/coursedelivery.26fa1008469c2fe82016.gif",
     "static/media/fakeface.gif": "/static/media/fakeface.162b8f4eedc91bad36ce.gif",
     "static/media/spacex.gif": "/static/media/spacex.f8f4d7217aa2e33e5f22.gif",
+    "static/media/Transformers.gif": "/static/media/Transformers.007dbd03fc69037ec785.gif",
     "static/media/Portfolio_Pic.jpg": "/static/media/Portfolio_Pic.663504b00e3f4b64760c.jpg",
     "static/media/MarketingCampaign.gif": "/static/media/MarketingCampaign.2deca6f274376ba2ed76.gif",
     "static/media/bg-light.png": "/static/media/bg-light.bac0efb485244a522981.png",
@@ -31,11 +32,11 @@
     "static/media/heartrisk.gif": "/static/media/heartrisk.a7d28744716a534a9a09.gif",
     "index.html": "/index.html",
     "main.92242add.css.map": "/static/css/main.92242add.css.map",
-    "main.fc95064c.js.map": "/static/js/main.fc95064c.js.map",
+    "main.859da077.js.map": "/static/js/main.859da077.js.map",
     "453.b05d8aa5.chunk.js.map": "/static/js/453.b05d8aa5.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.92242add.css",
-    "static/js/main.fc95064c.js"
+    "static/js/main.859da077.js"
   ]
 }
