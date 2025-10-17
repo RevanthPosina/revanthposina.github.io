@@ -35,7 +35,7 @@ const MainPage = () => {
                 <Type />
               </div>
             </div>
-            <p>I like ML, Data pipelines that turn complex data into insights to support better business decisions.</p>
+            <p>I like building ML, Data pipelines that turn complex data sources into insights that support better business decisions.</p>
             
             <div className="button-group">
               <a 

@@ -233,6 +233,12 @@ function Project() {
                         ALL
                     </button>
                     <button 
+                        className={`filter-btn ${filter === 'PUBLICATION' ? 'active' : ''}`}
+                        onClick={() => setFilter('PUBLICATION')}
+                    >
+                        PUBLICATION
+                    </button>
+                    <button 
                         className={`filter-btn ${filter === 'PROJECTS' ? 'active' : ''}`}
                         onClick={() => setFilter('PROJECTS')}
                     >
@@ -245,12 +251,6 @@ function Project() {
                         INTERNSHIPS
                     </button>
                     <button 
-                        className={`filter-btn ${filter === 'PUBLICATION' ? 'active' : ''}`}
-                        onClick={() => setFilter('PUBLICATION')}
-                    >
-                        PUBLICATION
-                    </button>
-                    <button 
                         className={`filter-btn ${filter === 'CERTIFICATIONS' ? 'active' : ''}`}
                         onClick={() => setFilter('CERTIFICATIONS')}
                     >
@@ -258,7 +258,7 @@ function Project() {
                     </button>
                 </div>
 
-                <div className="projects-grid">
+                <div className={`projects-grid ${filteredProjects.length === 1 ? 'single-item' : ''}`}>
                     {filteredProjects.map((project, index) => (
                         <div className="project" key={index}>
                             <a href={project.link} target="_blank" rel="noreferrer">

@@ -84,6 +84,17 @@
         grid-gap: 50px;
         width: 100%;
 
+        &.single-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            .project {
+                max-width: 720px; /* keep card reasonably narrow on large screens */
+                width: 100%;
+            }
+        }
+
         .project {
             text-align: left;
             animation: fadeIn 0.5s ease-in-out;
@@ -253,6 +264,15 @@
 
         .projects-grid {
             display: block;
+
+            &.single-item {
+                display: flex;
+                justify-content: center;
+                .project {
+                    max-width: 520px;
+                    width: 100%;
+                }
+            }
 
             .project {
                 margin-bottom: 30px;
