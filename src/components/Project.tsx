@@ -24,12 +24,21 @@ import DeliveryOptimization from '../assets/images/DeliveryOptimization.gif';
 import MarketingCampaign from '../assets/images/MarketingCampaign.gif';
 import heartrisk from '../assets/images/heartrisk.gif';
 import trail from '../assets/images/trail.gif';
+import transformers from '../assets/images/Transformers.gif';
 import '../assets/styles/Project.scss';
 
 function Project() {
     const [filter, setFilter] = useState('ALL');
 
     const projects = [
+
+        {
+            img: transformers,
+            title: "Transformer101",
+            description: "A Jupyter notebook that builds a GPT-style Transformer from scratch in PyTorch and trains it on Tiny Shakespeare. Includes character-level tokenization, causal self attention, and an end to end training and text generation workflow.",
+            link: "https://github.com/RevanthPosina/Transformer101",
+            category: "PROJECTS"
+        },
         {
             img: heartrisk,
             title: "Heart Attack Risk Prediction - Behavioral Data",
