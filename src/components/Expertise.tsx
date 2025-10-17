@@ -12,56 +12,50 @@ import {
 const expertiseData = [
   {
     icon: <StorageIcon />,
-    title: "Data Engineering",
-    description: "Building robust data pipelines and ETL processes using modern tools and technologies.",
+    title: "Real-Time Data Engineering",
+    description: "Designing and operating low-latency ingestion and ETL pipelines with strong SLAs and observability.",
     techStack: [
-      "MySQL", "MS SQL Server", "Oracle", "PostgreSQL", "MongoDB",
-      "SSIS", "SSMS", "SSRS", "PySpark", "SparkSQL", "Snowflake", "Kafka"
+      "Kafka", "Kinesis", "PySpark", "SparkSQL", "Databricks", "Snowflake", "AWS Glue"
     ]
   },
   {
     icon: <CloudIcon />,
     title: "Cloud Architecture",
-    description: "Designing and implementing scalable cloud-native solutions on AWS and Azure.",
+    description: "Building scalable, secure, and cost-efficient data platforms on AWS and Azure.",
     techStack: [
-      "S3", "IAM", "Redshift", "Glue","Lambda", "Sagemaker", "Cloudwatch", "Azure Data Factory",
-      "Synapse", "Docker", "Terraform"
+      "S3", "Redshift", "Lambda", "SageMaker", "CloudWatch", "Azure Data Factory", "Synapse", "Terraform"
     ]
   },
   {
     icon: <AnalyticsIcon />,
-    title: "Analytics & ML",
-    description: "Transforming raw data into actionable insights using advanced analytics, machine learning, and LLM techniques.",
+    title: "Machine Learning & LLMs",
+    description: "Developing predictive and generative models using classical ML and modern transformer-based methods.",
     techStack: [
-      "Python", "R", "Tableau", "PowerBI", "Scikit-learn","XGBoost", "LLMs", "Hugging Face",
-      "Excel", "Statistical Analysis", "Data Visualization"
+      "Python", "Scikit-learn", "XGBoost", "MLflow", "Hugging Face", "LangChain", "Prompt Engineering", "SHAP"
     ]
   },
   {
     icon: <DataIcon />,
-    title: "Big Data",
-    description: "Processing and analyzing large-scale datasets using distributed computing frameworks.",
+    title: "Big Data & Lakehouse",
+    description: "Processing and analyzing petabyte-scale datasets with open table formats and distributed compute.",
     techStack: [
-      "Hadoop", "Spark", "Hive", "PySpark", "Databricks",
-      "Delta Lake", "Data Lakes", "EMR"
+      "Spark", "Hive", "Delta Lake", "Apache Iceberg", "EMR", "Data Lakes"
     ]
   },
   {
     icon: <ArchitectureIcon />,
     title: "Data Architecture",
-    description: "Designing efficient data models and warehouses for optimal performance.",
+    description: "Designing robust data models, warehouses, and governance frameworks for reliability and evolution.",
     techStack: [
-      "Data Modeling", "ETL Design", "Data Warehousing", "Schema Design",
-      "Dimensional Modeling", "Data Lakes", "Data Governance"
+      "Data Modeling", "Dimensional Modeling", "Data Warehousing", "Data Quality", "Data Governance"
     ]
   },
   {
     icon: <AutomationIcon />,
     title: "MLOps & Automation",
-    description: "Creating automated workflows and production-grade pipelines for ML models and LLM applications.",
+    description: "Operationalizing models and data workflows with CI/CD, lineage tracking, and automated retraining.",
     techStack: [
-      "Airflow", "Jenkins", "Git", "CI/CD", "MLflow", "FastAPI", "Embeddings", "Prompt Tuning",
-      "Shell", "SHAP", "DataOps"
+      "Airflow", "Jenkins", "Git", "CI/CD", "MLflow", "FastAPI", "DataOps"
     ]
   }
 ];

@@ -8,8 +8,7 @@ function Type() {
         strings: [
           "Machine Learning",
           "Data Engineering",
-          "Data Analysis",
-          "Business Intelligence",
+          "AI Workflows"
         ],
         autoStart: true,
         loop: true,

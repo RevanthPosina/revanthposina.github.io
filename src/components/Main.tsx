@@ -35,7 +35,7 @@ const MainPage = () => {
                 <Type />
               </div>
             </div>
-            <p>I build data and ML pipelines that turn complex data into insights to support better business decisions.</p>
+            <p>I like ML, Data pipelines that turn complex data into insights to support better business decisions.</p>
             
             <div className="button-group">
               <a 
@@ -63,9 +63,9 @@ const MainPage = () => {
             <div className="socialIcons">
               <a href="https://github.com/RevanthPosina" target="_blank" rel="noopener noreferrer"><GitHubIcon /></a>
               <a href="https://www.linkedin.com/in/revanth-p/" target="_blank" rel="noopener noreferrer"><LinkedInIcon /></a>
-              <a href="https://public.tableau.com/app/profile/rev.pos/vizzes" target="_blank" rel="noopener noreferrer"><InsightsIcon /></a>
               <a href="https://medium.com/@revp" target="_blank" rel="noopener noreferrer"><AutoStoriesIcon /></a>
-              <a href="https://www.kaggle.com/revzkaggle" target="_blank" rel="noopener noreferrer"><StorageIcon /></a>
+              <a href="https://public.tableau.com/app/profile/rev.pos/vizzes" target="_blank" rel="noopener noreferrer"><InsightsIcon /></a>
+              {/* <a href="https://www.kaggle.com/revzkaggle" target="_blank" rel="noopener noreferrer"><StorageIcon /></a> */}
             </div>
           </div>
           <div className="illustrationWrapper">
