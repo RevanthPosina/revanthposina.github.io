@@ -1,70 +1,61 @@
+// ============================================
+// NAVIGATION - Modern Minimal
+// ============================================
+
 .nav-link {
-  color: #ffffff;  // default color for navigation links
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   position: relative;
-  padding: 0 10px;
-  transition: color 0.3s;
+  padding: 8px 0;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  transition: color 0.2s ease;
 
   &:hover {
-    color: #ab47bc;
+    color: #ffffff;
   }
 
-  &:after {
+  &::after {
     content: "";
     position: absolute;
     left: 0;
-    bottom: -5px; // Adjust to place the underline below the text
+    bottom: 0;
     width: 100%;
-    height: 3px; // Adjust for the thickness of the underline
-    background-color: #ab47bc;
-    border-radius: 2px; // Rounded corners like in the screenshot
+    height: 2px;
+    background: #ab47bc;
+    border-radius: 1px;
     transform: scaleX(0);
     transform-origin: right;
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;
   }
 
-  &:hover:after {
+  &:hover::after {
     transform: scaleX(1);
     transform-origin: left;
   }
 }
 
-// Add styles for active navigation item
 .nav-item-active {
-  color: #ab47bc;
+  color: #ffffff;
   
-  &:after {
+  &::after {
     transform: scaleX(1);
     transform-origin: left;
   }
 }
 
-// Special highlight for About section
-.about-highlight {
-  position: relative;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: rgba(171, 71, 188, 0.1);
-    border-radius: 4px;
-    z-index: -1;
-    animation: pulse 2s infinite;
-  }
-}
+// Light mode navigation
+.light-mode {
+  .nav-link {
+    color: rgba(10, 10, 10, 0.7);
 
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(171, 71, 188, 0.4);
+    &:hover {
+      color: #0a0a0a;
+    }
   }
-  70% {
-    box-shadow: 0 0 0 10px rgba(171, 71, 188, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(171, 71, 188, 0);
+
+  .nav-item-active {
+    color: #0a0a0a;
   }
 }

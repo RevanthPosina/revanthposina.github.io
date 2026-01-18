@@ -1,134 +1,53 @@
-.container {
-    background-color: #0a0a0a;
-    padding: 60px 15%;
-    min-height: 100vh;
-
-    h1 {
-        color: white;
-        font-size: 2.5rem;
-        margin-bottom: 3rem;
-    }
-}
-
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-}
-
-.skill {
-    color: white;
-
-    svg {
-        font-size: 2.5rem;
-        margin-bottom: 1.5rem;
-        color: white;
-    }
-
-    h3 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-        font-weight: 500;
-    }
-
-    p {
-        color: #a8a8a8;
-        line-height: 1.6;
-        margin-bottom: 1.5rem;
-        font-size: 0.95rem;
-    }
-
-    .tech-stack {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        
-        span {
-            display: block;
-            width: 100%;
-            margin-bottom: 0.5rem;
-            color: #a8a8a8;
-        }
-
-        .tech-tag {
-            background: white;
-            color: rgb(39, 40, 34);
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.85rem;
-            font-family: 'Courier Prime', monospace;
-            white-space: nowrap;
-        }
-    }
-}
-
-@media (max-width: 1200px) {
-    .container {
-        padding: 60px 5%;
-    }
-}
-
-@media (max-width: 768px) {
-    .skills-grid {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-    }
-
-    .skill {
-        text-align: center;
-
-        .tech-stack {
-            justify-content: center;
-        }
-    }
-}
+// ============================================
+// EXPERTISE SECTION - Modern Minimal
+// ============================================
 
 .expertise-container {
   background-color: #0a0a0a;
   color: #ffffff;
-  padding: 100px 20px;
+  padding: 120px 40px;
   min-height: 100vh;
+  box-sizing: border-box;
 
   .light-mode & {
-    background-color: #f8f9fa;
-    color: #0d1116;
+    background-color: #fafafa;
+    color: #0a0a0a;
 
-    .expertise-content {
-      .section-title {
-        color: #0d1116;
-      }
+    .section-title {
+      color: #0a0a0a;
     }
 
     .expertise-card {
-      background: rgba(0, 0, 0, 0.03);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      background: rgba(0, 0, 0, 0.02);
+      border-color: rgba(0, 0, 0, 0.08);
 
       &:hover {
         border-color: rgba(171, 71, 188, 0.3);
-        box-shadow: 0 10px 30px rgba(171, 71, 188, 0.15);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
       }
 
       .card-title {
-        color: #0d1116;
+        color: #0a0a0a;
       }
 
       .card-description {
-        color: #4a4a4a;
+        color: rgba(10, 10, 10, 0.7);
       }
 
       .card-icon {
-        color: #0d1116;
+        color: #0a0a0a;
       }
     }
 
-    .tech-stack {
-      .tech-tag {
-        color: #4a4a4a;
-        background: rgba(171, 71, 188, 0.08);
-        border: 1px solid rgba(171, 71, 188, 0.15);
-      }
+    .tech-tag {
+      background: rgba(171, 71, 188, 0.08);
+      color: rgba(10, 10, 10, 0.8);
+      border-color: rgba(171, 71, 188, 0.15);
     }
+  }
+
+  @media (max-width: 768px) {
+    padding: 80px 24px;
   }
 }
 
@@ -139,7 +58,8 @@
 }
 
 .section-title {
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
   color: #ffffff;
   text-align: center;
   margin-bottom: 60px;
@@ -147,58 +67,60 @@
   display: inline-block;
   left: 50%;
   transform: translateX(-50%);
-  font-weight: 600;
-}
+  letter-spacing: 0.08em;
 
-.title-underline {
-  width: 100%;
-  height: 4px;
-  background: #ab47bc;
-  margin-top: 8px;
-  border-radius: 2px;
+  .title-underline {
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: #ab47bc;
+    border-radius: 2px;
+  }
 }
 
 .expertise-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
-  padding: 20px 0;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 }
 
 .expertise-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(171, 71, 188, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 16px;
-  padding: 30px;
+  padding: 32px;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  
-  // Soft glow effect
+
   &::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    background: radial-gradient(
-      circle at center,
-      rgba(171, 71, 188, 0.1) 0%,
-      transparent 70%
-    );
+    height: 3px;
+    background: linear-gradient(90deg, #ab47bc, transparent);
     opacity: 0;
     transition: opacity 0.3s ease;
-    pointer-events: none;
   }
 
   &:hover {
-    transform: translateY(-5px);
-    border-color: rgba(171, 71, 188, 0.3);
-    box-shadow: 0 10px 30px rgba(171, 71, 188, 0.15);
+    transform: translateY(-8px);
+    border-color: rgba(171, 71, 188, 0.2);
+    box-shadow: 0 20px 40px rgba(171, 71, 188, 0.1);
 
     &::before {
       opacity: 1;
@@ -212,11 +134,10 @@
 }
 
 .card-icon {
-  font-size: 2.5rem;
-  color: #e0e0e0;
+  font-size: 2.2rem;
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 20px;
   transition: all 0.3s ease;
-  display: inline-block;
 
   svg {
     width: 40px;
@@ -225,79 +146,95 @@
 }
 
 .card-title {
-  font-size: 1.4rem;
+  font-size: 1.25rem;
+  font-weight: 600;
   color: #ffffff;
-  margin-bottom: 15px;
-  font-weight: 500;
+  margin-bottom: 12px;
+  letter-spacing: 0.01em;
 }
 
 .card-description {
-  font-size: 1rem;
-  color: #e0e0e0;
+  font-size: 0.95rem;
   line-height: 1.6;
-  opacity: 0.9;
+  color: rgba(255, 255, 255, 0.6);
   margin-bottom: 20px;
 }
 
 .tech-stack {
-  margin-top: auto;
-  
   span {
     display: block;
-    color: #ab47bc;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     margin-bottom: 12px;
-    font-size: 0.9rem;
-    font-weight: 500;
-  }
-
-  .tech-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .tech-tag {
-    background: rgba(171, 71, 188, 0.1);
-    color: #e0e0e0;
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 0.85rem;
-    border: 1px solid rgba(171, 71, 188, 0.2);
-    transition: all 0.2s ease;
-    
-    &:hover {
-      background: rgba(171, 71, 188, 0.2);
-      border-color: rgba(171, 71, 188, 0.4);
-      transform: translateY(-2px);
-    }
   }
 }
 
-@media (max-width: 768px) {
-  .expertise-grid {
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tech-tag {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.75rem;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(171, 71, 188, 0.15);
+    border-color: rgba(171, 71, 188, 0.3);
+    color: #ab47bc;
+  }
+}
+
+// Legacy styles (kept for compatibility)
+.container {
+  background-color: #0a0a0a;
+  padding: 60px 15%;
+  min-height: 100vh;
+
+  h1 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+  }
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+
+  @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    gap: 20px;
+  }
+}
+
+.skill {
+  color: white;
+
+  svg {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
   }
 
-  .expertise-card {
-    padding: 25px;
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
   }
 
-  .card-title {
-    font-size: 1.3rem;
-  }
-
-  .card-description {
+  p {
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
     font-size: 0.95rem;
-  }
-
-  .tech-stack {
-    .tech-tags {
-      justify-content: center;
-    }
-    
-    .tech-tag {
-      font-size: 0.8rem;
-    }
   }
 }

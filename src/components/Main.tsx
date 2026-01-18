@@ -1,7 +1,6 @@
 import React from 'react';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import StorageIcon from '@mui/icons-material/Storage';
 import InsightsIcon from '@mui/icons-material/Insights';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import '../assets/styles/Main.scss';
