@@ -22,6 +22,22 @@ function Timeline() {
       <div className="items-container">
         <h1>Experience</h1>
         <VerticalTimeline lineColor="rgba(171, 71, 188, 0.2)">
+          {/* Data Engineer (AI/ML) - Microsoft */}
+          <VerticalTimelineElement
+            className="vertical-timeline-element"
+            contentStyle={darkThemeStyles}
+            contentArrowStyle={darkThemeArrow}
+            date="Jan 2025 - Present"
+            iconStyle={iconStyle}
+            icon={<FontAwesomeIcon icon={faBriefcase} />}
+          >
+            <h3>Data Engineer (AI/ML)</h3>
+            <h4>Microsoft</h4>
+            <p>
+              Building forecasting pipelines delivering monthly and 12-month revenue KPIs. Developing ML forecast/anomaly models and LLM agents over KPI semantic layers for retrieval and analysis.
+            </p>
+          </VerticalTimelineElement>
+
           {/* ML Data Engineer */}
           <VerticalTimelineElement
             className="vertical-timeline-element"
