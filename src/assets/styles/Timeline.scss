@@ -1,15 +1,23 @@
 // ============================================
-// EXPERIENCE / TIMELINE SECTION - Modern Minimal
+// EXPERIENCE / TIMELINE SECTION - Clean with Animations
 // ============================================
 
 #experience {
-  background-color: #0a0a0a;
+  background-color: #ffffff;
   min-height: 100vh;
-  padding: 120px 40px;
+  padding: 120px 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+
+  @media (max-width: 1024px) {
+    padding: 100px 60px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 80px 24px;
+  }
 
   .items-container {
     width: 100%;
@@ -17,41 +25,21 @@
     padding: 0;
 
     h1 {
-      color: #ffffff;
-      font-size: clamp(2rem, 4vw, 2.8rem);
+      color: #000000;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
       font-weight: 700;
-      margin-bottom: 60px;
-      text-align: center;
-      position: relative;
-      display: inline-block;
-      left: 50%;
-      transform: translateX(-50%);
-      letter-spacing: 0.08em;
-
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: -12px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60px;
-        height: 3px;
-        background: #ab47bc;
-        border-radius: 2px;
-      }
+      margin-bottom: 80px;
+      text-align: left;
+      letter-spacing: -0.02em;
     }
-  }
-
-  @media (max-width: 768px) {
-    padding: 80px 24px;
   }
 }
 
 // Vertical Timeline overrides
 .vertical-timeline {
   &::before {
-    background: rgba(255, 255, 255, 0.06) !important;
-    width: 2px !important;
+    background: #e5e5e5 !important;
+    width: 3px !important;
   }
 }
 
@@ -59,8 +47,9 @@
   margin: 2em 0 !important;
 
   .vertical-timeline-element-icon {
-    box-shadow: 0 0 0 3px rgba(171, 71, 188, 0.3), 
-                0 4px 20px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 0 0 0 4px #ffffff, 
+                0 0 0 6px #c084fc, 
+                0 4px 20px rgba(192, 132, 252, 0.3) !important;
     
     .svg-inline--fa {
       color: white;
@@ -68,139 +57,135 @@
   }
 
   .vertical-timeline-element-content {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 16px;
-    box-shadow: none;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     padding: 28px 32px;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    
+    &:hover {
+      transform: translateY(-5px);
+      border-color: #c084fc;
+      box-shadow: 0 12px 32px rgba(192, 132, 252, 0.15);
 
-    // Subtle top accent on hover
+      &::before {
+        opacity: 1;
+      }
+
+      h3 {
+        color: #c084fc;
+      }
+    }
+
+    // Purple top accent
     &::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #ab47bc, transparent);
+      height: 3px;
+      background: linear-gradient(90deg, #c084fc, transparent);
       opacity: 0;
       transition: opacity 0.3s ease;
     }
-    
-    &:hover {
-      transform: translateY(-5px);
-      border-color: rgba(171, 71, 188, 0.2);
-      box-shadow: 0 15px 35px rgba(171, 71, 188, 0.1);
 
-      &::before {
-        opacity: 1;
-      }
-    }
-
-    .vertical-timeline-element-content-arrow {
-      border-right-color: rgba(255, 255, 255, 0.06) !important;
+    .vertical-timeline-element-title {
+      margin-bottom: 0;
     }
 
     h3 {
-      color: #ffffff;
-      font-size: 1.2rem;
+      color: #000000;
+      font-size: 1.375rem;
       font-weight: 600;
-      margin-bottom: 6px;
-      letter-spacing: 0.01em;
+      margin-bottom: 8px;
+      transition: color 0.3s ease;
+      letter-spacing: -0.01em;
     }
 
     h4 {
-      color: #ab47bc;
-      font-size: 1rem;
+      color: #666666;
+      font-size: 1.125rem;
       font-weight: 500;
       margin-bottom: 16px;
-      opacity: 0.9;
+      letter-spacing: 0;
     }
 
     p {
-      color: rgba(255, 255, 255, 0.65);
-      font-size: 0.95rem;
+      color: #666666;
       line-height: 1.7;
-      margin-bottom: 0;
-
-      strong {
-        color: #ab47bc;
-        font-weight: 500;
-      }
+      margin: 0;
+      font-size: 1.0625rem;
     }
 
     .vertical-timeline-element-date {
-      color: rgba(255, 255, 255, 0.5);
-      font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
+      color: #999999;
+      font-size: 0.9375rem;
       font-weight: 500;
-      letter-spacing: 0.02em;
     }
   }
 }
 
-// Light mode
-.light-mode {
-  #experience {
-    background-color: #fafafa;
+// Fade in up animation
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    h1 {
-      color: #0a0a0a;
+// Dark mode
+.dark-mode {
+  #experience {
+    background-color: #0a0a0a;
+
+    .items-container h1 {
+      color: #ffffff;
     }
   }
 
   .vertical-timeline {
     &::before {
-      background: rgba(0, 0, 0, 0.08) !important;
+      background: rgba(255, 255, 255, 0.1) !important;
     }
   }
 
   .vertical-timeline-element {
+    .vertical-timeline-element-icon {
+      box-shadow: 0 0 0 4px #0a0a0a, 
+                  0 0 0 6px #c084fc, 
+                  0 4px 20px rgba(192, 132, 252, 0.3) !important;
+    }
+
     .vertical-timeline-element-content {
-      background: rgba(0, 0, 0, 0.02);
-      border-color: rgba(0, 0, 0, 0.06);
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 
       &:hover {
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-      }
-
-      .vertical-timeline-element-content-arrow {
-        border-right-color: rgba(0, 0, 0, 0.06) !important;
+        border-color: #c084fc;
+        box-shadow: 0 12px 32px rgba(192, 132, 252, 0.2);
       }
 
       h3 {
-        color: #0a0a0a;
+        color: #ffffff;
+      }
+
+      h4 {
+        color: rgba(255, 255, 255, 0.7);
       }
 
       p {
-        color: rgba(10, 10, 10, 0.65);
+        color: rgba(255, 255, 255, 0.6);
       }
 
-      .vertical-timeline-element-date {
-        color: rgba(10, 10, 10, 0.5);
-      }
-    }
-  }
-}
-
-// Responsive adjustments
-@media only screen and (max-width: 1169px) {
-  .vertical-timeline-element-content {
-    .vertical-timeline-element-date {
-      display: block !important;
-      float: none !important;
-      margin-top: 16px;
-      color: rgba(255, 255, 255, 0.5);
-    }
-  }
-}
-
-@media only screen and (min-width: 1170px) {
-  .vertical-timeline--two-columns {
-    .vertical-timeline-element-content {
       .vertical-timeline-element-date {
         color: rgba(255, 255, 255, 0.5);
       }

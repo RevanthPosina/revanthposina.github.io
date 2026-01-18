@@ -1,44 +1,40 @@
 // ============================================
-// GLOBAL STYLES - Modern Minimal Portfolio
+// GLOBAL STYLES - Clean Minimal (Reference Match)
 // ============================================
 
-// Typography
-$font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-$font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-// Colors - Black & White with subtle accent
-$color-bg-dark: #0a0a0a;
-$color-bg-light: #fafafa;
-$color-text-primary: #ffffff;
-$color-text-secondary: rgba(255, 255, 255, 0.7);
-$color-text-muted: rgba(255, 255, 255, 0.5);
-$color-accent: #ab47bc;
-$color-accent-subtle: rgba(171, 71, 188, 0.15);
-$color-border: rgba(255, 255, 255, 0.08);
-$color-card-bg: rgba(255, 255, 255, 0.02);
-
-// Import Google Fonts
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
-  font-family: $font-primary;
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 1rem;
+  font-size: 16px;
   line-height: 1.6;
-  background-color: $color-bg-dark;
-  color: $color-text-primary;
+  background-color: #ffffff;
+  color: #000000;
+  
+  // Smaller grid background (40px)
+  background-image: 
+    linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+    linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
 code {
-  font-family: $font-mono;
-  font-size: 0.9rem;
+  font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+  font-size: 0.9em;
 }
 
 .main-container {
   position: relative;
-  background-color: $color-bg-dark;
+  background-color: transparent;
   overflow-x: hidden;
 }
 
@@ -46,102 +42,185 @@ code {
 a {
   text-decoration: none;
   color: inherit;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
-a:hover {
-  color: $color-accent;
-}
-
-// Typography hierarchy
-p, a, h1, h2, h3, h4, h5, label, button {
-  color: $color-text-primary;
-  font-family: $font-primary;
+// Typography
+h1, h2, h3, h4, h5, h6, p, a, label, button {
+  color: #000000;
 }
 
 h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(3rem, 8vw, 6rem);
   font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  letter-spacing: -0.03em;
+  line-height: 1;
 }
 
 h2 {
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-size: clamp(1.75rem, 3.5vw, 3rem);
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   line-height: 1.2;
 }
 
 h3 {
-  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-size: 1.5rem;
   font-weight: 500;
-  line-height: 1.3;
+  line-height: 1.4;
 }
 
 p {
-  font-size: 1.05rem;
+  font-size: 1.25rem;
   line-height: 1.7;
-  color: $color-text-secondary;
+  color: #666666;
 }
 
-// Section spacing
-.section-title {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 4rem;
-  position: relative;
-  display: inline-block;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -12px;
-    left: 0;
-    width: 60px;
-    height: 3px;
-    background: $color-accent;
-    border-radius: 2px;
-  }
+// Highlights - Purple like reference
+.highlight {
+  background: linear-gradient(to right, #c084fc 0%, #c084fc 100%);
+  background-size: 100% 35%;
+  background-repeat: no-repeat;
+  background-position: 0 75%;
+  padding: 0 8px;
 }
 
-// Navigation bar styles
+// Navigation - Single capsule container (modern reference style)
+
+// Remove AppBar default styles - make it transparent wrapper
+#navigation {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 1.5rem 0 !important;
+}
+
 .navigation-bar {
-  justify-content: space-between;
-  background-color: rgba(10, 10, 10, 0.9);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid $color-border;
+  // This is the actual visible capsule container
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-radius: 9999px !important;
+  padding: 10px 16px 10px 10px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  min-height: auto !important;
+  width: fit-content !important;
+  max-width: 90vw;
+  gap: 8px;
+  margin: 0 auto;
+  
+  // Override Material-UI defaults
+  min-width: auto !important;
+  flex-grow: 0 !important;
 
-  button {
-    font-size: 0.95rem;
-    font-family: $font-primary;
-    text-transform: none;
-    font-weight: 500;
-    padding: 8px 16px;
-    letter-spacing: 0.02em;
+  // Theme icon container (circular mini-pill)
+  svg {
+    color: #666666;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: rgba(0, 0, 0, 0.04);
+    border-radius: 50%;
+    padding: 8px;
+    width: 36px;
+    height: 36px;
+    margin-right: 4px;
+    flex-shrink: 0;
+    
+    &:hover {
+      color: #000000;
+      background-color: rgba(0, 0, 0, 0.08);
+    }
   }
 
-  svg {
-    cursor: pointer;
+  // Mobile menu icon
+  .MuiIconButton-root {
+    color: #666666;
+    
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+  }
+
+  // Nav links container
+  .MuiBox-root {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  // Individual nav buttons/links
+  button {
+    font-size: 0.875rem !important;
+    text-transform: none !important;
+    font-weight: 400 !important;
+    color: #666666 !important;
+    padding: 8px 16px !important;
+    margin: 0 !important;
+    letter-spacing: 0 !important;
+    border-radius: 50px !important;
+    transition: all 0.2s ease !important;
+    background: transparent !important;
+    border: none !important;
+    min-width: auto !important;
+    white-space: nowrap;
+    
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05) !important;
+      color: #000000 !important;
+    }
+
+    // Active state - inner pill highlight
+    &.nav-item-active {
+      background-color: rgba(0, 0, 0, 0.08) !important;
+      color: #000000 !important;
+      font-weight: 500 !important;
+      
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.12) !important;
+      }
+    }
+  }
+
+  // CTA button (Get in Touch) - darker style
+  button:last-child {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    padding: 8px 20px !important;
+    margin-left: 4px !important;
+    
+    &:hover {
+      background-color: #1a1a1a !important;
+      color: #ffffff !important;
+    }
+
+    &.nav-item-active {
+      background-color: #000000 !important;
+      color: #ffffff !important;
+      
+      &:hover {
+        background-color: #1a1a1a !important;
+      }
+    }
   }
 }
 
 .navigation-bar-responsive {
   span, p {
     color: #000000;
-    font-family: $font-primary;
   }
 }
 
 .container {
   margin-top: 64px;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .mobile-menu-top {
@@ -161,29 +240,92 @@ p {
   justify-content: center;
 }
 
-// Light mode
-.light-mode {
-  background-color: $color-bg-light;
+// Dark mode
+.dark-mode {
+  background-color: #0a0a0a;
+  // Grid background visible in dark mode
+  background-image: 
+    linear-gradient(to right, #1a1a1a 1px, transparent 1px),
+    linear-gradient(to bottom, #1a1a1a 1px, transparent 1px);
+  background-size: 40px 40px;
 
-  .navigation-bar {
-    background-color: rgba(250, 250, 250, 0.9);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  // Navigation dark mode
+  #navigation {
+    background-color: transparent !important;
   }
 
-  p, a, h1, h2, h3, h4, h5, label, button {
-    color: #0a0a0a;
+  .navigation-bar {
+    background-color: rgba(26, 26, 26, 0.95) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+
+    // Theme icon in dark mode
+    svg {
+      color: rgba(255, 255, 255, 0.7);
+      background-color: rgba(255, 255, 255, 0.08);
+
+      &:hover {
+        color: #ffffff;
+        background-color: rgba(255, 255, 255, 0.15);
+      }
+    }
+
+    // Mobile menu icon
+    .MuiIconButton-root {
+      color: rgba(255, 255, 255, 0.7);
+      
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.08);
+      }
+    }
+    
+    button {
+      color: rgba(255, 255, 255, 0.7) !important;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.08) !important;
+        color: #ffffff !important;
+      }
+
+      // Active state in dark mode
+      &.nav-item-active {
+        background-color: rgba(255, 255, 255, 0.12) !important;
+        color: #ffffff !important;
+        font-weight: 500 !important;
+        
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.18) !important;
+        }
+      }
+    }
+
+    // CTA button in dark mode
+    button:last-child {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+      
+      &:hover {
+        background-color: #f5f5f5 !important;
+        color: #000000 !important;
+      }
+
+      &.nav-item-active {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        
+        &:hover {
+          background-color: #f5f5f5 !important;
+        }
+      }
+    }
+  }
+
+  h1, h2, h3, h4, h5, h6, a, label, button {
+    color: #ffffff;
   }
 
   p {
-    color: rgba(10, 10, 10, 0.7);
-  }
-
-  a:hover {
-    color: $color-accent;
-  }
-
-  .navigation-bar svg {
-    color: #000000;
+    color: rgba(255, 255, 255, 0.7);
   }
 }
 
@@ -199,8 +341,8 @@ html {
   scroll-behavior: smooth;
 }
 
-// Selection styling
+// Selection
 ::selection {
-  background: $color-accent;
-  color: white;
+  background: #c084fc;
+  color: #ffffff;
 }
