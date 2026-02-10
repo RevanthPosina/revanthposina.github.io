@@ -35,7 +35,7 @@ const MainPage = () => {
                   <Type />
                 </div>
               </div>
-              <p>I like building ML, Data pipelines that turn complex data sources into insights that support better business decisions.</p>
+              <p>I love building ML, Data pipelines that turn complex data sources into insights that support better business decisions.</p>
               
               <div className="button-group">
                 <a 
@@ -75,7 +75,7 @@ const MainPage = () => {
               </div>
               <div className="polaroid">
                 <img src={ProfilePhoto} alt="Revanth Posina" />
-                <div className="polaroidCaption">me.jpeg</div>
+                <div className="polaroidCaption">Rev</div>
               </div>
               <div className="purpleArrow">→</div>
             </div>
