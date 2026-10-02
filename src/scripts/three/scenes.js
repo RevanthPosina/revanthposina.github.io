@@ -98,7 +98,7 @@ function loopWhenVisible(el, { update, render, isRunning = () => true, margin = 
   let last = 0;
   let visible = false;
   const loop = (t) => {
-    const dt = Math.min(0.05, (t - last) / 1000);
+    const dt = Math.max(0, Math.min(0.05, (t - last) / 1000));
     last = t;
     update(dt);
     render();
@@ -135,15 +135,17 @@ function lakehouse() {
   scene.add(sun);
 
   const PAL = {
-    light: { base: 0xE3E6EC, lake: 0x8EC5E8, bronze: 0xC98B5A, silver: 0xC6CBD4, gold: 0xE2B84E, src: 0x3F3F46, ring: 0x5B5BD6, plate: 0xF4F4F5, bar: 0x3F3F46, fc: 0x5B5BD6, anom: 0xE5484D, layer: 0xDDDDF7, grid: 0x5B5BD6, bot: 0xFFFFFF, eye: 0x18181B, mtn: 0x8C95A8, snow: 0xFFFFFF, tree: 0x5F9470, trunk: 0x8A6A4F, hemi: 0.8, sun: 0.85 },
-    dark: { base: 0x1D1F27, lake: 0x2D6587, bronze: 0xA9703F, silver: 0x8C93A2, gold: 0xC9A03E, src: 0xB4B4BD, ring: 0x8F91F8, plate: 0x272932, bar: 0xD4D4D8, fc: 0x8F91F8, anom: 0xFF6369, layer: 0x2B2C4D, grid: 0x8F91F8, bot: 0xE4E4E7, eye: 0x09090B, mtn: 0x4C5366, snow: 0xD7DCE6, tree: 0x3F6E50, trunk: 0x6B5341, hemi: 0.55, sun: 0.75 },
+    light: { base: 0xE3E6EC, lake: 0x8EC5E8, bronze: 0xC98B5A, silver: 0xC6CBD4, gold: 0xE2B84E, src: 0x3F3F46, ring: 0x5B5BD6, plate: 0xF4F4F5, bar: 0x3F3F46, fc: 0x5B5BD6, anom: 0xE5484D, layer: 0xDDDDF7, grid: 0x5B5BD6, bot: 0xFFFFFF, eye: 0x18181B, mtn: 0x8C95A8, snow: 0xFFFFFF, needle: 0xF4F4F5, cloud: 0xFFFFFF, tree: 0x5F9470, trunk: 0x8A6A4F, hemi: 0.8, sun: 0.85 },
+    dark: { base: 0x1D1F27, lake: 0x2D6587, bronze: 0xA9703F, silver: 0x8C93A2, gold: 0xC9A03E, src: 0xB4B4BD, ring: 0x8F91F8, plate: 0x272932, bar: 0xD4D4D8, fc: 0x8F91F8, anom: 0xFF6369, layer: 0x2B2C4D, grid: 0x8F91F8, bot: 0xE4E4E7, eye: 0x09090B, mtn: 0x4C5366, snow: 0xD7DCE6, needle: 0xC3C7D2, cloud: 0xAEB6C6, tree: 0x3F6E50, trunk: 0x6B5341, hemi: 0.55, sun: 0.75 },
   };
-  const KEYS = ['base', 'lake', 'bronze', 'silver', 'gold', 'src', 'ring', 'plate', 'bar', 'anom', 'layer', 'bot', 'eye', 'mtn', 'snow', 'tree', 'trunk'];
+  const KEYS = ['base', 'lake', 'bronze', 'silver', 'gold', 'src', 'ring', 'plate', 'bar', 'anom', 'layer', 'bot', 'eye', 'snow', 'needle', 'cloud', 'tree', 'trunk'];
   const M = {};
   KEYS.forEach((k) => { M[k] = std(0xffffff); });
   Object.assign(M.lake, { roughness: 0.25, metalness: 0.1 });
   Object.assign(M.gold, { roughness: 0.55, metalness: 0.25 });
-  M.mtn.flatShading = true; M.snow.flatShading = true; M.tree.flatShading = true;
+  M.tree.flatShading = true; M.snow.flatShading = true;
+  Object.assign(M.cloud, { transparent: true, opacity: 0.9, depthWrite: false });
+  M.rainier = new T.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.95 });
   M.fc = new T.MeshStandardMaterial({ color: 0xffffff, transparent: true, opacity: 0.55, roughness: 0.6 });
   M.band = new T.MeshStandardMaterial({ color: 0xffffff, transparent: true, opacity: 0.16, roughness: 0.6, depthWrite: false });
   M.grid = new T.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.5 });
@@ -239,15 +241,100 @@ function lakehouse() {
   bot.position.set(-0.7, 1.15, 2.35);
   scene.add(pick(bot, 'bot', 'KPI agent', 'An LLM agent that answers questions through the semantic layer', 'msft'));
 
-  const mtn = new T.Group();
-  const cone = new T.Mesh(new T.ConeGeometry(1.5, 2.4, 7), M.mtn);
-  cone.position.y = 1.2; cone.castShadow = true; cone.receiveShadow = true;
-  mtn.add(cone);
-  const cap = new T.Mesh(new T.ConeGeometry(0.64, 1.0, 7), M.snow);
-  cap.position.y = 1.92;
-  mtn.add(cap);
-  mtn.position.set(5.0, 0, -2.7);
-  scene.add(pick(mtn, 'mtn', 'The Cascades', 'Where the weekend trail runs happen', 'off'));
+  /* Mt. Rainier, 14,411 ft: a broad massif with a cratered summit plateau and glaciers radiating from the top
+     between rock ridges (cleavers). */
+  const RH = 3.45;
+  const GL = [[0.2, 0.17, 0.3], [0.95, 0.2, 0.26], [1.7, 0.15, 0.34], [2.45, 0.18, 0.24], [3.2, 0.2, 0.32], [3.9, 0.16, 0.28], [4.6, 0.19, 0.3], [5.3, 0.17, 0.25], [5.9, 0.15, 0.22]];
+  const angd = (a, b) => { const d = Math.abs(a - b) % (Math.PI * 2); return d > Math.PI ? Math.PI * 2 - d : d; };
+  const glacier = (th) => GL.reduce((m, [a, w]) => Math.max(m, Math.exp(-Math.pow(angd(th, a) / w, 2))), 0);
+  const snowLine = (th) => GL.reduce((l, [a, w, reach]) => l - reach * Math.exp(-Math.pow(angd(th, a) / w, 2)), 0.58);
+  const rainierGeo = new T.CylinderGeometry(0.34, 1.6, RH, 48, 22);
+  rainierGeo.translate(0, RH / 2, 0);
+  {
+    // Integer-frequency functions of the angle keep the seam vertices moving together.
+    const pos = rainierGeo.attributes.position;
+    for (let i = 0; i < pos.count; i++) {
+      const x = pos.getX(i);
+      const z = pos.getZ(i);
+      const t = Math.min(1, pos.getY(i) / RH);
+      if (Math.hypot(x, z) < 1e-6) { if (t > 0.5) pos.setY(i, RH - 0.07); continue; } // crater floor (top cap centre only)
+      const th = Math.atan2(z, x);
+      const ridge = 1 + (0.1 * (1 - glacier(th)) + 0.05 * Math.sin(3 * th + 0.8)) * (1 - t * 0.6);
+      const r = (0.34 + 1.26 * Math.pow(1 - t, 1.5)) * ridge;
+      pos.setXYZ(i, Math.cos(th) * r, pos.getY(i) + Math.sin(4 * th + t * 9) * 0.04 * (1 - t), Math.sin(th) * r);
+    }
+    rainierGeo.computeVertexNormals();
+  }
+  const rainierCol = new T.Float32BufferAttribute(new Float32Array(rainierGeo.attributes.position.count * 3), 3);
+  rainierGeo.setAttribute('color', rainierCol);
+  const tint = new T.Color();
+  const snowC = new T.Color();
+  const paintRainier = (P) => {
+    const pos = rainierGeo.attributes.position;
+    for (let i = 0; i < pos.count; i++) {
+      const t = Math.min(1, pos.getY(i) / RH);
+      const th = Math.atan2(pos.getZ(i), pos.getX(i));
+      if (t >= snowLine(th)) snowC.setHex(P.snow);
+      else snowC.setHex(P.mtn).multiplyScalar(0.8).lerp(tint.setHex(P.snow), t * 0.15);
+      rainierCol.setXYZ(i, snowC.r, snowC.g, snowC.b);
+    }
+    rainierCol.needsUpdate = true;
+  };
+  const rainier = new T.Mesh(rainierGeo, M.rainier);
+  rainier.castShadow = true;
+  rainier.receiveShadow = true;
+  rainier.position.set(4.9, 0, -2.9);
+  // Three summit crests on the crater rim: Columbia Crest (highest), Point Success, Liberty Cap (the one Seattle sees).
+  [[0.9, 0.2, 0.2, 0.07], [-0.9, 0.16, 0.18, 0.04], [2.5, 0.2, 0.17, 0.035]].forEach(([th, r, rad, lift]) => {
+    const c = new T.Mesh(new T.SphereGeometry(rad, 8, 6), M.snow);
+    c.scale.y = 0.6;
+    c.position.set(Math.cos(th) * r, RH + lift - 0.04, Math.sin(th) * r);
+    c.castShadow = true;
+    rainier.add(c);
+  });
+  scene.add(pick(rainier, 'rainier', 'Mt. Rainier', 'Sets the mood of the day just by showing up', 'off'));
+  const clouds = [
+    { r: 1.15, y: 1.05, s: 1.15, sp: 0.12, a: 0.4 },
+    { r: 0.95, y: 1.65, s: 1.0, sp: -0.1, a: 2.5 },
+    { r: 0.78, y: 2.25, s: 0.85, sp: 0.09, a: 4.5 },
+  ].map((c) => {
+    const g = new T.Group();
+    [[0, 0, 0, 0.34], [0.36, -0.03, 0.06, 0.26], [-0.34, -0.04, -0.05, 0.25], [0.12, 0.08, -0.12, 0.24], [0.66, -0.07, 0, 0.17], [-0.62, -0.07, 0.04, 0.16]].forEach(([x, y, z, r]) => {
+      const m = new T.Mesh(new T.IcosahedronGeometry(r, 2), M.cloud);
+      m.position.set(x, y, z);
+      g.add(m);
+    });
+    g.scale.set(c.s * 1.3, c.s * 0.6, c.s);
+    g.userData = c;
+    scene.add(g);
+    return g;
+  });
+
+  /* Space Needle, behind the event streams. Real proportions: 605 ft tall, three pairs of legs curving from a
+     102 ft base in to a waist at 373 ft (62% of the height), then out to a 138 ft saucer, then the spire. */
+  const needle = new T.Group();
+  const NK = 2.5 / 605; // scene units per foot
+  const part = (geo, mat, y) => { const m = new T.Mesh(geo, mat); m.position.y = y || 0; m.castShadow = true; needle.add(m); return m; };
+  const WAIST = 373 * NK;
+  for (let i = 0; i < 3; i++) {
+    const ph = (i * Math.PI * 2) / 3 + Math.PI / 6;
+    const pts = [0, 0.12, 0.3, 0.5, 0.7, 0.85, 1].map((u) => { const r = 0.05 + (51 * NK - 0.05) * Math.pow(1 - u, 1.7); return new T.Vector3(Math.cos(ph) * r, u * WAIST, Math.sin(ph) * r); });
+    part(new T.TubeGeometry(new T.CatmullRomCurve3(pts), 20, 0.017, 6, false), M.needle);
+  }
+  part(new T.CylinderGeometry(0.03, 0.04, WAIST, 10), M.needle, WAIST / 2);
+  const shaft = [[0.055, WAIST - 0.04], [0.07, WAIST + 0.02], [0.09, 1.7], [0.115, 1.85], [0.13, 1.93]].map(([r, y]) => new T.Vector2(r, y));
+  const saucer = [[0.13, 1.93], [0.22, 1.985], [0.285, 2.03], [0.285, 2.09], [0.25, 2.105], [0.17, 2.135], [0.08, 2.165], [0.02, 2.175]].map(([r, y]) => new T.Vector2(r, y));
+  part(new T.LatheGeometry(shaft, 16), M.needle);
+  part(new T.LatheGeometry(saucer, 32), M.needle);
+  part(new T.CylinderGeometry(0.288, 0.288, 0.05, 32, 1, true), M.eye, 2.06); // observation windows
+  part(new T.CylinderGeometry(0.292, 0.292, 0.016, 32), M.gold, 2.035); // the gold halo
+  part(new T.CylinderGeometry(0.288, 0.288, 0.012, 32), M.gold, 2.092);
+  part(new T.CylinderGeometry(0.008, 0.02, 0.33, 8), M.needle, 2.33);
+  const needleTip = new T.Mesh(new T.SphereGeometry(0.04, 12, 10), M.antenna);
+  needleTip.position.y = 2.5;
+  needle.add(needleTip);
+  needle.position.set(-5.9, 0, -2.6);
+  scene.add(pick(needle, 'needle', 'Space Needle', 'Seattle, where it all gets built'));
 
   [[-5.7, 2.9], [-2.2, 3.6], [-5.8, 0.6], [0.9, 3.75], [5.8, 3.6], [5.9, -0.4], [3.6, -3.9], [-3.6, -3.6]].forEach((p, i) => {
     const t = new T.Group();
@@ -281,7 +368,9 @@ function lakehouse() {
     const dk = isDark();
     const P = dk ? PAL.dark : PAL.light;
     KEYS.forEach((k) => M[k].color.setHex(P[k]));
+    paintRainier(P);
     M.fc.color.setHex(P.fc); M.band.color.setHex(P.fc); M.grid.color.setHex(P.grid);
+    M.cloud.emissive.setHex(P.cloud); M.cloud.emissiveIntensity = dk ? 0.22 : 0.18;
     M.antenna.color.setHex(P.ring); M.antenna.emissive.setHex(P.ring); M.antenna.emissiveIntensity = 0.35;
     M.shadowBlob.opacity = dk ? 0.35 : 0.12;
     hemi.intensity = P.hemi; sun.intensity = P.sun;
@@ -325,8 +414,10 @@ function lakehouse() {
   }
   const act = (o, from) => {
     if (!o?.userData.action) return;
-    if (o.userData.action === 'off') go('off');
-    else openCase(o.userData.action, from);
+    const id = o.userData.action;
+    if (id === 'off') go('off');
+    else if ($(`role-${id}`)) document.dispatchEvent(new CustomEvent('portfolio:show-role', { detail: id }));
+    else openCase(id, from);
   };
   cover.addEventListener('pointermove', (e) => {
     if (e.pointerType !== 'mouse' || cover.classList.contains('drag')) return;
@@ -381,7 +472,8 @@ function lakehouse() {
   const bv = new T.Vector3();
   const placeBubble = () => {
     bv.set(bot.position.x, bot.position.y + 0.62, bot.position.z).project(cam);
-    bubble.style.transform = `translate(${Math.round((bv.x + 1) / 2 * W + 6)}px,${Math.round((1 - bv.y) / 2 * H - bubble.offsetHeight)}px)`;
+    const x = Math.min(W - bubble.offsetWidth - 8, Math.max(8, (bv.x + 1) / 2 * W + 6));
+    bubble.style.transform = `translate(${Math.round(x)}px,${Math.round((1 - bv.y) / 2 * H - bubble.offsetHeight)}px)`;
   };
 
   let clock = 0;
@@ -410,6 +502,12 @@ function lakehouse() {
     blob.scale.setScalar(1 - bob * 0.8);
     antTip.scale.setScalar(1 + pulse * 0.3);
     tip.scale.setScalar(1 + 0.3 * Math.sin(clock * 6));
+    needleTip.scale.setScalar(1 + 0.3 * Math.sin(clock * 3 + 1));
+    clouds.forEach((c, i) => {
+      const d = c.userData;
+      const a = d.a + clock * d.sp;
+      c.position.set(rainier.position.x + Math.cos(a) * d.r, d.y + Math.sin(clock * 0.8 + i * 2) * 0.06, rainier.position.z + Math.sin(a) * d.r);
+    });
   }
   function render() {
     if (!W) return;
@@ -738,9 +836,9 @@ function offTheClock() {
   orbit.add(new T.Points(starGeo, new T.PointsMaterial({ color: 0xffffff, size: 1.6, sizeAttenuation: false, transparent: true, opacity: 0.8 })));
 
   const SCENES = {
-    trail: { sc: trail, target: new T.Vector3(0, 0.4, 0), minH: 8.4, minW: 12.4, fig: 'Fig. 2, placeholder terrain', how: 'USGS 3DEP elevation + my GPX route, meshed and drawn with three.js. Placeholder terrain and numbers until I add a real run.' },
-    lap: { sc: lap, target: new T.Vector3(0, 0.4, 0), minH: 6.8, minW: 11.8, fig: 'Fig. 3, placeholder circuit', how: 'One lap of FastF1 telemetry, resampled and colored by speed: red is braking, iris is flat out. Try DRS. Placeholder circuit until I pick a real lap.' },
-    orbit: { sc: orbit, target: new T.Vector3(0, 0, 0), minH: 6.6, minW: 8.6, fig: 'Fig. 4, illustrative orbit', how: 'An ISS-like orbit: about 92 minutes per lap at 51.6° inclination, with time warp. Positions are illustrative, not live tracking.' },
+    trail: { sc: trail, target: new T.Vector3(0, 0.4, 0), minH: 8.4, minW: 12.4, fig: 'Fig. 2, placeholder terrain' },
+    lap: { sc: lap, target: new T.Vector3(0, 0.4, 0), minH: 6.8, minW: 11.8, fig: 'Fig. 3, placeholder circuit' },
+    orbit: { sc: orbit, target: new T.Vector3(0, 0, 0), minH: 6.6, minW: 8.6, fig: 'Fig. 4, illustrative orbit' },
   };
   let cur = 'trail';
   let W = 0;
@@ -867,7 +965,6 @@ function offTheClock() {
     cur = b.dataset.scene;
     document.querySelectorAll('#off .seg button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
     $('stage-fig').textContent = SCENES[cur].fig;
-    $('stage-how').textContent = SCENES[cur].how;
     if (cur === 'orbit') { st.tel = 0.35; S.trailFill = 0; }
     else if (st.tel < 0.4) st.tel = 0.62;
     buildHud();

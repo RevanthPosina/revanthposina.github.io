@@ -140,31 +140,6 @@ new MutationObserver(emitTheme).observe(docEl, { attributes: true, attributeFilt
   });
 })();
 
-/* stats count up when scrolled into view */
-(() => {
-  if (reduce || !('IntersectionObserver' in window)) return;
-  const fmt = (el, v) => {
-    const s = el.dataset.comma ? Math.round(v).toLocaleString('en-US') : String(Math.round(v));
-    el.textContent = (el.dataset.prefix || '') + s + (el.dataset.suffix || '');
-  };
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((en) => {
-      if (!en.isIntersecting) return;
-      io.unobserve(en.target);
-      const el = en.target;
-      const to = Number(el.dataset.to);
-      const t0 = performance.now();
-      const step = (t) => {
-        const k = Math.min(1, (t - t0) / 1100);
-        fmt(el, to * (1 - Math.pow(1 - k, 3)));
-        if (k < 1) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-    });
-  }, { threshold: 0.6 });
-  document.querySelectorAll('.stat .n').forEach((el) => io.observe(el));
-})();
-
 /* overlays */
 let lastFocus = null;
 function showOv(ov) { ov.classList.add('on'); ov.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; }
@@ -182,7 +157,6 @@ function trap(ov, e) {
 const cards = [...document.querySelectorAll('.card[data-case]')];
 const caseOv = $('case-ov');
 function pill(status) {
-  if (status === 'build') return '<span class="pill build"><i></i>building</span>';
   if (status === 'pend') return '<span class="pill pend">evals pending</span>';
   return '';
 }
@@ -218,7 +192,7 @@ $('filters').addEventListener('click', (e) => {
   if (!b) return;
   const f = b.dataset.f;
   $('filters').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-  cards.forEach((c) => { c.hidden = f !== 'all' && c.dataset.cat !== f; });
+  document.querySelectorAll('#cards .card').forEach((c) => { c.hidden = f !== 'all' && c.dataset.cat !== f; });
 });
 $('case-x').addEventListener('click', () => hideOv(caseOv));
 caseOv.addEventListener('click', (e) => { if (e.target === caseOv) hideOv(caseOv); });
@@ -229,6 +203,7 @@ document.addEventListener('portfolio:open-case', (e) => openCase(e.detail.id, e.
   const roles = $('roles');
   const nav = $('xp-nav');
   let cur = 'msft';
+  let hold = 0;
   const setActive = (k) => {
     if (k === cur) return;
     cur = k;
@@ -236,18 +211,24 @@ document.addEventListener('portfolio:open-case', (e) => openCase(e.detail.id, e.
     nav.querySelectorAll('button').forEach((b) => b.setAttribute('aria-current', String(b.dataset.k === k)));
     document.dispatchEvent(new CustomEvent('portfolio:xp', { detail: k }));
   };
+  const showRole = (k) => {
+    if (!$(`role-${k}`)) return;
+    setActive(k);
+    hold = performance.now() + 900;
+    $(`role-${k}`).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+  };
   nav.addEventListener('click', (e) => {
     const b = e.target.closest('button[data-k]');
-    if (!b) return;
-    setActive(b.dataset.k);
-    $(`role-${b.dataset.k}`).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    if (b) showRole(b.dataset.k);
   });
+  document.addEventListener('portfolio:show-role', (e) => showRole(e.detail));
   roles.addEventListener('pointerover', (e) => {
     const r = e.target.closest('.role');
     if (r) setActive(r.dataset.k);
   });
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
+      if (performance.now() < hold) return;
       entries.forEach((en) => { if (en.isIntersecting) setActive(en.target.dataset.k); });
     }, { rootMargin: '-35% 0px -55% 0px' });
     roles.querySelectorAll('.role').forEach((r) => io.observe(r));

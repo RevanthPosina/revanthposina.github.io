@@ -5,7 +5,6 @@ export function esc(s) {
 }
 
 export function pillFor(c) {
-  if (c.status === 'build') return '<span class="pill build"><i></i>building</span>';
   if (c.status === 'pend') return '<span class="pill pend">evals pending</span>';
   return '';
 }
@@ -77,14 +76,13 @@ export function diagram(spec,uid){
 
 /** Full HTML for a project sheet, rendered at build time into a <template>. */
 export function caseBody(c) {
-  const head = c.cat === 'work' ? 'What I did' : c.status === 'build' ? 'How it works' : 'What it does';
   let h = `<p>${esc(c.sum)}</p>`;
   if (c.dia) h += `<div class="dia">${diagram(c.dia, c.id)}</div>`;
-  h += `<h4>${head}</h4><ul>${c.bullets.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`;
+  h += `<h4>What it does</h4><ul>${c.bullets.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`;
   if (c.mets) h += `<h4>${esc(c.mhead || 'Results')}</h4><div class="mets">${c.mets.map((m) => `<div class="met${m.p ? ' pending' : ''}"><div class="v">${esc(m.v)}</div><div class="k">${esc(m.k)}</div></div>`).join('')}</div>`;
   if (c.note) h += `<p class="note-box">${esc(c.note)}</p>`;
   h += `<div class="chips">${c.chips.map((x) => `<span class="chip">${esc(x)}</span>`).join('')}</div>`;
   if (c.repo) h += `<div class="btns"><a class="btn" href="${c.repo}" target="_blank" rel="noopener"><svg class="i"><use href="#i-gh"/></svg>View the repo on GitHub</a></div>`;
-  else if (c.cat !== 'work') h += `<div class="btns"><span class="pill">repo coming soon</span></div>`;
+  else h += `<div class="btns"><span class="pill">repo coming soon</span></div>`;
   return h;
 }

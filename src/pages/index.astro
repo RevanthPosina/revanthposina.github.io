@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { profile, stats, categories, cases, experience, education, stack, legend } from '../data/content.js';
+import { profile, categories, cases, experience, education, stack, legend } from '../data/content.js';
 import { pillFor, svgVis, caseBody } from '../lib/svg.js';
 
 const stackCount = stack.reduce((n, s) => n + s.tools.length, 0);
@@ -18,30 +18,33 @@ const catCounts = Object.keys(categories).map((k) => [k, categories[k], cases.fi
         <a class="l" href="#experience">Experience</a>
         <a class="l" href="#stack">Stack</a>
         <a class="l" href="#off">Off the clock</a>
+      </nav>
+      <div class="nav-tools">
         <button class="iconbtn search-btn" type="button" id="open-pal" aria-label="Search the site"><svg class="i"><use href="#i-search"/></svg><span class="lbl">Search</span><span class="kbd">⌘K</span></button>
         <button class="iconbtn theme-btn" type="button" id="theme" aria-label="Toggle light and dark theme"><svg class="i sun"><use href="#i-sun"/></svg><svg class="i moon"><use href="#i-moon"/></svg></button>
         <a class="iconbtn" href={profile.links.github} target="_blank" rel="noopener" aria-label="GitHub profile"><svg class="i"><use href="#i-gh"/></svg></a>
-      </nav>
+      </div>
     </div>
   </header>
 
   <main>
-  <section class="cover" id="cover" aria-label="Interactive 3D model of a medallion lakehouse that feeds a forecast and an LLM agent">
-    <canvas id="c3d" aria-hidden="true"></canvas>
-    <div class="nogl" id="nogl">This 3D scene needs WebGL. The legend below lists what it shows.</div>
-    <div class="note note-drag" aria-hidden="true">drag to orbit, hover to explore<svg viewBox="0 0 44 30"><path d="M3 4c10 1 22 6 30 20"/><path d="M27 21l6 4 2-7"/></svg></div>
-    <div class="tip3d" id="tip3d" role="status"></div>
-    <div class="bubble" id="bubble" aria-hidden="true"></div>
-    <div class="cover-tools"><button class="iconbtn" type="button" id="reset3d" aria-label="Reset the 3D view"><svg class="i"><use href="#i-reset"/></svg></button><button class="iconbtn" type="button" id="pause3d" aria-pressed="false">Pause</button></div>
-    <span class="fig">Fig. 1, the lakehouse I keep building. Synthetic.</span>
-  </section>
-  <div class="rule"></div>
-  <div class="legend" id="legend" role="group" aria-label="Parts of the 3D model">
-    {legend.map(([key, label, color]) => (
-      <button type="button" class="lg" data-key={key} aria-pressed="false"><i style={`background:${color}`}></i>{label}</button>
-    ))}
+  <div class="cover-page">
+    <section class="cover" id="cover" aria-label="Interactive 3D model of a medallion lakehouse that feeds a forecast and an LLM agent">
+      <canvas id="c3d" aria-hidden="true"></canvas>
+      <div class="nogl" id="nogl">This 3D scene needs WebGL. The legend below lists what it shows.</div>
+      <div class="note note-drag" aria-hidden="true">drag to orbit, hover to explore<svg viewBox="0 0 44 30"><path d="M3 4c10 1 22 6 30 20"/><path d="M27 21l6 4 2-7"/></svg></div>
+      <div class="tip3d" id="tip3d" role="status"></div>
+      <div class="bubble" id="bubble" aria-hidden="true"></div>
+      <div class="cover-tools"><button class="iconbtn" type="button" id="reset3d" aria-label="Reset the 3D view"><svg class="i"><use href="#i-reset"/></svg></button><button class="iconbtn" type="button" id="pause3d" aria-pressed="false">Pause</button></div>
+    </section>
+    <div class="rule"></div>
+    <div class="legend" id="legend" role="group" aria-label="Parts of the 3D model">
+      {legend.map(([key, label, color]) => (
+        <button type="button" class="lg" data-key={key} aria-pressed="false"><i style={`background:${color}`}></i>{label}</button>
+      ))}
+    </div>
+    <div class="rule"></div>
   </div>
-  <div class="rule"></div>
 
   <section class="hero2" aria-labelledby="name">
     <div class="h-left">
@@ -49,10 +52,9 @@ const catCounts = Object.keys(categories).map((k) => [k, categories[k], cases.fi
       <h1 class="bigname" id="name">Revanth <span>Posina</span></h1>
       <div class="flip" aria-hidden="true"><div class="flip-in" id="flip">{[...profile.roles, profile.roles[0]].map((r) => <span>{r}</span>)}</div></div>
       <p class="sr-only">{profile.title} at {profile.employer}.</p>
-      <p class="lede2">I build the <b>pipelines, forecasts and LLM agents</b> behind finance analytics at Microsoft. On the side I'm building <b>ForgeDB</b>, a distributed SQL engine in Rust.</p>
+      <p class="lede2">I build the <b>pipelines, forecasts and LLM agents</b> that power finance analytics at Microsoft.</p>
       <div class="info">
         <div class="row"><span class="ic"><svg class="i"><use href="#i-brief"/></svg></span><span class="tx">{profile.title} <span class="dim">@</span> {profile.employer}</span></div>
-        <div class="row"><span class="ic"><svg class="i"><use href="#i-pin"/></svg></span><span class="tx">{profile.location}</span></div>
         <div class="row"><span class="ic"><svg class="i"><use href="#i-clock"/></svg></span><span class="tx" id="clock">Pacific time</span></div>
         <div class="row"><span class="ic"><svg class="i"><use href="#i-mail"/></svg></span><button class="tx copy-email" type="button">{profile.email}</button></div>
       </div>
@@ -87,7 +89,6 @@ const catCounts = Object.keys(categories).map((k) => [k, categories[k], cases.fi
               <span class="id-list">
                 <span>Forecasting and anomaly models for finance analytics</span>
                 <span>LLM agents over a KPI semantic layer</span>
-                <span>Building ForgeDB, a distributed SQL engine in Rust</span>
               </span>
               <span class="id-h">ASK ME ABOUT</span>
               <span class="id-tags"><span>lakehouses</span><span>streaming</span><span>query engines</span><span>evals</span><span>trail runs</span></span>
@@ -102,40 +103,35 @@ const catCounts = Object.keys(categories).map((k) => [k, categories[k], cases.fi
 
   <div class="hatch"></div>
   <section class="sec" id="about" aria-labelledby="about-h">
-    <div class="sec-h"><h2 id="about-h">About</h2><span class="meta">the short version</span></div>
-    <div class="ab">
-      <div class="ab-card ab-bio">
-        <p class="big">I turn messy operational data into numbers people <em>plan on</em>, and I build the agents that explain them.</p>
-        <p>Since 2020 I've gone from gaming telemetry at Entain to HIPAA claims at Bloom Insurance to finance analytics at Microsoft. The common thread: get the data in reliably, model it at the right grain, forecast it, flag what doesn't fit, and let people ask why in plain English.</p>
-      </div>
-      <div class="ab-card ab-now">
-        <span class="lbl"><i></i>NOW</span>
-        <ul class="now-list">
-          <li><span class="ic"><svg class="i"><use href="#i-brief"/></svg></span><span>Forecasting, anomaly detection and LLM agents<small>Microsoft</small></span></li>
-          <li><span class="ic"><svg class="i"><use href="#i-cpu"/></svg></span><span>A distributed SQL engine in Rust<small>ForgeDB, building</small></span></li>
-        </ul>
-      </div>
-      <div class="ab-stats" id="stats">
-        {stats.map((s) => (
-          <div class="stat">
-            <span class="n" data-to={s.to} data-prefix={s.prefix} data-suffix={s.suffix} data-comma={s.comma ? '1' : undefined}>{s.text}</span>
-            <span class="d">{s.d}</span>
-            <span class="src"><b>{s.src}</b></span>
-          </div>
-        ))}
+    <div class="sec-h"><h2 id="about-h">About</h2></div>
+    <div class="ab-card ab-bio">
+      <p class="big">I turn messy operational data into numbers people <em>plan on</em>, and I build the agents that explain them.</p>
+      <div class="ab-body">
+        <p>Since 2020 I've moved from gaming telemetry at Entain to healthcare claims at Bloom Insurance to finance analytics at Microsoft. The domains change, the work doesn't: get the data in reliably, model it so the numbers hold up, and make it easy for people to ask why.</p>
+        <p>I care most about the parts that make data trustworthy: clear contracts between teams, quality checks, lineage, and agents with guardrails and evals. Forecasts and anomaly detection are only useful when people believe the data underneath.</p>
+        <p>I studied data science at Indiana University Bloomington. Away from the keyboard: trail running, hiking and Formula 1.</p>
       </div>
     </div>
   </section>
 
   <div class="hatch"></div>
   <section class="sec" id="work" aria-labelledby="work-h">
-    <div class="sec-h"><h2 id="work-h">Work and projects</h2><span class="meta">click a card for the architecture</span></div>
+    <div class="sec-h"><h2 id="work-h">Work and projects</h2><span class="meta">open a project for the architecture</span></div>
     <div class="filters" id="filters" role="group" aria-label="Filter projects">
       <button type="button" data-f="all" aria-pressed="true">All <span>{cases.length}</span></button>
       {catCounts.map(([k, label, n]) => <button type="button" data-f={k} aria-pressed="false">{label} <span>{n}</span></button>)}
     </div>
     <div class="grid2" id="cards">
-      {cases.map((c) => (
+      {cases.map((c) => c.cat === 'work' ? (
+        <article class="card static" data-cat={c.cat}>
+          <span class="card-vis" set:html={svgVis(c.vis)}></span>
+          <span class="card-b">
+            <span class="card-top"><span>{c.org}</span><span>{c.yrs}</span></span>
+            <span class="h3">{c.title}</span>
+            <span class="p">{c.sum}</span>
+          </span>
+        </article>
+      ) : (
         <button type="button" class="card" data-case={c.id} data-cat={c.cat} data-title={c.title} data-org={c.org} data-yrs={c.yrs} data-status={c.status} data-group={categories[c.cat]}>
           <span class="card-vis" set:html={svgVis(c.vis)}></span>
           <span class="card-b">
@@ -147,7 +143,7 @@ const catCounts = Object.keys(categories).map((k) => [k, categories[k], cases.fi
         </button>
       ))}
     </div>
-    {cases.map((c) => <template id={`case-${c.id}`} set:html={caseBody(c)}></template>)}
+    {cases.filter((c) => c.cat !== 'work').map((c) => <template id={`case-${c.id}`} set:html={caseBody(c)}></template>)}
   </section>
 
   <div class="hatch"></div>
@@ -168,10 +164,8 @@ const catCounts = Object.keys(categories).map((k) => [k, categories[k], cases.fi
               <div><h3>{x.co}{x.current && <span class="badge"><i></i>current</span>}</h3><div class="meta">{x.meta}</div></div>
               <span class="when">{x.when}</span>
             </div>
+            <p class="role-sum">{x.sum}</p>
             {x.ladder && <ul class="ladder">{x.ladder.map(([t, d]) => <li>{t}<span>{d}</span></li>)}</ul>}
-            <div class="role-mets">{x.mets.map(([v, k]) => <div><b>{v}</b><span>{k}</span></div>)}</div>
-            <ul class="wins">{x.wins.map((w) => <li><span set:html={w}></span></li>)}</ul>
-            <div class="chips">{x.chips.map((c) => <span class="chip">{c}</span>)}</div>
           </article>
         ))}
       </div>
@@ -218,7 +212,6 @@ const catCounts = Object.keys(categories).map((k) => [k, categories[k], cases.fi
       <div class="note stage-note" aria-hidden="true">spin it</div>
       <span class="fig" id="stage-fig">Fig. 2, placeholder terrain</span>
     </div>
-    <p class="how" id="stage-how">USGS 3DEP elevation + my GPX route, meshed and drawn with three.js. Placeholder terrain until I add a real run.</p>
     <div class="box" style="margin-top:14px">
       <h3>Also into</h3>
       <div class="chips" style="margin-top:2px"><span class="chip">Trail running</span><span class="chip">Hiking</span><span class="chip">Formula 1</span><span class="chip">Anime</span><span class="chip">Space documentaries</span><span class="chip">Game dev, see Rex_Runner in Work</span></div>
