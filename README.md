@@ -17,9 +17,8 @@ Needs Node 20.19+ (CI uses Node 22).
 All copy lives in `src/data/content.js`:
 
 - `profile`: name, title, links, the rotating role line
-- `stats`: the four numbers in About
-- `cases`: project cards and their pop-up sheets (diagram nodes and edges included)
-- `experience`, `education`, `stack`
+- `cases`: project cards and their pop-up sheets (diagram nodes and edges included). Cards with `cat: 'work'` are one-line summaries with no pop-up
+- `experience` (a one-line summary per role), `education`, `stack`
 
 Layout is in `src/pages/index.astro`, styles in `src/styles/global.css`,
 interactions in `src/scripts/ui.js`, and the 3D scenes in `src/scripts/three/scenes.js`.

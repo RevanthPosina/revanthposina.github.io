@@ -4,11 +4,10 @@ export const profile = {
   name: 'Revanth Posina',
   title: 'Data Engineer (AI/ML)',
   employer: 'Microsoft',
-  location: 'Seattle area, Washington',
   email: 'posinarevanth@gmail.com',
   url: 'https://revanthposina.github.io',
   description:
-    'Data Engineer (AI/ML) at Microsoft. I build the pipelines, forecasts and LLM agents behind finance analytics, and I am building ForgeDB, a distributed SQL engine in Rust.',
+    'Data Engineer (AI/ML) at Microsoft. I build the pipelines, forecasts and LLM agents that power finance analytics.',
   links: {
     github: 'https://github.com/RevanthPosina',
     linkedin: 'https://www.linkedin.com/in/revanth-p/',
@@ -23,123 +22,26 @@ export const profile = {
   ],
 };
 
-export const stats = [
-  { to: 30, suffix: '+', text: '30+', d: 'revenue sources unified into one governed layer', src: 'Microsoft' },
-  { to: 95, prefix: '~', suffix: '%', text: '~95%', d: 'forecast accuracy, champion/challenger across 7+ models', src: 'Microsoft' },
-  { to: 2, suffix: 'M+', text: '2M+', d: 'claims a month through a pipeline held at 99.9% SLA', src: 'Bloom Insurance' },
-  { to: 5000, suffix: '+', comma: true, text: '5,000+', d: 'IRS filings turned into a searchable RAG service', src: 'Project990' },
-];
-
 export const categories = { work: 'Work', side: 'Side projects' };
 
 export const cases = [
   {
     id: 'msft', cat: 'work', org: 'Microsoft', yrs: '2025 to now', vis: 'forecast',
-    title: 'Revenue lakehouse, forecasting and agents',
-    sum: 'Unified 30+ revenue sources into a governed medallion lakehouse on Microsoft Fabric, then built forecasting, anomaly detection and LLM agents on top of it.',
-    chips: ['Fabric', 'PySpark', 'Delta Lake', 'dbt', 'Airflow', 'Terraform', 'MCP'],
-    bullets: [
-      'Medallion lakehouse on Fabric with PySpark, Delta Lake incremental loads and dbt: one governed revenue layer instead of 30+ disconnected sources, so Finance and GTM stopped working from different numbers.',
-      "ML forecasting with 7+ model variants and champion/challenger selection, validated side by side against Finance's own process and reported in their error bands rather than RMSE.",
-      'Anomaly models that flag KPIs drifting outside their expected range, feeding the same semantic layer.',
-      'An MCP-based LLM agent over dbt lineage and catalog metadata for lineage, impact and metric questions, with read-only credentials, schema-scoped retrieval and sanity checks on implausible results.',
-      'Column masking, row-level access and audit trails built in. CI/CD from dev to staging to prod. About 30% lower compute from Spark right-sizing.',
-    ],
-    mets: [
-      { v: '100+ hrs', k: 'manual reconciliation removed a month' },
-      { v: '~80%', k: 'faster reporting' },
-      { v: '~95%', k: 'forecast accuracy' },
-      { v: '~30%', k: 'lower compute cost' },
-    ],
-    dia: {
-      h: 290,
-      nodes: [
-        { id: 'src', x: 10, y: 20, l: '30+ revenue sources' },
-        { id: 'lake', x: 196, y: 20, l: 'Fabric lakehouse', s: 'PySpark + Delta', k: 'key' },
-        { id: 'dbt', x: 382, y: 20, l: 'dbt governed layer', s: 'standard metrics' },
-        { id: 'sem', x: 568, y: 20, l: 'KPI semantic layer' },
-        { id: 'ci', x: 10, y: 125, l: 'Azure DevOps', s: 'dev, stage, prod', k: 'tag' },
-        { id: 'fc', x: 196, y: 125, l: 'Forecast models', s: 'champion/challenger', k: 'key' },
-        { id: 'an', x: 382, y: 125, l: 'Anomaly models', k: 'key' },
-        { id: 'ag', x: 568, y: 125, l: 'MCP agent', s: 'lineage + metrics', k: 'key' },
-        { id: 'gov', x: 10, y: 230, l: 'Governance', s: 'masking, RLS, audit', k: 'tag' },
-        { id: 'out', x: 382, y: 230, l: 'Finance planning', s: 'forecasts + flags' },
-      ],
-      edges: [['src', 'lake'], ['lake', 'dbt'], ['dbt', 'sem'], ['dbt', 'fc'], ['dbt', 'an'], ['sem', 'ag'], ['an', 'ag'], ['fc', 'out'], ['an', 'out']],
-    },
+    title: 'Finance forecasting and analytics agents',
+    sum: 'Building the governed data layer, forecasting and anomaly models, and LLM agents that finance teams plan with.',
   },
   {
     id: 'p990', cat: 'work', org: 'Project990, contract', yrs: '2025', vis: 'vectors',
     title: 'Form 990 document intelligence',
-    sum: 'Turned 5,000+ IRS Form 990 filings into validated datasets and a RAG service that analysts query directly.',
-    chips: ['Python', 'Spark', 'LangChain', 'FAISS', 'FastAPI', 'Iceberg', 'dbt', 'Docker'],
-    bullets: [
-      'A Python and Spark pipeline that parses and validates 5,000+ Form 990 PDFs into structured datasets.',
-      'LangChain RAG with domain-specific embeddings and a FAISS index I designed, exposed through FastAPI for document search, entity lookup and retrieval.',
-      'Organization and grant data pipelines modeled with dbt on Iceberg. I designed the partition strategy.',
-      'Demographic classifiers and NLP embeddings, containerized with Docker. I led a 5-person mini-team on pipeline and system decisions.',
-    ],
-    mets: [
-      { v: '5,000+', k: 'filings parsed and validated' },
-      { v: '5+', k: 'ad hoc requests made self-serve' },
-      { v: 'hours to minutes', k: 'analyst lookup time' },
-    ],
-    dia: {
-      h: 290,
-      nodes: [
-        { id: 'pdf', x: 10, y: 20, l: 'Form 990 PDFs', s: '5,000+ filings' },
-        { id: 'parse', x: 196, y: 20, l: 'Parse + validate', s: 'Python + Spark' },
-        { id: 'emb', x: 382, y: 20, l: 'Embeddings', s: 'domain-specific', k: 'key' },
-        { id: 'fa', x: 568, y: 20, l: 'FAISS index', s: 'index design', k: 'key' },
-        { id: 'dock', x: 10, y: 125, l: 'Docker', s: 'containerized jobs', k: 'tag' },
-        { id: 'cls', x: 196, y: 125, l: 'Demographic', s: 'classifiers', k: 'tag' },
-        { id: 'api', x: 382, y: 125, l: 'FastAPI', s: 'search + lookup', k: 'key' },
-        { id: 'rag', x: 568, y: 125, l: 'LangChain RAG', k: 'key' },
-        { id: 'org', x: 10, y: 230, l: 'Org + grant data' },
-        { id: 'dbt', x: 196, y: 230, l: 'dbt models' },
-        { id: 'ice', x: 382, y: 230, l: 'Iceberg tables', s: 'partition strategy', k: 'key' },
-      ],
-      edges: [['pdf', 'parse'], ['parse', 'emb'], ['emb', 'fa'], ['fa', 'rag'], ['rag', 'api'], ['org', 'dbt'], ['dbt', 'ice'], ['ice', 'rag']],
-    },
+    sum: 'Turned IRS Form 990 filings into validated datasets and a search service analysts can query in plain English.',
   },
   {
     id: 'bloom', cat: 'work', org: 'Bloom Insurance', yrs: '2023 to 2024', vis: 'stream',
     title: 'Claims migration and near-real-time ingestion',
-    sum: 'Moved claims, member and provider analytics off SSIS and SQL Server onto a streaming AWS and Snowflake platform, then made it reliable.',
-    chips: ['Kinesis', 'Glue', 'S3', 'Snowflake', 'Redshift', 'dbt', 'Airflow', 'Great Expectations'],
-    bullets: [
-      'Reverse-engineered undocumented SSIS and SQL Agent jobs, mapped every Finance-critical metric to its new home, and ran old and new in parallel until results held within variance.',
-      'A streaming path from Kinesis Firehose to S3, Glue, Snowflake, dbt and Redshift that met a sub-5-minute SLA.',
-      'A Kimball star schema at claim-line grain with an SCD2 member dimension. Fixed Redshift distribution keys and WLM so the nightly mart refresh went from about 45 to 50 minutes down to 14 to 18.',
-      'Great Expectations suites, reconciliation, drift alerts and on-call on 2M+ claims a month. A dead-letter queue, backoff with jitter and idempotent ingestion took hard failures from weekly to about monthly.',
-      'Replaced cron-style scheduling with Airflow sensors on expected S3 prefixes and row counts after early runs started on partial data.',
-    ],
-    mets: [
-      { v: '2M+', k: 'claims a month' },
-      { v: '99.9%', k: 'SLA adherence' },
-      { v: '5+ TB', k: 'processed a month' },
-      { v: 'under 5 min', k: 'near-real-time SLA' },
-    ],
-    dia: {
-      h: 290,
-      nodes: [
-        { id: 'src', x: 10, y: 20, l: 'Claims + EDI feeds' },
-        { id: 'kin', x: 196, y: 20, l: 'Kinesis Firehose', s: 'near-real-time', k: 'key' },
-        { id: 's3', x: 382, y: 20, l: 'S3 + Glue', s: 'landing + catalog' },
-        { id: 'sf', x: 568, y: 20, l: 'Snowflake', s: 'dbt models', k: 'key' },
-        { id: 'dlq', x: 10, y: 125, l: 'Dead-letter queue', s: 'idempotent replay' },
-        { id: 'ge', x: 196, y: 125, l: 'Great Expectations', s: 'reconcile + drift', k: 'tag' },
-        { id: 'rs', x: 382, y: 125, l: 'Redshift marts', s: 'DISTKEY + WLM', k: 'key' },
-        { id: 'star', x: 568, y: 125, l: 'Star schema', s: 'SCD2 member dim', k: 'key' },
-        { id: 'leg', x: 10, y: 230, l: 'Legacy SSIS', s: 'parallel run', k: 'tag' },
-        { id: 'af', x: 196, y: 230, l: 'Airflow', s: 'sensors, not cron', k: 'tag' },
-        { id: 'bi', x: 382, y: 230, l: 'Finance BI', s: 'Looker, Tableau' },
-      ],
-      edges: [['src', 'kin'], ['kin', 's3'], ['s3', 'sf'], ['sf', 'star'], ['star', 'rs'], ['rs', 'bi'], ['kin', 'dlq']],
-    },
+    sum: 'Moved claims, member and provider analytics onto a streaming cloud platform, then kept it reliable.',
   },
   {
-    id: 'forgedb', cat: 'side', status: 'build', org: 'Personal', yrs: '2026', vis: 'dag',
+    id: 'forgedb', cat: 'side', org: 'Personal', yrs: '2026', vis: 'dag',
     title: 'ForgeDB, a distributed SQL engine',
     sum: 'A distributed analytical query engine built from first principles, to show the planning, shuffles, scheduling and fault tolerance that Spark, Trino and DuckDB normally hide.',
     chips: ['Rust', 'Python', 'Parquet', 'Arrow', 'Docker Compose', 'Kubernetes', 'Prometheus', 'Grafana'],
@@ -178,7 +80,7 @@ export const cases = [
     },
   },
   {
-    id: 'sentinel', cat: 'side', status: 'build', org: 'Personal', yrs: '2026', vis: 'heal',
+    id: 'sentinel', cat: 'side', org: 'Personal', yrs: '2026', vis: 'heal',
     title: 'SentinelStream, a self-healing streaming platform',
     sum: 'A streaming lab that detects, diagnoses and recovers from data and infrastructure failures, benchmarked on a ladder from 100M up to 1.2B events an hour.',
     chips: ['Kafka', 'Schema Registry', 'Spark or Flink', 'Iceberg or Delta', 'Prometheus', 'Grafana', 'Kubernetes'],
@@ -216,7 +118,7 @@ export const cases = [
     },
   },
   {
-    id: 'atlas', cat: 'side', status: 'build', org: 'Personal', yrs: '2026', vis: 'versions',
+    id: 'atlas', cat: 'side', org: 'Personal', yrs: '2026', vis: 'versions',
     title: 'Atlas, an AI training and eval data platform',
     sum: 'The data systems behind model development: reproducible, versioned training datasets and an evaluation platform with regression gates. Working name TrainForge.',
     chips: ['Spark or Ray', 'Iceberg or Delta', 'Kafka', 'PostgreSQL', 'Kubernetes', 'Prometheus', 'Grafana'],
@@ -396,47 +298,21 @@ export const cases = [
 export const experience = [
   {
     k: 'msft', co: 'Microsoft', m: 'MS', meta: 'Data Engineer (AI/ML), full-time, Seattle area', when: 'Jan 2025 – Present', yr: '2025', current: true,
-    mets: [['30+', 'sources unified'], ['~95%', 'forecast accuracy'], ['100+ hrs', 'saved every month']],
-    wins: [
-      'Built a medallion lakehouse on <b>Microsoft Fabric</b> (PySpark, Delta Lake, dbt) that unified <b>30+ revenue sources</b> into one governed layer, removing <b>100+ hours a month</b> of manual reconciliation and making reporting <b>about 80% faster</b>.',
-      "Shipped ML forecasting with <b>7+ model variants</b> and champion/challenger selection, validated against Finance's own process: <b>~95% accuracy</b>, adopted for planning.",
-      'Built an <b>MCP-based LLM agent</b> over dbt lineage and catalog metadata that answers lineage, impact and metric questions in plain English, read-only and schema-scoped. <b>Hours to minutes.</b>',
-      'Cut compute <b>about 30%</b> by right-sizing Spark; built column masking, row-level access and audit trails into the platform; mentor interns and a junior engineer.',
-    ],
-    chips: ['Fabric', 'PySpark', 'Delta Lake', 'dbt', 'T-SQL', 'Airflow', 'Terraform', 'Azure DevOps', 'MCP'],
+    sum: 'Building the data foundation, forecasting and LLM agents behind finance analytics.',
   },
   {
     k: 'p990', co: 'Project990', m: 'P9', meta: 'ML Data Engineer, contract', when: '2025', yr: '2025',
-    mets: [['5,000+', 'filings parsed'], ['hrs → min', 'analyst lookups'], ['5', 'person mini-team']],
-    wins: [
-      'Parsed and validated <b>5,000+ IRS Form 990 filings</b> into structured datasets with Python and Spark.',
-      'Built a LangChain <b>RAG</b> layer with domain-specific embeddings and a <b>FAISS</b> index, served through FastAPI for search, entity lookup and retrieval. Analyst lookups went from <b>hours to minutes</b>.',
-      'Designed the <b>Iceberg</b> partition strategy and dbt models for organization and grant data, built demographic classifiers, and led a <b>5-person</b> mini-team on pipeline design.',
-    ],
-    chips: ['Python', 'Spark', 'LangChain', 'FAISS', 'FastAPI', 'Iceberg', 'dbt', 'Docker'],
+    sum: 'Turned IRS Form 990 filings into clean datasets and a search service for analysts.',
   },
   {
     k: 'bloom', co: 'Bloom Insurance', m: 'BI', meta: 'Full-time, healthcare insurance', when: 'May 2023 – Dec 2024', yr: '2023',
     ladder: [['Data Engineer I', 'Jul 2024 – Dec 2024'], ['Data Engineer Intern', 'May 2023 – Dec 2023']],
-    mets: [['2M+', 'claims a month'], ['99.9%', 'SLA adherence'], ['~65%', 'faster mart refresh']],
-    wins: [
-      'Led the claims, member and provider migration from SSIS and SQL Server to <b>Kinesis, S3, Glue, Snowflake and Redshift</b>, with parallel-run validation before cutover and a <b>sub-5-minute</b> near-real-time SLA.',
-      'Owned data quality on a HIPAA claims pipeline at <b>2M+ claims a month</b>: Great Expectations, reconciliation, drift alerts and on-call, holding <b>99.9% SLA</b> over 5+ TB a month.',
-      'Modeled a Kimball star schema with an <b>SCD2</b> member dimension and fixed Redshift dist keys and WLM: the nightly refresh went from <b>45–50 to 14–18 minutes</b>.',
-      'As an intern: hardened operational pipelines and modernized monitoring. Later mentored two junior engineers and an intern.',
-    ],
-    chips: ['Kinesis', 'Glue', 'S3', 'Snowflake', 'Redshift', 'dbt', 'Airflow', 'Great Expectations'],
+    sum: 'Migrated claims analytics to a streaming cloud platform and kept its data trustworthy.',
   },
   {
     k: 'entain', co: 'Ivy Comptech (Entain)', short: 'Ivy Comptech', m: 'EN', meta: 'Full-time, gaming', when: 'Jun 2020 – Jul 2022', yr: '2020',
     ladder: [['Data Engineer, Ops', 'Feb 2021 – Jul 2022'], ['Trainee Software Engineer, Data Ops', 'Jun 2020 – Feb 2021']],
-    mets: [['10+', 'producer teams aligned'], ['500K+', 'events a day'], ['~25%', 'less runtime']],
-    wins: [
-      'Drove <b>Avro + Schema Registry</b> contracts across <b>10+ Kafka producer teams</b> with no formal authority, plus a CI check that caught breaking changes before merge.',
-      'Tuned three Databricks pipelines (Kafka to bronze, silver and gold, <b>500K+ events a day</b>) for <b>about 25%</b> less runtime and compute-hours, then added p95 and freshness alerts after peak days showed the limits of tuning for the mean.',
-      'Built real-time and batch pipelines for gaming analytics. As a trainee: pipelines, APIs and data migrations.',
-    ],
-    chips: ['Kafka', 'Avro', 'Schema Registry', 'Databricks', 'Spark', 'Python', 'SQL'],
+    sum: 'Built real-time and batch data pipelines for gaming analytics and set data contracts across producer teams.',
   },
 ];
 
@@ -470,5 +346,4 @@ export const legend = [
   ['chart', 'Forecast', '#5B5BD6'],
   ['anom', 'Anomaly', '#E5484D'],
   ['bot', 'KPI agent', '#A1A1AA'],
-  ['mtn', 'Cascades', '#8C95A8'],
 ];
