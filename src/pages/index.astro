@@ -1,0 +1,260 @@
+---
+import Base from '../layouts/Base.astro';
+import { profile, stats, categories, cases, experience, education, stack, legend } from '../data/content.js';
+import { pillFor, svgVis, caseBody } from '../lib/svg.js';
+
+const stackCount = stack.reduce((n, s) => n + s.tools.length, 0);
+const catCounts = Object.keys(categories).map((k) => [k, categories[k], cases.filter((c) => c.cat === k).length]);
+
+---
+<Base>
+<div class="frame" id="top">
+  <header class="nav">
+    <div class="nav-in">
+      <a class="mark" href="#top" aria-label="Revanth Posina, back to top"><span class="mark-box">rp</span><span>Revanth</span></a>
+      <nav class="links" aria-label="Main">
+        <a class="l" href="#about">About</a>
+        <a class="l" href="#work">Work</a>
+        <a class="l" href="#experience">Experience</a>
+        <a class="l" href="#stack">Stack</a>
+        <a class="l" href="#off">Off the clock</a>
+        <button class="iconbtn search-btn" type="button" id="open-pal" aria-label="Search the site"><svg class="i"><use href="#i-search"/></svg><span class="lbl">Search</span><span class="kbd">⌘K</span></button>
+        <button class="iconbtn theme-btn" type="button" id="theme" aria-label="Toggle light and dark theme"><svg class="i sun"><use href="#i-sun"/></svg><svg class="i moon"><use href="#i-moon"/></svg></button>
+        <a class="iconbtn" href={profile.links.github} target="_blank" rel="noopener" aria-label="GitHub profile"><svg class="i"><use href="#i-gh"/></svg></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+  <section class="cover" id="cover" aria-label="Interactive 3D model of a medallion lakehouse that feeds a forecast and an LLM agent">
+    <canvas id="c3d" aria-hidden="true"></canvas>
+    <div class="nogl" id="nogl">This 3D scene needs WebGL. The legend below lists what it shows.</div>
+    <div class="note note-drag" aria-hidden="true">drag to orbit, hover to explore<svg viewBox="0 0 44 30"><path d="M3 4c10 1 22 6 30 20"/><path d="M27 21l6 4 2-7"/></svg></div>
+    <div class="tip3d" id="tip3d" role="status"></div>
+    <div class="bubble" id="bubble" aria-hidden="true"></div>
+    <div class="cover-tools"><button class="iconbtn" type="button" id="reset3d" aria-label="Reset the 3D view"><svg class="i"><use href="#i-reset"/></svg></button><button class="iconbtn" type="button" id="pause3d" aria-pressed="false">Pause</button></div>
+    <span class="fig">Fig. 1, the lakehouse I keep building. Synthetic.</span>
+  </section>
+  <div class="rule"></div>
+  <div class="legend" id="legend" role="group" aria-label="Parts of the 3D model">
+    {legend.map(([key, label, color]) => (
+      <button type="button" class="lg" data-key={key} aria-pressed="false"><i style={`background:${color}`}></i>{label}</button>
+    ))}
+  </div>
+  <div class="rule"></div>
+
+  <section class="hero2" aria-labelledby="name">
+    <div class="h-left">
+      <span class="hello" aria-hidden="true">hi, I'm</span>
+      <h1 class="bigname" id="name">Revanth <span>Posina</span></h1>
+      <div class="flip" aria-hidden="true"><div class="flip-in" id="flip">{[...profile.roles, profile.roles[0]].map((r) => <span>{r}</span>)}</div></div>
+      <p class="sr-only">{profile.title} at {profile.employer}.</p>
+      <p class="lede2">I build the <b>pipelines, forecasts and LLM agents</b> behind finance analytics at Microsoft. On the side I'm building <b>ForgeDB</b>, a distributed SQL engine in Rust.</p>
+      <div class="info">
+        <div class="row"><span class="ic"><svg class="i"><use href="#i-brief"/></svg></span><span class="tx">{profile.title} <span class="dim">@</span> {profile.employer}</span></div>
+        <div class="row"><span class="ic"><svg class="i"><use href="#i-pin"/></svg></span><span class="tx">{profile.location}</span></div>
+        <div class="row"><span class="ic"><svg class="i"><use href="#i-clock"/></svg></span><span class="tx" id="clock">Pacific time</span></div>
+        <div class="row"><span class="ic"><svg class="i"><use href="#i-mail"/></svg></span><button class="tx copy-email" type="button">{profile.email}</button></div>
+      </div>
+      <div class="socials">
+        <a class="iconbtn" href={profile.links.github} target="_blank" rel="noopener"><svg class="i"><use href="#i-gh"/></svg>GitHub</a>
+        <a class="iconbtn" href={profile.links.linkedin} target="_blank" rel="noopener"><svg class="i"><use href="#i-in"/></svg>LinkedIn</a>
+        <a class="iconbtn" href={profile.links.medium} target="_blank" rel="noopener"><svg class="i"><use href="#i-book"/></svg>Medium</a>
+        <a class="iconbtn" href={profile.links.kaggle} target="_blank" rel="noopener"><svg class="i"><use href="#i-chart"/></svg>Kaggle</a>
+      </div>
+    </div>
+    <div class="badge-col">
+      <span class="note me-note" aria-hidden="true">that's me<svg viewBox="0 0 44 30"><path d="M3 6c12 0 24 4 32 16"/><path d="M28 19l7 4 1-8"/></svg></span>
+      <div class="swing" id="swing">
+        <span class="strap" aria-hidden="true"></span>
+        <button class="idcard" id="idcard" type="button" aria-pressed="false" aria-label="ID card for Revanth Posina. Press to flip it over.">
+          <span class="id-inner">
+            <span class="id-face id-front">
+              <span class="id-hole"></span>
+              <span class="id-top"><span class="mark-box">rp</span><span>DATA ENGINEER (AI/ML)</span></span>
+              <picture>
+                <source srcset="/images/portrait.webp" type="image/webp" />
+                <img class="id-photo" src="/images/portrait.jpg" alt="Revanth Posina" width="208" height="150" />
+              </picture>
+              <span class="id-name">{profile.name}</span>
+              <span class="id-role">Microsoft, Seattle area</span>
+              <span class="id-foot"><span class="id-chip" aria-hidden="true"></span><svg id="id-bars" viewBox="0 0 120 30" aria-hidden="true"></svg></span>
+              <span class="id-sheen" aria-hidden="true"></span>
+            </span>
+            <span class="id-face id-back">
+              <span class="id-hole"></span>
+              <span class="id-h">CURRENTLY</span>
+              <span class="id-list">
+                <span>Forecasting and anomaly models for finance analytics</span>
+                <span>LLM agents over a KPI semantic layer</span>
+                <span>Building ForgeDB, a distributed SQL engine in Rust</span>
+              </span>
+              <span class="id-h">ASK ME ABOUT</span>
+              <span class="id-tags"><span>lakehouses</span><span>streaming</span><span>query engines</span><span>evals</span><span>trail runs</span></span>
+              <span class="id-qr"><span>since 2020</span><svg id="id-qr" viewBox="0 0 21 21" shape-rendering="crispEdges" aria-hidden="true"></svg></span>
+            </span>
+          </span>
+        </button>
+      </div>
+      <span class="badge-hint" aria-hidden="true">tilt it, tap to flip</span>
+    </div>
+  </section>
+
+  <div class="hatch"></div>
+  <section class="sec" id="about" aria-labelledby="about-h">
+    <div class="sec-h"><h2 id="about-h">About</h2><span class="meta">the short version</span></div>
+    <div class="ab">
+      <div class="ab-card ab-bio">
+        <p class="big">I turn messy operational data into numbers people <em>plan on</em>, and I build the agents that explain them.</p>
+        <p>Since 2020 I've gone from gaming telemetry at Entain to HIPAA claims at Bloom Insurance to finance analytics at Microsoft. The common thread: get the data in reliably, model it at the right grain, forecast it, flag what doesn't fit, and let people ask why in plain English.</p>
+      </div>
+      <div class="ab-card ab-now">
+        <span class="lbl"><i></i>NOW</span>
+        <ul class="now-list">
+          <li><span class="ic"><svg class="i"><use href="#i-brief"/></svg></span><span>Forecasting, anomaly detection and LLM agents<small>Microsoft</small></span></li>
+          <li><span class="ic"><svg class="i"><use href="#i-cpu"/></svg></span><span>A distributed SQL engine in Rust<small>ForgeDB, building</small></span></li>
+        </ul>
+      </div>
+      <div class="ab-stats" id="stats">
+        {stats.map((s) => (
+          <div class="stat">
+            <span class="n" data-to={s.to} data-prefix={s.prefix} data-suffix={s.suffix} data-comma={s.comma ? '1' : undefined}>{s.text}</span>
+            <span class="d">{s.d}</span>
+            <span class="src"><b>{s.src}</b></span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="hatch"></div>
+  <section class="sec" id="work" aria-labelledby="work-h">
+    <div class="sec-h"><h2 id="work-h">Work and projects</h2><span class="meta">click a card for the architecture</span></div>
+    <div class="filters" id="filters" role="group" aria-label="Filter projects">
+      <button type="button" data-f="all" aria-pressed="true">All <span>{cases.length}</span></button>
+      {catCounts.map(([k, label, n]) => <button type="button" data-f={k} aria-pressed="false">{label} <span>{n}</span></button>)}
+    </div>
+    <div class="grid2" id="cards">
+      {cases.map((c) => (
+        <button type="button" class="card" data-case={c.id} data-cat={c.cat} data-title={c.title} data-org={c.org} data-yrs={c.yrs} data-status={c.status} data-group={categories[c.cat]}>
+          <span class="card-vis" set:html={svgVis(c.vis)}></span>
+          <span class="card-b">
+            <span class="card-top"><span>{c.org}</span>{c.status ? <Fragment set:html={pillFor(c)} /> : <span>{c.yrs}</span>}</span>
+            <span class="h3">{c.title}</span>
+            <span class="p">{c.sum}</span>
+            <span class="chips">{c.chips.slice(0, 5).map((x) => <span class="chip">{x}</span>)}</span>
+          </span>
+        </button>
+      ))}
+    </div>
+    {cases.map((c) => <template id={`case-${c.id}`} set:html={caseBody(c)}></template>)}
+  </section>
+
+  <div class="hatch"></div>
+  <section class="sec" id="experience" aria-labelledby="exp-h">
+    <div class="sec-h"><h2 id="exp-h">Experience</h2><span class="meta">2020 to now</span></div>
+    <div class="xp">
+      <aside class="xp-side">
+        <div class="xp-stage" id="xp-stage"><canvas id="c3d-xp" aria-hidden="true"></canvas><span class="fig">each layer is a role</span></div>
+        <div class="xp-nav" id="xp-nav" role="group" aria-label="Jump to a role">
+          {experience.map((x, i) => <button type="button" data-k={x.k} aria-current={i === 0 ? 'true' : 'false'}><i></i><span>{x.short || x.co}</span><small>{x.yr}</small></button>)}
+        </div>
+      </aside>
+      <div class="roles" id="roles">
+        {experience.map((x, i) => (
+          <article class:list={['role', { active: i === 0 }]} id={`role-${x.k}`} data-k={x.k}>
+            <div class="role-h">
+              <span class="role-logo">{x.m}</span>
+              <div><h3>{x.co}{x.current && <span class="badge"><i></i>current</span>}</h3><div class="meta">{x.meta}</div></div>
+              <span class="when">{x.when}</span>
+            </div>
+            {x.ladder && <ul class="ladder">{x.ladder.map(([t, d]) => <li>{t}<span>{d}</span></li>)}</ul>}
+            <div class="role-mets">{x.mets.map(([v, k]) => <div><b>{v}</b><span>{k}</span></div>)}</div>
+            <ul class="wins">{x.wins.map((w) => <li><span set:html={w}></span></li>)}</ul>
+            <div class="chips">{x.chips.map((c) => <span class="chip">{c}</span>)}</div>
+          </article>
+        ))}
+      </div>
+    </div>
+    <div class="sec-h" style="margin-top:26px; margin-bottom:12px"><h2 style="font-size:18px">Education and more</h2></div>
+    <div class="edu">
+      {education.map((e) => (
+        <div class="edu-row">
+          <span class="logo">{e.logo ? e.logo : <svg class="i"><use href={`#${e.icon}`} /></svg>}</span>
+          <span>{e.href ? <a href={e.href} target="_blank" rel="noopener"><b>{e.title}</b></a> : <b>{e.title}</b>}, {e.where}</span>
+          <span class="dim">{e.when}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="hatch"></div>
+  <section class="sec" id="stack" aria-labelledby="stack-h">
+    <div class="sec-h"><h2 id="stack-h">Stack</h2><span class="meta">{stackCount} tools, {stack.length} areas</span></div>
+    <div class="st-grid">
+      {stack.map((s) => (
+        <div class="scard">
+          <div class="scard-h"><span class="ic"><svg class="i"><use href={`#${s.i}`} /></svg></span><h3>{s.t}</h3><small>{s.tools.length}</small></div>
+          <p>{s.d}</p>
+          <div class="tools">{s.tools.map((t) => <span class="tool">{t}</span>)}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="hatch"></div>
+  <section class="sec" id="off" aria-labelledby="off-h">
+    <div class="sec-h"><h2 id="off-h">Off the clock</h2>
+      <div class="seg seg3" role="group" aria-label="Choose a scene">
+        <button type="button" data-scene="trail" aria-pressed="true">Trail run</button>
+        <button type="button" data-scene="lap" aria-pressed="false">F1 lap</button>
+        <button type="button" data-scene="orbit" aria-pressed="false">Orbit</button>
+      </div>
+    </div>
+    <div class="stage" id="stage" aria-label="Interactive 3D scene, described below">
+      <canvas id="c3d2" aria-hidden="true"></canvas>
+      <div class="hud" id="hud" aria-live="off"></div>
+      <div class="hud-ctl" id="hud-ctl"></div>
+      <div class="note stage-note" aria-hidden="true">spin it</div>
+      <span class="fig" id="stage-fig">Fig. 2, placeholder terrain</span>
+    </div>
+    <p class="how" id="stage-how">USGS 3DEP elevation + my GPX route, meshed and drawn with three.js. Placeholder terrain until I add a real run.</p>
+    <div class="box" style="margin-top:14px">
+      <h3>Also into</h3>
+      <div class="chips" style="margin-top:2px"><span class="chip">Trail running</span><span class="chip">Hiking</span><span class="chip">Formula 1</span><span class="chip">Anime</span><span class="chip">Space documentaries</span><span class="chip">Game dev, see Rex_Runner in Work</span></div>
+    </div>
+  </section>
+
+  <div class="hatch"></div>
+  <section class="cta" id="contact" aria-labelledby="cta-h">
+    <h2 id="cta-h">Working on forecasting, streaming or LLM systems? Let's talk.</h2>
+    <p>Email is the fastest way to reach me.</p>
+    <div class="btns">
+      <button class="btn btn-dark copy-email" type="button"><svg class="i"><use href="#i-copy"/></svg>{profile.email}</button>
+      <a class="btn" href={profile.links.linkedin} target="_blank" rel="noopener"><svg class="i"><use href="#i-in"/></svg>LinkedIn</a>
+      <a class="btn" href={profile.links.github} target="_blank" rel="noopener"><svg class="i"><use href="#i-gh"/></svg>GitHub</a>
+    </div>
+  </section>
+  </main>
+  <div class="rule"></div>
+  <footer class="foot"><span>© {new Date().getFullYear()} Revanth Posina</span><span>Built with Astro and three.js. 3D data is synthetic.</span></footer>
+</div>
+
+<div class="overlay" id="case-ov" aria-hidden="true">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="case-title" id="case-sheet">
+    <div class="sheet-h"><div><div class="org" id="case-org"></div><h3 id="case-title"></h3></div><button class="iconbtn" type="button" id="case-x" aria-label="Close"><svg class="i"><use href="#i-x"/></svg></button></div>
+    <div class="sheet-b" id="case-body"></div>
+  </div>
+</div>
+<div class="overlay" id="pal-ov" aria-hidden="true">
+  <div class="pal" role="dialog" aria-modal="true" aria-label="Search">
+    <div class="pal-in"><svg class="i"><use href="#i-search"/></svg><input id="pal-q" type="text" placeholder="Search work, sections, links, actions" autocomplete="off" aria-controls="pal-list" aria-label="Search" /></div>
+    <div class="pal-list" id="pal-list" role="listbox" aria-label="Results"></div>
+    <div class="pal-foot"><span>↑↓ move</span><span>↵ open</span><span>esc close</span></div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+  import '../scripts/ui.js';
+</script>
+</Base>
