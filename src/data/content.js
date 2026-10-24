@@ -7,7 +7,7 @@ export const profile = {
   email: 'posinarevanth@gmail.com',
   url: 'https://revanthposina.github.io',
   description:
-    'Data Engineer (AI/ML) at Microsoft. I build the pipelines, forecasts and LLM agents that power finance analytics.',
+    'Data Engineer (AI/ML) at Microsoft. I build the pipelines, forecasts and agents that power finance analytics at scale.',
   links: {
     github: 'https://github.com/RevanthPosina',
     linkedin: 'https://www.linkedin.com/in/revanth-p/',
@@ -16,7 +16,7 @@ export const profile = {
   },
   roles: [
     'Data Engineer (AI/ML) at Microsoft',
-    'Forecasting and anomaly detection',
+    'Data, Distributed Systems, AI',
     'LLM agents, with evals',
     'Lakehouses, streaming, query engines',
   ],
@@ -31,7 +31,7 @@ export const cases = [
     sum: 'Building the governed data layer, forecasting and anomaly models, and LLM agents that finance teams plan with.',
   },
   {
-    id: 'p990', cat: 'work', org: 'Project990, contract', yrs: '2025', vis: 'vectors',
+    id: 'p990', cat: 'work', org: 'Project990', yrs: '2025', vis: 'vectors',
     title: 'Form 990 document intelligence',
     sum: 'Turned IRS Form 990 filings into validated datasets and a search service analysts can query in plain English.',
   },
@@ -297,21 +297,19 @@ export const cases = [
 
 export const experience = [
   {
-    k: 'msft', co: 'Microsoft', m: 'MS', meta: 'Data Engineer (AI/ML), full-time, Seattle area', when: 'Jan 2025 – Present', yr: '2025', current: true,
+    k: 'msft', co: 'Microsoft', m: 'MS', meta: 'Data Engineer (AI/ML), Seattle area', when: 'Jan 2025 – Present', yr: '2025', current: true,
     sum: 'Building the data foundation, forecasting and LLM agents behind finance analytics.',
   },
   {
-    k: 'p990', co: 'Project990', m: 'P9', meta: 'ML Data Engineer, contract', when: '2025', yr: '2025',
+    k: 'p990', co: 'Project990', m: 'P9', meta: 'ML Data Engineer', when: '2025', yr: '2025',
     sum: 'Turned IRS Form 990 filings into clean datasets and a search service for analysts.',
   },
   {
-    k: 'bloom', co: 'Bloom Insurance', m: 'BI', meta: 'Full-time, healthcare insurance', when: 'May 2023 – Dec 2024', yr: '2023',
-    ladder: [['Data Engineer I', 'Jul 2024 – Dec 2024'], ['Data Engineer Intern', 'May 2023 – Dec 2023']],
-    sum: 'Migrated claims analytics to a streaming cloud platform and kept its data trustworthy.',
+    k: 'bloom', co: 'Bloom Insurance', m: 'BI', meta: 'Healthcare insurance', when: 'May 2023 – Dec 2024', yr: '2023',
+    sum: 'Worked on improving Partner Provider plans and claims data in legacy SSIS to AWS migrations.',
   },
   {
-    k: 'entain', co: 'Ivy Comptech (Entain)', short: 'Ivy Comptech', m: 'EN', meta: 'Full-time, gaming', when: 'Jun 2020 – Jul 2022', yr: '2020',
-    ladder: [['Data Engineer, Ops', 'Feb 2021 – Jul 2022'], ['Trainee Software Engineer, Data Ops', 'Jun 2020 – Feb 2021']],
+    k: 'entain', co: 'Ivy Comptech (Entain)', short: 'Ivy Comptech', m: 'EN', meta: 'Gaming', when: 'Jun 2020 – Jul 2022', yr: '2020',
     sum: 'Built real-time and batch data pipelines for gaming analytics and set data contracts across producer teams.',
   },
 ];
