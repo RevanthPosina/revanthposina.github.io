@@ -70,6 +70,8 @@ svg.i{width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.8;
 .search-btn .lbl{font-size:13px}
 @media (max-width:520px){ .search-btn .lbl,.search-btn .kbd{display:none} }
 /* theme switch: 62x36 pill, sun on the left, moon on the right. The knob art follows data-face (set by ui.js mid-smear); before the script runs it follows the theme so first paint is right even with no data-theme and a dark OS. */
+.tsw-wrap{position:relative; flex:none; display:block; width:62px; height:36px}
+.tsw-smoke{position:absolute; left:50%; top:50%; width:140px; height:84px; margin:-42px 0 0 -70px; pointer-events:none; z-index:1}
 .tsw{--kx:0px; --m:0; position:relative; flex:none; display:block; width:62px; height:36px; padding:0; border:1px solid var(--line); border-radius:999px; background:var(--panel); cursor:pointer; overflow:hidden; -webkit-tap-highlight-color:transparent; transition:border-color .15s, background-color .2s}
 .tsw:hover{border-color:color-mix(in srgb, var(--muted) 45%, var(--line))}
 .tsw:focus-visible{border-radius:999px}

@@ -317,8 +317,7 @@ export const experience = [
 export const education = [
   { logo: 'IU', title: 'MS, Data Science', where: 'Indiana University Bloomington', when: '2022 – 2024' },
   { logo: 'KL', title: 'BTech, Electronics and Communication', where: 'KL University', when: '2016 – 2020' },
-  { icon: 'i-layers', title: 'Databricks Certified Data Engineer', where: 'Professional', when: 'certification' },
-  { icon: 'i-cloud', title: 'AWS Certified Solutions Architect', where: 'Associate', when: 'certification' },
+  { icon: 'i-cloud', title: 'Databricks Data Engineer Professional', where: 'AWS Solutions Architect Associate', when: 'certifications' },
   {
     icon: 'i-book', title: 'Fusion of visible and infrared images', where: 'Springer', when: 'publication',
     href: 'https://www.springerprofessional.de/en/fusion-of-visible-and-infrared-images-via-saliency-detection-usi/18540690',

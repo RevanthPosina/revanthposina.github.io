@@ -56,12 +56,118 @@ const setTheme = (next) => {
   let pending = null;
   const knobX = () => new DOMMatrixReadOnly(getComputedStyle(knob).transform).m41;
   const play = (el, frames, opts) => anims.push(el.animate(frames, opts));
+
+  /* Cel smoke: a canvas larger than the pill so puffs spill past its edge. Each puff is 2-3 overlapping circles drawn as one flat shape (outline stroked wide underneath the fill, so only the outer half shows), with one shadow crescent clipped inside. Position and size are closed-form in age, so the loop only paints. */
+  const cv = sw.parentElement.querySelector('.tsw-smoke');
+  const cx = cv && cv.getContext('2d');
+  const CW = 140, CH = 84, OX = (CW - sw.offsetWidth) / 2, OY = (CH - sw.offsetHeight) / 2;
+  let puffs = [];
+  let raf = 0;
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const hex = (v) => {
+    let h = v.trim().replace('#', '');
+    if (h.length === 3) h = [...h].map((c) => c + c).join('');
+    const n = parseInt(h, 16) || 0x888888;
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  };
+  const rgb = (c, a = 1) => `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`;
+  const palette = () => {
+    const cs = getComputedStyle(docEl);
+    const g = (n) => hex(cs.getPropertyValue(n));
+    if (isDark()) {
+      const soft = g('--soft'), lift = [58, 58, 68];
+      return { fill: rgb(soft.map((v, i) => v + (lift[i] - v) * 0.85)), line: rgb(g('--muted')), shade: rgb(g('--bg')) };
+    }
+    return { fill: rgb(g('--panel')), line: rgb(g('--text'), 0.7), shade: rgb(g('--line')) };
+  };
+  const spawn = (o) => {
+    if (puffs.length >= 30) puffs.shift();
+    const blobs = [[0, 0, 1], [rnd(0.5, 0.85), rnd(-0.4, 0.1), rnd(0.55, 0.8)]];
+    if (Math.random() < 0.7) blobs.push([rnd(-0.85, -0.45), rnd(-0.1, 0.4), rnd(0.5, 0.75)]);
+    puffs.push({ ...o, blobs, t0: performance.now() + (o.delay || 0), dash: rnd(0, 20) });
+    if (!raf) raf = requestAnimationFrame(frame);
+  };
+  const frame = (now) => {
+    raf = 0;
+    const dpr = window.devicePixelRatio || 1;
+    if (cv.width !== Math.round(CW * dpr)) { cv.width = Math.round(CW * dpr); cv.height = Math.round(CH * dpr); }
+    cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cx.clearRect(0, 0, CW, CH);
+    puffs = puffs.filter((p) => now - p.t0 < p.life);
+    for (const p of puffs) {
+      const age = now - p.t0;
+      if (age < 0) continue;
+      const k = (1 - Math.exp(-p.k * age / 1000)) / p.k * 1000;
+      const x = OX + p.x + p.vx * k / 1000, y = OY + p.y + p.vy * k / 1000;
+      const t = age / p.life;
+      cx.globalAlpha = t > 0.7 ? 1 - (t - 0.7) / 0.3 : 1;
+      if (p.dot) {
+        cx.fillStyle = p.line;
+        cx.beginPath();
+        cx.arc(x, y, 0.75 * (1 - t * 0.5), 0, 6.2832);
+        cx.fill();
+        continue;
+      }
+      const e = Math.max(0, Math.min(1, (t - 0.35) / 0.65));
+      const g = 1 - Math.pow(1 - Math.min(1, age / 120), 3);
+      const r = (p.r0 + (p.r1 - p.r0) * g) * (1 - 0.6 * e * e * (3 - 2 * e));
+      const shape = (dx, dy) => {
+        cx.beginPath();
+        for (const [bx, by, bf] of p.blobs) {
+          const rr = r * bf;
+          cx.moveTo(x + bx * r + dx + rr, y + by * r + dy);
+          cx.arc(x + bx * r + dx, y + by * r + dy, rr, 0, 6.2832);
+        }
+      };
+      shape(0, 0);
+      cx.lineWidth = 3;
+      cx.lineJoin = 'round';
+      cx.setLineDash(e > 0.04 ? [Math.max(0.6, 8 * (1 - e)), 1.2 + 11 * e] : []);
+      cx.lineDashOffset = p.dash + age * 0.04;
+      cx.strokeStyle = p.line;
+      cx.stroke();
+      cx.setLineDash([]);
+      cx.fillStyle = p.fill;
+      cx.fill();
+      cx.save();
+      cx.clip();
+      cx.fillStyle = p.shade;
+      cx.fillRect(0, 0, CW, CH);
+      shape(-0.12 * r, -0.3 * r);
+      cx.fillStyle = p.fill;
+      cx.fill();
+      cx.restore();
+    }
+    cx.globalAlpha = 1;
+    if (puffs.length) raf = requestAnimationFrame(frame);
+    else cx.clearRect(0, 0, CW, CH);
+  };
+  /* Knob centre inside the pill: border 1 + inset 4 + half the 26px knob. */
+  const KC = 18;
+  const takeoff = (x, d) => {
+    const c = palette(), n = 6;
+    for (let i = 0; i < n; i++) {
+      spawn({ ...c, x: x + KC + d * rnd(-3, 3), y: KC + rnd(-7, 7), vx: -d * rnd(90, 190), vy: rnd(-50, 30), k: rnd(3.5, 5), r0: 3, r1: rnd(7, 10), life: rnd(350, 450), delay: i * rnd(10, 20) });
+    }
+  };
+  const landing = (x, d) => {
+    const c = palette();
+    for (let i = 0; i < 4; i++) {
+      const up = i % 2 ? 1 : -1;
+      spawn({ ...c, x: x + KC + d * rnd(2, 6), y: KC + up * rnd(2, 6), vx: d * rnd(10, 45), vy: up * rnd(70, 110), k: rnd(4, 5.5), r0: 2, r1: rnd(4.5, 6), life: rnd(260, 300), delay: i * 8 });
+    }
+    for (let i = 0; i < 3; i++) {
+      spawn({ dot: true, line: c.line, x: x + KC + d * 6, y: KC, vx: d * rnd(40, 90), vy: rnd(-70, 70), k: 5, life: rnd(180, 240), delay: 10 });
+    }
+  };
   sw.addEventListener('click', () => {
     const x0 = knobX();
     timers.forEach(clearTimeout);
     timers = [];
     anims.forEach((a) => a.cancel());
     anims = [];
+    const nowMs = performance.now();
+    puffs = puffs.filter((p) => p.t0 <= nowMs);
     if (pending) { setTheme(pending); pending = null; }
     const next = isDark() ? 'light' : 'dark';
     if (reduce) { setTheme(next); return; }
@@ -102,7 +208,8 @@ const setTheme = (next) => {
         ], { duration: 270, delay: 170, easing: 'ease-out' });
     pending = next;
     timers.push(setTimeout(() => { sw.dataset.face = d > 0 ? 'moon' : 'sun'; }, 115));
-    timers.push(setTimeout(() => { setTheme(next); pending = null; }, 170));
+    if (cx) timers.push(setTimeout(() => takeoff(x0, d), 80));
+    timers.push(setTimeout(() => { setTheme(next); pending = null; if (cx) landing(x1, d); }, 170));
   });
 })();
 document.addEventListener('portfolio:theme', syncSwitch);
