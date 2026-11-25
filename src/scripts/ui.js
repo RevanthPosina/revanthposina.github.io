@@ -32,11 +32,81 @@ document.querySelectorAll('.copy-email').forEach((b) => b.addEventListener('clic
 
 /* theme */
 const emitTheme = () => document.dispatchEvent(new CustomEvent('portfolio:theme'));
-$('theme').addEventListener('click', () => {
-  const next = isDark() ? 'light' : 'dark';
+const sw = $('theme');
+const syncSwitch = () => {
+  const dark = isDark();
+  sw.setAttribute('aria-checked', String(dark));
+  sw.dataset.face = dark ? 'moon' : 'sun';
+};
+const setTheme = (next) => {
   docEl.setAttribute('data-theme', next);
   try { localStorage.setItem('theme', next); } catch { /* storage blocked */ }
-});
+  syncSwitch();
+};
+/* Switch flip, in four beats (ms): 0-80 anticipation, 80-170 smear, 170-260 impact, 260-360 settle, with a sparkle from 170. The face swaps mid-smear and the theme flips on impact. State always lives in data-theme, so a click mid-flip commits the pending change first and restarts from where the knob is. */
+(() => {
+  const knob = sw.querySelector('.tsw-knob');
+  const body = sw.querySelector('.tsw-body');
+  const lines = [...sw.querySelectorAll('.tsw-lines i')];
+  const star = sw.querySelector('.tsw-star');
+  const burst = sw.querySelector('.tsw-burst');
+  const D = 360;
+  let anims = [];
+  let timers = [];
+  let pending = null;
+  const knobX = () => new DOMMatrixReadOnly(getComputedStyle(knob).transform).m41;
+  const play = (el, frames, opts) => anims.push(el.animate(frames, opts));
+  sw.addEventListener('click', () => {
+    const x0 = knobX();
+    timers.forEach(clearTimeout);
+    timers = [];
+    anims.forEach((a) => a.cancel());
+    anims = [];
+    if (pending) { setTheme(pending); pending = null; }
+    const next = isDark() ? 'light' : 'dark';
+    if (reduce) { setTheme(next); return; }
+    const d = next === 'dark' ? 1 : -1;
+    const x1 = d > 0 ? sw.clientWidth - 8 - knob.offsetWidth : 0;
+    const t = (v) => `translateX(${v}px)`;
+    const o = (ms) => ms / D;
+    play(knob, [
+      { transform: t(x0), offset: 0, easing: 'ease-out' },
+      { transform: t(x0 - d * 3), offset: o(80), easing: 'linear' },
+      { transform: t(x1), offset: o(170), easing: 'ease-out' },
+      { transform: t(x1 + d * 1.5), offset: o(260), easing: 'ease-in-out' },
+      { transform: t(x1), offset: 1 },
+    ], { duration: D });
+    play(body, [
+      { transform: `${t(0)} scale(1,1)`, filter: 'blur(0px)', offset: 0, easing: 'ease-out' },
+      { transform: `${t(-d * 1.8)} scale(.86,1.08)`, filter: 'blur(0px)', offset: o(80), easing: 'ease-out' },
+      { transform: `${t(0)} scale(1.8,.7)`, filter: 'blur(.6px)', offset: o(125), easing: 'ease-out' },
+      { transform: `${t(d * 2.9)} scale(.78,1.14)`, filter: 'blur(0px)', offset: o(170), easing: 'ease-out' },
+      { transform: `${t(0)} scale(1.06,.96)`, filter: 'blur(0px)', offset: o(260), easing: 'ease-in-out' },
+      { transform: `${t(0)} scale(1,1)`, filter: 'blur(0px)', offset: 1 },
+    ], { duration: D });
+    sw.style.setProperty('--ld', d);
+    lines.forEach((l, i) => play(l, [
+      { transform: 'scaleX(0)', opacity: 0, offset: 0 },
+      { transform: 'scaleX(1)', opacity: 0.85, offset: 0.45 },
+      { transform: 'scaleX(.3)', opacity: 0, offset: 1 },
+    ], { duration: 150, delay: 80 + i * 8, easing: 'ease-out' }));
+    play(d > 0 ? star : burst, d > 0
+      ? [
+          { transform: 'scale(0) rotate(-30deg)', opacity: 1, offset: 0 },
+          { transform: 'scale(1.25) rotate(0deg)', opacity: 1, offset: 0.35 },
+          { transform: 'scale(.9) rotate(20deg)', opacity: 0, offset: 1 },
+        ]
+      : [
+          { transform: 'scale(.4)', opacity: 1, offset: 0 },
+          { transform: 'scale(1.15)', opacity: 0, offset: 1 },
+        ], { duration: 270, delay: 170, easing: 'ease-out' });
+    pending = next;
+    timers.push(setTimeout(() => { sw.dataset.face = d > 0 ? 'moon' : 'sun'; }, 115));
+    timers.push(setTimeout(() => { setTheme(next); pending = null; }, 170));
+  });
+})();
+document.addEventListener('portfolio:theme', syncSwitch);
+syncSwitch();
 mqDark.addEventListener?.('change', emitTheme);
 new MutationObserver(emitTheme).observe(docEl, { attributes: true, attributeFilter: ['data-theme'] });
 
@@ -246,7 +316,7 @@ const openUrl = (u) => window.open(u, '_blank', 'noopener');
 let WRITES = [];
 try { WRITES = JSON.parse($('writes-data')?.textContent || '[]'); } catch { /* no essays in the palette */ }
 const CMDS = [
-  ...[['about', 'About'], ['work', 'Work and projects'], ['writes', 'Writes'], ['experience', 'Experience'], ['stack', 'Stack'], ['off', 'Off the clock'], ['contact', 'Contact']]
+  ...[['about', 'About'], ['experience', 'Experience'], ['work', 'Work and projects'], ['writes', 'Writes'], ['stack', 'Stack'], ['off', 'Off the clock'], ['contact', 'Contact']]
     .map(([id, l]) => ({ g: 'Sections', l, i: 'i-hash', run: () => go(id) })),
   ...cards.map((c) => ({ g: c.dataset.group, l: c.dataset.title, h: c.dataset.org, i: 'i-box', run: () => openCase(c.dataset.case, palQ) })),
   ...WRITES.map((w) => ({ g: 'Writes', l: w.title, h: w.pub, i: 'i-book', run: () => openUrl(w.url) })),
