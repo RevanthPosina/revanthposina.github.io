@@ -243,10 +243,13 @@ let sel = 0;
 let shown = [];
 const go = (id) => $(id)?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
 const openUrl = (u) => window.open(u, '_blank', 'noopener');
+let WRITES = [];
+try { WRITES = JSON.parse($('writes-data')?.textContent || '[]'); } catch { /* no essays in the palette */ }
 const CMDS = [
-  ...[['about', 'About'], ['work', 'Work and projects'], ['experience', 'Experience'], ['stack', 'Stack'], ['off', 'Off the clock'], ['contact', 'Contact']]
+  ...[['about', 'About'], ['work', 'Work and projects'], ['writes', 'Writes'], ['experience', 'Experience'], ['stack', 'Stack'], ['off', 'Off the clock'], ['contact', 'Contact']]
     .map(([id, l]) => ({ g: 'Sections', l, i: 'i-hash', run: () => go(id) })),
   ...cards.map((c) => ({ g: c.dataset.group, l: c.dataset.title, h: c.dataset.org, i: 'i-box', run: () => openCase(c.dataset.case, palQ) })),
+  ...WRITES.map((w) => ({ g: 'Writes', l: w.title, h: w.pub, i: 'i-book', run: () => openUrl(w.url) })),
   { g: 'Links', l: 'GitHub', i: 'i-gh', h: 'RevanthPosina', run: () => openUrl('https://github.com/RevanthPosina') },
   { g: 'Links', l: 'LinkedIn', i: 'i-in', h: 'revanth-p', run: () => openUrl('https://www.linkedin.com/in/revanth-p/') },
   { g: 'Actions', l: 'Copy email', i: 'i-copy', h: EMAIL, run: copyEmail },

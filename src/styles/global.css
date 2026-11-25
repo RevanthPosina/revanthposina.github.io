@@ -148,6 +148,93 @@ svg.i{width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.8;
 .chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:4px}
 .chip{font-family:var(--mono); font-size:11px; border:1px solid var(--line); background:var(--soft); border-radius:6px; padding:2px 7px; color:var(--text)}
 @media (prefers-reduced-motion: reduce){ .card{transition:none} }
+
+/* writes: scroll rack. Essays are hand scrolls on a looping shelf, the centered one unrolls. The scrolls keep their own silk, paper, wood and hanko colors in both themes because they are objects; everything else uses the site tokens. */
+.wr-wrap{display:flex; flex-direction:column}
+.wr-stage{--H:328px; --S:46px; --C:236px; --RW:28px; --PW:309px; --wr-floor:rgba(9,9,11,.10);
+  position:relative; height:calc(var(--H) + 72px); margin-top:6px; overflow:hidden; touch-action:pan-y; overscroll-behavior-x:contain; cursor:grab; user-select:none; -webkit-user-select:none; outline:none}
+:root[data-theme="dark"] .wr-stage{--wr-floor:rgba(0,0,0,.55)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .wr-stage{--wr-floor:rgba(0,0,0,.55)} }
+.wr-stage.wr-drag{cursor:grabbing}
+.wr-stage:focus-visible{box-shadow:inset 0 0 0 2px var(--accent); border-radius:12px}
+.wr-stage::before{content:""; position:absolute; left:0; right:0; bottom:44px; border-top:1px solid var(--dot)}
+.wr-stage::after{content:""; position:absolute; left:50%; bottom:30px; width:min(420px,70%); height:26px; transform:translateX(-50%); background:radial-gradient(closest-side, var(--wr-floor), transparent); pointer-events:none}
+.wr-fade{position:absolute; top:0; bottom:0; width:min(120px,12vw); z-index:500; pointer-events:none}
+.wr-fl{left:0; background:linear-gradient(90deg, var(--bg), transparent)}
+.wr-fr{right:0; background:linear-gradient(-90deg, var(--bg), transparent)}
+
+.wr-scr{position:absolute; left:50%; bottom:45px; height:var(--H); width:var(--S); will-change:transform,width; text-decoration:none; color:inherit; -webkit-user-drag:none; --o:0}
+.wr-scr::after{content:""; position:absolute; left:6%; right:6%; bottom:-5px; height:8px; background:radial-gradient(closest-side, var(--wr-floor), transparent); pointer-events:none}
+.wr-scr > div{position:absolute; inset:0}
+.wr-jk{position:absolute; left:50%; width:var(--JW); margin-left:calc(var(--JW) / -2); height:10px; background:linear-gradient(90deg,#3B2A1E,#6B4A32 45%,#3B2A1E)}
+.wr-jk.wr-t{top:0; border-radius:3px 3px 1px 1px}
+.wr-jk.wr-b{bottom:0; border-radius:1px 1px 3px 3px}
+.wr-silk{position:absolute; left:0; right:0; top:9px; bottom:9px; border-radius:3px;
+  background:linear-gradient(90deg, rgba(0,0,0,.5) 0, rgba(0,0,0,.12) 16%, rgba(255,255,255,.3) 35%, rgba(255,255,255,.04) 55%, rgba(0,0,0,.18) 80%, rgba(0,0,0,.55) 100%), var(--cbg);
+  box-shadow:inset 0 3px 3px -2px rgba(0,0,0,.4), inset 0 -3px 3px -2px rgba(0,0,0,.4)}
+
+/* rolled view */
+.wr-scr > .wr-rolled{left:50%; right:auto; width:var(--S); margin-left:calc(var(--S) / -2); --JW:calc(var(--S) * .55); opacity:clamp(0, calc(1 - var(--o) * 3.4), 1)}
+.wr-n{position:absolute; top:14px; left:0; right:0; text-align:center; font-family:var(--mono); font-size:9px; font-weight:600; letter-spacing:.04em; color:var(--cink); opacity:.9; text-shadow:0 1px 1px rgba(0,0,0,.25)}
+.wr-slip{position:absolute; top:30px; left:50%; width:56%; height:calc(56% - 30px); transform:translateX(-50%); background:#EFE9DA; color:#1d1b18; display:grid; place-items:center; padding-block:5px; overflow:hidden;
+  box-shadow:0 1px 2px rgba(0,0,0,.4), inset 0 0 0 1px rgba(0,0,0,.08)}
+.wr-slip span{writing-mode:vertical-rl; max-height:100%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; font-weight:650; font-size:max(9px, calc(var(--S) * .23)); line-height:1.1; letter-spacing:.01em}
+.wr-cord{position:absolute; left:-1px; right:-1px; top:64%; height:3px; background:linear-gradient(90deg, rgba(0,0,0,.45), rgba(0,0,0,.2) 35%, rgba(0,0,0,.4)), color-mix(in srgb, var(--cbg) 55%, #000); box-shadow:0 1px 0 rgba(255,255,255,.16)}
+.wr-knot{position:absolute; left:62%; top:calc(64% - 2px); width:7px; height:7px; border-radius:50%; background:color-mix(in srgb, var(--cbg) 45%, #000); box-shadow:inset 1px 1px 1px rgba(255,255,255,.25), 0 1px 1px rgba(0,0,0,.3)}
+.wr-tas{position:absolute; left:calc(62% + 2px); top:calc(64% + 5px); width:3px; height:17px; border-radius:0 0 2px 2px; background:repeating-linear-gradient(90deg, color-mix(in srgb, var(--cbg) 45%, #000) 0 1px, transparent 1px 2px)}
+
+/* open view: rollers part, paper is revealed between them */
+.wr-open{--JW:calc(var(--RW) * .72)}
+.wr-rol{position:absolute; top:0; bottom:0; width:var(--RW); opacity:clamp(0, calc(var(--o) * 3.4), 1)}
+.wr-rol.wr-l{left:0} .wr-rol.wr-r{right:0}
+.wr-paper{position:absolute; top:9px; bottom:9px; left:var(--RW); right:var(--RW); overflow:hidden; color:#1d1b18;
+  background:repeating-linear-gradient(96deg, rgba(120,100,60,.05) 0 1px, transparent 1px 5px), repeating-linear-gradient(0deg, rgba(120,100,60,.035) 0 1px, transparent 1px 7px), #F3EEE2;
+  opacity:clamp(0, calc(var(--o) * 3.4), 1)}
+.wr-paper::after{content:""; position:absolute; inset:0; pointer-events:none; box-shadow:inset 10px 0 10px -8px rgba(0,0,0,.3), inset -10px 0 10px -8px rgba(0,0,0,.3)}
+.wr-hy{position:absolute; left:0; right:0; height:10px; background:var(--cbg)}
+.wr-hy.wr-t{top:0; box-shadow:inset 0 -1px 0 rgba(255,255,255,.35)}
+.wr-hy.wr-b{bottom:0; box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+.wr-pin{position:absolute; top:0; bottom:0; left:50%; width:var(--PW); margin-left:calc(var(--PW) / -2); padding:24px 14px 20px; display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); gap:10px;
+  opacity:clamp(0, calc((var(--o) - .35) * 2), 1)}
+.wr-pl{display:flex; flex-direction:column; min-width:0}
+.wr-pt{font-weight:650; font-size:calc(var(--PW) * .085); line-height:1.08; letter-spacing:-.025em; text-wrap:balance}
+.wr-pm{margin-top:10px; font-family:var(--mono); font-size:10px; line-height:1.45; color:#5C564A; display:flex; flex-direction:column}
+.wr-by{margin-top:auto; font-family:var(--mono); font-size:9.5px; letter-spacing:.05em; text-transform:uppercase; color:#1d1b18; opacity:.8}
+.wr-pr{display:grid; place-items:center; padding-bottom:34px; min-width:0}
+.wr-art{width:100%; color:#1d1b18}
+.wr-art svg{display:block; width:100%; max-height:100%; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round}
+.wr-hanko{position:absolute; right:14px; bottom:16px; width:30px; height:30px; display:grid; place-items:center; background:#B23A2E; color:#fff; font-family:var(--mono); font-weight:700; font-size:11px; letter-spacing:.02em; border-radius:3px; transform:rotate(-4deg); box-shadow:0 1px 1px rgba(0,0,0,.2)}
+
+/* without JS the scrolls sit in a plain row of rolled scrolls */
+.wr-stage:not(.wr-on){display:flex; align-items:flex-end; justify-content:center; gap:6px}
+.wr-stage:not(.wr-on) .wr-scr{position:relative; left:auto; bottom:45px; flex:none}
+
+/* hand-drawn hint, same hand as the ID card note */
+.wr-note{display:flex; align-items:center; justify-content:center; gap:10px; margin:2px 0 14px; font-family:var(--hand); font-size:19px; line-height:1.2; color:var(--muted); text-align:center; text-wrap:balance; pointer-events:none}
+.wr-note svg{flex:none; width:34px; height:18px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round}
+
+/* detail strip under the shelf */
+.wr-detail{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:14px 24px; align-items:end; padding-top:16px; border-top:1px solid var(--line)}
+.wr-info{min-width:0}
+.wr-eye{font-family:var(--mono); font-size:11.5px; color:var(--muted); display:flex; flex-wrap:wrap; gap:4px 12px}
+.wr-title{font-size:clamp(18px,1.8vw,22px); font-weight:620; letter-spacing:-.02em; line-height:1.25; margin-top:4px; text-wrap:balance}
+.wr-sum{color:var(--muted); margin-top:6px; max-width:68ch}
+.wr-tags{display:flex; flex-wrap:wrap; gap:6px; margin-top:10px}
+.wr-ctl{display:flex; align-items:center; gap:8px}
+.wr-ctl .iconbtn{font-size:13px}
+.iconbtn.wr-primary{background:var(--text); color:var(--bg); border-color:var(--text)}
+.iconbtn.wr-primary:hover{color:var(--bg); border-color:var(--text); opacity:.9}
+.wr-count{font-family:var(--mono); font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums; min-width:52px; text-align:center}
+@media (max-width:640px){
+  .wr-detail{grid-template-columns:minmax(0,1fr)}
+  .wr-ctl{justify-content:space-between}
+}
+/* on the full-page desktop layout the rack, note and detail sit centered in the page, and the detail holds its height so the shelf never jumps between essays */
+@media (min-width:821px) and (min-height:560px){
+  .wr-wrap{flex:1; justify-content:center}
+  .wr-title{min-height:2.5em}
+  .wr-sum{min-height:3.2em}
+}
 .v-line{fill:none; stroke:var(--text); stroke-width:1.6; stroke-linejoin:round}
 .v-acc{fill:none; stroke:var(--accent); stroke-width:1.6}
 .v-dash{fill:none; stroke:var(--accent); stroke-width:1.6; stroke-dasharray:3 3}

@@ -345,3 +345,48 @@ export const legend = [
   ['anom', 'Anomaly', '#E5484D'],
   ['bot', 'KPI agent', '#A1A1AA'],
 ];
+
+// Essays shown on the Writes rack, newest first. Posted to Medium (@revp and Towards Data Engineering).
+// bg and ink are the silk colors of each hand scroll, art is a key into writeArt.
+export const writes = [
+  {
+    n: 'W06', title: 'Thinking About Thinking: What Karpathy × Dwarkesh Made Me Realize About AI and Learning', short: 'Thinking About Thinking', pub: 'Medium', date: 'Oct 2025', yr: '2025',
+    sum: 'Notes from the Karpathy and Dwarkesh Patel conversation, and why cognition, human or machine, is about more than feeding in data.',
+    tags: ['ai', 'llms', 'learning'], url: 'https://medium.com/@revp/thinking-about-thinking-what-karpathyxdwarkesh-made-me-realize-about-ai-and-learning-d11e95400877', bg: '#2E2C6E', ink: '#EDEBFF', art: 'loops',
+  },
+  {
+    n: 'W05', title: 'Ground Control to Major Pipelines: ETL Pipelines Take Flight', short: 'Ground Control to Major Pipelines', pub: 'Towards Data Engineering', date: 'May 2025', yr: '2025',
+    sum: 'ETL orchestration as the step after warehouse design: Airflow, data quality checks, CI/CD and security.',
+    tags: ['orchestration', 'airflow', 'etl'], url: 'https://medium.com/towards-data-engineering/ground-control-to-major-pipelines-etl-pipelines-take-flight-7da764983af3', bg: '#CFE3F2', ink: '#0B2540', art: 'flight',
+  },
+  {
+    n: 'W04', title: 'From Data Chaos to Business Clarity: The Evolution of Modern Data Warehousing', short: 'From Data Chaos to Business Clarity', pub: 'Towards Data Engineering', date: 'Mar 2025', yr: '2025',
+    sum: 'From messy spreadsheet reports to the data warehouse, and how OLTP and OLAP systems split the work.',
+    tags: ['data warehousing', 'oltp vs olap'], url: 'https://medium.com/towards-data-engineering/from-data-chaos-to-business-clarity-the-evolution-of-modern-data-warehousing-361b0ba0126d', bg: '#E9DFC9', ink: '#2A2116', art: 'stack',
+  },
+  {
+    n: 'W03', title: 'From Blueprints to Business Intelligence: Mastering Kimball Data Model Design', short: 'From Blueprints to BI', pub: 'Towards Data Engineering', date: 'Feb 2025', yr: '2025',
+    sum: 'Kimball dimensional modeling for warehouses that scale: facts, dimensions and the star schema.',
+    tags: ['kimball', 'data modeling', 'star schema'], url: 'https://medium.com/towards-data-engineering/from-blueprints-to-business-intelligence-mastering-kimball-data-model-design-3e318d645051', bg: '#1F3D33', ink: '#E6F2EA', art: 'star',
+  },
+  {
+    n: 'W02', title: 'Modeling, But This Time Not on Runways', short: 'Modeling, Not on Runways', pub: 'Towards Data Engineering', date: 'Dec 2024', yr: '2024',
+    sum: 'A beginner guide and interview refresher on relational, dimensional and graph data models.',
+    tags: ['data modeling', 'interviews'], url: 'https://medium.com/towards-data-engineering/modeling-but-this-time-not-on-runways-51a881bb17d7', bg: '#F2C4C0', ink: '#3A1010', art: 'runway',
+  },
+  {
+    n: 'W01', title: 'Unlocking the Power of Statistics in Data Analysis', short: 'The Power of Statistics', pub: 'Medium', date: 'Nov 2024', yr: '2024',
+    sum: 'Descriptive and inferential statistics, hypothesis tests, confidence intervals and the normal distribution, worked in Python.',
+    tags: ['statistics', 'python'], url: 'https://medium.com/@revp/unlocking-the-power-of-statistics-in-data-analysis-e25e50f5b3e2', bg: '#1E1E22', ink: '#F2C94C', art: 'curve',
+  },
+];
+
+// Line art printed on each open scroll. Drawn with currentColor, so the scroll's paper ink colors it.
+export const writeArt = {
+  loops: '<svg viewBox="0 0 100 80" aria-hidden="true"><circle cx="50" cy="40" r="30"/><circle cx="50" cy="40" r="20"/><circle cx="58" cy="36" r="9"/><circle cx="58" cy="36" r="2" fill="currentColor"/></svg>',
+  flight: '<svg viewBox="0 0 100 80" aria-hidden="true"><path d="M10 66 C 30 66, 40 20, 88 16" stroke-dasharray="3 4"/><circle cx="10" cy="66" r="4"/><circle cx="36" cy="50" r="3"/><circle cx="56" cy="28" r="3"/><path d="M84 10l8 6-9 4z" fill="currentColor"/><path d="M4 74h40"/></svg>',
+  stack: '<svg viewBox="0 0 100 80" aria-hidden="true"><rect x="22" y="12" width="56" height="12" rx="2"/><rect x="16" y="30" width="68" height="12" rx="2"/><rect x="10" y="48" width="80" height="12" rx="2"/><path d="M10 70h80"/><path d="M30 18h8M30 36h16M30 54h24"/></svg>',
+  star: '<svg viewBox="0 0 100 80" aria-hidden="true"><rect x="38" y="30" width="24" height="20" rx="2" fill="currentColor" fill-opacity=".18"/><rect x="8" y="6" width="22" height="14" rx="2"/><rect x="70" y="6" width="22" height="14" rx="2"/><rect x="8" y="60" width="22" height="14" rx="2"/><rect x="70" y="60" width="22" height="14" rx="2"/><path d="M30 18l8 12M70 18l-8 12M30 62l8-12M70 62l-8-12"/></svg>',
+  runway: '<svg viewBox="0 0 100 80" aria-hidden="true"><path d="M38 6L22 76M62 6l16 70"/><path d="M50 12v6M50 26v8M50 42v10M50 60v12" stroke-width="2.4"/><rect x="6" y="20" width="18" height="12" rx="2"/><rect x="76" y="40" width="18" height="12" rx="2"/><path d="M24 26h8M68 46h8"/></svg>',
+  curve: '<svg viewBox="0 0 100 80" aria-hidden="true"><path d="M6 70h88"/><path d="M8 68 C 30 68, 36 12, 50 12 S 70 68, 92 68"/><path d="M50 12v58" stroke-dasharray="2 3"/><path d="M34 70v-24M66 70v-24" stroke-dasharray="2 3"/></svg>',
+};

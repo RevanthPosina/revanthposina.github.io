@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { profile, categories, cases, experience, education, stack, legend } from '../data/content.js';
+import { profile, categories, cases, experience, education, stack, legend, writes, writeArt } from '../data/content.js';
 import { pillFor, svgVis, caseBody } from '../lib/svg.js';
 
 const stackCount = stack.reduce((n, s) => n + s.tools.length, 0);
@@ -15,6 +15,7 @@ const catCounts = Object.keys(categories).map((k) => [k, categories[k], cases.fi
       <nav class="links" aria-label="Main">
         <a class="l" href="#about">About</a>
         <a class="l" href="#work">Work</a>
+        <a class="l" href="#writes">Writes</a>
         <a class="l" href="#experience">Experience</a>
         <a class="l" href="#stack">Stack</a>
         <a class="l" href="#off">Off the clock</a>
@@ -147,6 +148,52 @@ const catCounts = Object.keys(categories).map((k) => [k, categories[k], cases.fi
   </section>
 
   <div class="hatch"></div>
+  <section class="sec" id="writes" aria-labelledby="writes-h">
+    <div class="sec-h"><h2 id="writes-h">Writes</h2><span class="meta">{writes.length} essays on Medium</span></div>
+    <div class="wr-wrap">
+      <div class="wr-stage" id="wr-stage" tabindex="0" role="listbox" aria-label="Rack of essay scrolls. Use the arrow keys to browse and Enter to open.">
+        <div class="wr-fade wr-fl" aria-hidden="true"></div><div class="wr-fade wr-fr" aria-hidden="true"></div>
+        {writes.map((d) => (
+          <a class="wr-scr" href={d.url} target="_blank" rel="noopener" role="option" tabindex="-1" draggable="false" aria-selected={d === writes[0] ? 'true' : 'false'} aria-label={`${d.title}, ${d.pub}, ${d.date}`} style={`--cbg:${d.bg}; --cink:${d.ink}`}>
+            <div class="wr-rolled"><div class="wr-silk"></div><i class="wr-jk wr-t"></i><i class="wr-jk wr-b"></i><span class="wr-n">{d.n.slice(1)}</span><span class="wr-slip"><span>{d.short}</span></span><i class="wr-cord"></i><i class="wr-knot"></i><i class="wr-tas"></i></div>
+            <div class="wr-open">
+              <div class="wr-rol wr-l"><i class="wr-jk wr-t"></i><i class="wr-jk wr-b"></i><div class="wr-silk"></div></div>
+              <div class="wr-rol wr-r"><i class="wr-jk wr-t"></i><i class="wr-jk wr-b"></i><div class="wr-silk"></div></div>
+              <div class="wr-paper"><i class="wr-hy wr-t"></i><i class="wr-hy wr-b"></i>
+                <div class="wr-pin">
+                  <div class="wr-pl"><div class="wr-pt">{d.short}</div><div class="wr-pm"><span>{d.pub}</span><span>{d.date}</span></div><div class="wr-by">{profile.name}</div></div>
+                  <div class="wr-pr"><div class="wr-art" set:html={writeArt[d.art]}></div></div>
+                  <span class="wr-hanko">RP</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+      <p class="wr-note" aria-hidden="true">
+        <svg viewBox="0 0 34 18"><path d="M32 11c-8-3-17-3-27-1"/><path d="M11 4c-2 2-4 4-6 6 2 2 4 3 6 5"/></svg>
+        <span>swipe or drag sideways, tap to unroll</span>
+        <svg viewBox="0 0 34 18"><path d="M2 10c9-2 18-2 27 1"/><path d="M23 4c2 2 4 4 6 6-2 2-4 3-6 5"/></svg>
+      </p>
+      <div class="wr-detail" aria-live="polite">
+        <div class="wr-info">
+          <div class="wr-eye" id="wr-eye"><span>{writes[0].n}</span><span>{writes[0].pub}</span><span>{writes[0].date}</span></div>
+          <p class="wr-title" id="wr-title">{writes[0].title}</p>
+          <p class="wr-sum" id="wr-sum">{writes[0].sum}</p>
+          <div class="wr-tags" id="wr-tags">{writes[0].tags.map((t) => <span class="chip">{t}</span>)}</div>
+        </div>
+        <div class="wr-ctl">
+          <button class="iconbtn" type="button" id="wr-prev" aria-label="Previous essay"><svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+          <span class="wr-count" id="wr-count">01 / {String(writes.length).padStart(2, '0')}</span>
+          <button class="iconbtn" type="button" id="wr-next" aria-label="Next essay"><svg class="i" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+          <a class="iconbtn wr-primary" id="wr-link" href={writes[0].url} target="_blank" rel="noopener">Read on Medium <svg class="i" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <script type="application/json" id="writes-data" set:html={JSON.stringify(writes)} />
+  </section>
+
+  <div class="hatch"></div>
   <section class="sec" id="experience" aria-labelledby="exp-h">
     <div class="sec-h"><h2 id="exp-h">Experience</h2><span class="meta">2020 to now</span></div>
     <div class="xp">
@@ -249,5 +296,6 @@ const catCounts = Object.keys(categories).map((k) => [k, categories[k], cases.fi
 <div class="toast" id="toast" role="status"></div>
 <script>
   import '../scripts/ui.js';
+  import '../scripts/writes.js';
 </script>
 </Base>
