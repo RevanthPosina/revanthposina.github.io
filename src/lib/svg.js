@@ -52,6 +52,16 @@ export function svgVis(kind){
     b+='<rect x="170" y="12" width="138" height="56" rx="6" fill="var(--text)" opacity=".92"/><text x="180" y="28" font-family="var(--mono)" font-size="8" fill="var(--bg)">SELECT region, SUM(rev)</text><text x="180" y="41" font-family="var(--mono)" font-size="8" fill="var(--bg)">FROM sem.revenue</text><text x="180" y="54" font-family="var(--mono)" font-size="8" fill="var(--bg)">GROUP BY 1 LIMIT 5</text>';
     for(var ty=0;ty<3;ty++)for(var tx=0;tx<3;tx++)b+='<rect class="v-node" x="'+(170+tx*46)+'" y="'+(76+ty*11)+'" width="44" height="9" rx="2"/>';
     b+='<circle cx="30" cy="84" r="8" fill="var(--ok)"/><path d="M26,84 l3,3 5,-6" fill="none" stroke="var(--bg)" stroke-width="1.8"/><text class="v-txt" x="44" y="87">validated, read-only</text>';
+  }else if(kind==='branch'){
+    [22,44,66,88].forEach(function(y,i){var d='M32,'+y+' C70,'+y+' 80,52 108,52';b+='<circle cx="24" cy="'+y+'" r="6" fill="var(--accent)" opacity="'+(.45+i*.15).toFixed(2)+'"/><path class="d-edge" d="'+d+'"/>'+(i%2?'':'<path class="flow" style="animation-delay:-'+(i*.3)+'s" d="'+d+'"/>');});
+    b+='<rect class="v-node" x="108" y="36" width="78" height="32" rx="8"/><text class="v-txt" x="147" y="56" text-anchor="middle">reuse + budget</text>';
+    b+='<path class="d-edge" d="M186,52 C202,52 202,92 216,92"/><path class="v-line" d="M216,92 L308,92"/><path class="v-acc" d="M240,92 C254,92 252,64 268,64 L308,64"/>';
+    [224,256,292].forEach(function(x){b+='<circle cx="'+x+'" cy="92" r="4" fill="var(--text)"/>';});[280,300].forEach(function(x){b+='<circle cx="'+x+'" cy="64" r="4" fill="var(--accent)"/>';});
+    b+='<text class="v-txt" x="12" y="112">agents</text><text class="v-txt" x="216" y="110">main</text><text class="v-txt" x="268" y="54">agent branch</text>';
+  }else if(kind==='forget'){
+    ['postgres','iceberg','qdrant'].forEach(function(t,i){var x=14+i*104;b+='<rect class="v-node" x="'+x+'" y="18" width="84" height="28" rx="6"/><text class="v-txt" x="'+(x+42)+'" y="36" text-anchor="middle">'+t+'</text>';if(i<2){var d='M'+(x+84)+',32 L'+(x+104)+',32';b+='<path class="d-edge" d="'+d+'"/><path class="flow" d="'+d+'"/>';}});
+    for(var fr=0;fr<9;fr++){var fx=14+fr*33,hit=fr===4;b+='<rect class="'+(hit?'':'v-node')+'" x="'+fx+'" y="66" width="27" height="12" rx="2"'+(hit?' fill="none" stroke="var(--signal)" stroke-dasharray="3 2"':'')+'/>';}
+    b+='<path d="M150,62 l20,20 M170,62 l-20,20" stroke="var(--signal)" stroke-width="1.8" stroke-linecap="round"/><text class="v-txt" x="14" y="104">deleted logically, then physically</text>';
   }else if(kind==='rex'){
     b+='<polygon points="0,78 50,46 96,70 150,36 206,66 262,40 320,68 320,118 0,118" fill="var(--accent)" opacity=".16"/><polygon points="0,96 70,74 132,88 196,70 260,86 320,76 320,118 0,118" fill="var(--accent)" opacity=".3"/>';
     b+='<rect x="56" y="70" width="54" height="8" rx="2" fill="var(--text)" opacity=".75"/><rect x="160" y="54" width="48" height="8" rx="2" fill="var(--text)" opacity=".75"/><rect x="240" y="66" width="52" height="8" rx="2" fill="var(--text)" opacity=".75"/>';
