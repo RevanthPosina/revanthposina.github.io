@@ -69,9 +69,41 @@ svg.i{width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.8;
 .search-btn{padding:0 8px 0 10px}
 .search-btn .lbl{font-size:13px}
 @media (max-width:520px){ .search-btn .lbl,.search-btn .kbd{display:none} }
-.theme-btn .moon{display:none}
-:root[data-theme="dark"] .theme-btn .moon{display:block} :root[data-theme="dark"] .theme-btn .sun{display:none}
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .theme-btn .moon{display:block} :root:not([data-theme="light"]) .theme-btn .sun{display:none} }
+/* theme switch: 62x36 pill, sun on the left, moon on the right. The knob art follows data-face (set by ui.js mid-smear); before the script runs it follows the theme so first paint is right even with no data-theme and a dark OS. */
+.tsw-wrap{position:relative; flex:none; display:block; width:62px; height:36px}
+.tsw-smoke{position:absolute; left:50%; top:50%; width:140px; height:84px; margin:-42px 0 0 -70px; pointer-events:none; z-index:1}
+.tsw{--kx:0px; --m:0; position:relative; flex:none; display:block; width:62px; height:36px; padding:0; border:1px solid var(--line); border-radius:999px; background:var(--panel); cursor:pointer; overflow:hidden; -webkit-tap-highlight-color:transparent; transition:border-color .15s, background-color .2s}
+.tsw:hover{border-color:color-mix(in srgb, var(--muted) 45%, var(--line))}
+.tsw:focus-visible{border-radius:999px}
+:root[data-theme="dark"] .tsw{--kx:26px; background:var(--soft)}
+:root[data-theme="dark"] .tsw:not([data-face]){--m:1}
+.tsw[data-face="moon"]{--m:1}
+.tsw[data-face="sun"]{--m:0}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .tsw{--kx:26px; background:var(--soft)}
+  :root:not([data-theme="light"]) .tsw:not([data-face]){--m:1}
+  :root:not([data-theme="light"]) .tsw[data-face="sun"]{--m:0}
+}
+.tsw-knob{position:absolute; left:4px; top:4px; width:26px; height:26px; transform:translateX(var(--kx)); z-index:2}
+.tsw-body{position:absolute; inset:0; display:block}
+.tsw-body svg{position:absolute; inset:0; width:26px; height:26px; overflow:visible; transition:opacity .05s}
+.tsw-sun{opacity:calc(1 - var(--m))}
+.tsw-moon{opacity:var(--m)}
+.tsw-sun circle{fill:#F5B83D; stroke:color-mix(in srgb, var(--text) 62%, transparent); stroke-width:1.5}
+.tsw-rays{stroke:color-mix(in srgb, var(--text) 62%, transparent); stroke-width:1.5; stroke-linecap:round}
+.tsw-stars i{position:absolute; border-radius:50%; background:var(--muted); opacity:var(--m); transition:opacity .2s}
+.tsw-stars i:nth-child(1){left:8px; top:9px; width:2px; height:2px}
+.tsw-stars i:nth-child(2){left:15px; top:23px; width:1.5px; height:1.5px}
+.tsw-stars i:nth-child(3){left:23px; top:15px; width:2px; height:2px}
+.tsw-lines{position:absolute; inset:0; transform:scaleX(var(--ld,1)); z-index:1; pointer-events:none}
+.tsw-lines i{position:absolute; height:1.5px; border-radius:1px; background:var(--muted); opacity:0; transform-origin:right center}
+.tsw-lines i:nth-child(1){left:9px; width:17px; top:5px; rotate:-2deg}
+.tsw-lines i:nth-child(2){left:2px; width:8px; top:16.5px; rotate:1deg}
+.tsw-lines i:nth-child(3){left:6px; width:21px; top:28px; rotate:-1.5deg}
+.tsw-star,.tsw-burst{position:absolute; opacity:0; pointer-events:none; z-index:3}
+.tsw-star{left:17px; top:4px; width:11px; height:11px; fill:var(--accent)}
+.tsw-burst{left:32px; top:7px; width:20px; height:20px; fill:none; stroke:#F5B83D; stroke-width:1.5; stroke-linecap:round}
+@media (prefers-reduced-motion: reduce){ .tsw-knob{transition:transform .12s ease-out} }
 
 /* cover */
 .cover{position:relative; height:clamp(360px,46vw,600px); background-color:var(--cover); background-image:radial-gradient(var(--dot) 1px, transparent 1.2px); background-size:18px 18px; overflow:hidden; touch-action:pan-y; cursor:grab}
