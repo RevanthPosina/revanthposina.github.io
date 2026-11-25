@@ -284,13 +284,13 @@ export const cases = [
   {
     id: 'rex', cat: 'side', org: 'Game project', yrs: 'GitHub', vis: 'rex',
     repo: 'https://github.com/RevanthPosina/Rex_Runner',
-    title: 'Rex_Runner, a Unity platformer',
-    sum: 'A 3D open-world platformer scene inspired by the classics, built in Unity and C#.',
-    chips: ['Unity', 'C#', 'TextMeshPro', 'Animation'],
+    title: 'Rex_Runner, a 3D dinosaur game in Unity',
+    sum: 'Run a T. rex through an open 3D world, collecting coins, grabbing speed boosts and dodging a giant mutant. Built in Unity and C#.',
+    chips: ['Unity', 'C#', 'Animator', 'TextMeshPro'],
     bullets: [
-      'A 3D scene that takes the classic platformer idea to an open-world scale.',
-      'Player interactions and character animations, with TextMeshPro for in-game text.',
-      'A gameplay video lives in the repo README. The goal is a fully interactive open world with multiple levels.',
+      'Steer Rex around an open world and jump with Space. Spinning coins add to a live score while a follow camera eases in behind him.',
+      'Speed boosts double his speed for three seconds and leave a trail. A mutant giant chases him, and getting caught knocks Rex down and costs 5 points.',
+      'Sound and particle effects on every pickup and hit, a fade-in welcome screen, and a TextMeshPro score display. A gameplay video is in the repo README.',
     ],
   },
 ];
