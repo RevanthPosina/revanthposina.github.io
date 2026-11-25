@@ -80,9 +80,9 @@ export const cases = [
     },
   },
   {
-    id: 'adrp', cat: 'side', org: 'Personal, synthetic data', yrs: '2026', vis: 'forget',
+    id: 'adrp', cat: 'side', org: 'Personal', yrs: '2026', vis: 'forget',
     title: 'AI Data Reliability Platform',
-    sum: 'Postgres change data capture into an Apache Iceberg lakehouse and a Qdrant vector index, plus a harness that injects faults and delete requests and records whether the copies stay correct and whether deleted data is actually gone, logically and physically.',
+    sum: 'Copies a live payments database into analytics tables and an AI search index, then breaks the pipeline on purpose to prove two things: the copies stay correct, and when a customer asks to be deleted, their data is really gone, logically and physically.',
     chips: ['Postgres', 'Debezium', 'Redpanda', 'Spark Structured Streaming', 'Apache Iceberg', 'Trino', 'dbt', 'Qdrant', 'Dagster'],
     bullets: [
       'CDC from Postgres 17 through Debezium and Redpanda into Spark Structured Streaming, landing in Iceberg bronze (change log) and silver (current state) on SeaweedFS with a Lakekeeper catalog, a dbt-on-Trino gold layer, and Dagster for maintenance.',
@@ -98,7 +98,7 @@ export const cases = [
       { v: '307 s', k: 'median to logical deletion, 12 requests' },
       { v: '34.4 min', k: 'median to physical removal, 12 requests' },
     ],
-    note: 'A personal project on synthetic payments data, run on one laptop with no cloud services. Every figure comes from a recorded run manifest and holds only for the faults tested; counts from two or three runs are not rates. Physical removal time depends on when maintenance ran. Postgres WAL, Qdrant WAL and Spark spill are bounded, not removed.',
+    note: 'Runs on one laptop with no cloud services. Every figure comes from a recorded run manifest and holds only for the faults tested; counts from two or three runs are not rates. Physical removal time depends on when maintenance ran. Postgres WAL, Qdrant WAL and Spark spill are bounded, not removed.',
     dia: {
       h: 290,
       nodes: [
