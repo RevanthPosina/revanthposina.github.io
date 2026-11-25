@@ -14,15 +14,24 @@ const catCounts = Object.keys(categories).map((k) => [k, categories[k], cases.fi
       <a class="mark" href="#top" aria-label="Revanth Posina, back to top"><span class="mark-box">rp</span><span>Revanth</span></a>
       <nav class="links" aria-label="Main">
         <a class="l" href="#about">About</a>
+        <a class="l" href="#experience">Experience</a>
         <a class="l" href="#work">Work</a>
         <a class="l" href="#writes">Writes</a>
-        <a class="l" href="#experience">Experience</a>
         <a class="l" href="#stack">Stack</a>
         <a class="l" href="#off">Off the clock</a>
       </nav>
       <div class="nav-tools">
         <button class="iconbtn search-btn" type="button" id="open-pal" aria-label="Search the site"><svg class="i"><use href="#i-search"/></svg><span class="lbl">Search</span><span class="kbd">⌘K</span></button>
-        <button class="iconbtn theme-btn" type="button" id="theme" aria-label="Toggle light and dark theme"><svg class="i sun"><use href="#i-sun"/></svg><svg class="i moon"><use href="#i-moon"/></svg></button>
+        <button class="tsw" type="button" id="theme" role="switch" aria-checked="false" aria-label="Dark theme">
+          <span class="tsw-stars" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="tsw-lines" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="tsw-knob" aria-hidden="true"><span class="tsw-body">
+            <svg class="tsw-sun" viewBox="0 0 26 26"><g class="tsw-rays"><line x1="24.6" y1="13.0" x2="26.2" y2="13.0"/><line x1="21.2" y1="21.2" x2="22.3" y2="22.3"/><line x1="13.0" y1="24.6" x2="13.0" y2="26.2"/><line x1="4.8" y1="21.2" x2="3.7" y2="22.3"/><line x1="1.4" y1="13.0" x2="-0.2" y2="13.0"/><line x1="4.8" y1="4.8" x2="3.7" y2="3.7"/><line x1="13.0" y1="1.4" x2="13.0" y2="-0.2"/><line x1="21.2" y1="4.8" x2="22.3" y2="3.7"/></g><circle cx="13" cy="13" r="9.2"/></svg>
+            <svg class="tsw-moon" viewBox="0 0 26 26"><mask id="tsw-cut"><rect width="26" height="26" fill="#fff"/><circle cx="19.5" cy="8.5" r="8.6" fill="#000"/></mask><g mask="url(#tsw-cut)"><circle cx="13" cy="13" r="11.5" fill="#E8E8F5"/><circle cx="7.2" cy="14.2" r="1.4" fill="#C3C4E0"/><circle cx="11.4" cy="19.6" r="1.1" fill="#C3C4E0"/></g></svg>
+          </span></span>
+          <svg class="tsw-star" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 0C6.6 3.6 8.4 5.4 12 6C8.4 6.6 6.6 8.4 6 12C5.4 8.4 3.6 6.6 0 6C3.6 5.4 5.4 3.6 6 0Z"/></svg>
+          <svg class="tsw-burst" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5V5M10 15V18.5M1.5 10H5M15 10H18.5M4 4L6.4 6.4M13.6 13.6L16 16M16 4L13.6 6.4M6.4 13.6L4 16"/></svg>
+        </button>
         <a class="iconbtn" href={profile.links.github} target="_blank" rel="noopener" aria-label="GitHub profile"><svg class="i"><use href="#i-gh"/></svg></a>
       </div>
     </div>
@@ -62,7 +71,7 @@ const catCounts = Object.keys(categories).map((k) => [k, categories[k], cases.fi
       <div class="socials">
         <a class="iconbtn" href={profile.links.github} target="_blank" rel="noopener"><svg class="i"><use href="#i-gh"/></svg>GitHub</a>
         <a class="iconbtn" href={profile.links.linkedin} target="_blank" rel="noopener"><svg class="i"><use href="#i-in"/></svg>LinkedIn</a>
-        <a class="iconbtn" href={profile.links.medium} target="_blank" rel="noopener"><svg class="i"><use href="#i-book"/></svg>Medium</a>
+        <a class="iconbtn" href="#writes"><svg class="i"><use href="#i-book"/></svg>Writes</a>
         <a class="iconbtn" href={profile.links.kaggle} target="_blank" rel="noopener"><svg class="i"><use href="#i-chart"/></svg>Kaggle</a>
       </div>
     </div>
@@ -112,6 +121,42 @@ const catCounts = Object.keys(categories).map((k) => [k, categories[k], cases.fi
         <p>I care most about the parts that make data trustworthy: clear contracts between teams, quality checks, lineage, and agents with guardrails and evals. Forecasts and anomaly detection are only useful when people believe the data underneath.</p>
         <p>I studied data science at Indiana University Bloomington. Away from the keyboard I like to walk, watch Anime and Formula 1.</p>
       </div>
+    </div>
+  </section>
+
+  <div class="hatch"></div>
+  <section class="sec" id="experience" aria-labelledby="exp-h">
+    <div class="sec-h"><h2 id="exp-h">Experience</h2><span class="meta">2020 to now</span></div>
+    <div class="xp">
+      <aside class="xp-side">
+        <div class="xp-stage" id="xp-stage"><canvas id="c3d-xp" aria-hidden="true"></canvas><span class="fig">each layer is a role</span></div>
+        <div class="xp-nav" id="xp-nav" role="group" aria-label="Jump to a role">
+          {experience.map((x, i) => <button type="button" data-k={x.k} aria-current={i === 0 ? 'true' : 'false'}><i></i><span>{x.short || x.co}</span><small>{x.yr}</small></button>)}
+        </div>
+      </aside>
+      <div class="roles" id="roles">
+        {experience.map((x, i) => (
+          <article class:list={['role', { active: i === 0 }]} id={`role-${x.k}`} data-k={x.k}>
+            <div class="role-h">
+              <span class="role-logo">{x.m}</span>
+              <div><h3>{x.co}{x.current && <span class="badge"><i></i>current</span>}</h3><div class="meta">{x.meta}</div></div>
+              <span class="when">{x.when}</span>
+            </div>
+            <p class="role-sum">{x.sum}</p>
+            {x.ladder && <ul class="ladder">{x.ladder.map(([t, d]) => <li>{t}<span>{d}</span></li>)}</ul>}
+          </article>
+        ))}
+      </div>
+    </div>
+    <div class="sec-h" style="margin-top:26px; margin-bottom:12px"><h2 style="font-size:18px">Education and more</h2></div>
+    <div class="edu">
+      {education.map((e) => (
+        <div class="edu-row">
+          <span class="logo">{e.logo ? e.logo : <svg class="i"><use href={`#${e.icon}`} /></svg>}</span>
+          <span>{e.href ? <a href={e.href} target="_blank" rel="noopener"><b>{e.title}</b></a> : <b>{e.title}</b>}, {e.where}</span>
+          <span class="dim">{e.when}</span>
+        </div>
+      ))}
     </div>
   </section>
 
@@ -191,42 +236,6 @@ const catCounts = Object.keys(categories).map((k) => [k, categories[k], cases.fi
       </div>
     </div>
     <script type="application/json" id="writes-data" set:html={JSON.stringify(writes)} />
-  </section>
-
-  <div class="hatch"></div>
-  <section class="sec" id="experience" aria-labelledby="exp-h">
-    <div class="sec-h"><h2 id="exp-h">Experience</h2><span class="meta">2020 to now</span></div>
-    <div class="xp">
-      <aside class="xp-side">
-        <div class="xp-stage" id="xp-stage"><canvas id="c3d-xp" aria-hidden="true"></canvas><span class="fig">each layer is a role</span></div>
-        <div class="xp-nav" id="xp-nav" role="group" aria-label="Jump to a role">
-          {experience.map((x, i) => <button type="button" data-k={x.k} aria-current={i === 0 ? 'true' : 'false'}><i></i><span>{x.short || x.co}</span><small>{x.yr}</small></button>)}
-        </div>
-      </aside>
-      <div class="roles" id="roles">
-        {experience.map((x, i) => (
-          <article class:list={['role', { active: i === 0 }]} id={`role-${x.k}`} data-k={x.k}>
-            <div class="role-h">
-              <span class="role-logo">{x.m}</span>
-              <div><h3>{x.co}{x.current && <span class="badge"><i></i>current</span>}</h3><div class="meta">{x.meta}</div></div>
-              <span class="when">{x.when}</span>
-            </div>
-            <p class="role-sum">{x.sum}</p>
-            {x.ladder && <ul class="ladder">{x.ladder.map(([t, d]) => <li>{t}<span>{d}</span></li>)}</ul>}
-          </article>
-        ))}
-      </div>
-    </div>
-    <div class="sec-h" style="margin-top:26px; margin-bottom:12px"><h2 style="font-size:18px">Education and more</h2></div>
-    <div class="edu">
-      {education.map((e) => (
-        <div class="edu-row">
-          <span class="logo">{e.logo ? e.logo : <svg class="i"><use href={`#${e.icon}`} /></svg>}</span>
-          <span>{e.href ? <a href={e.href} target="_blank" rel="noopener"><b>{e.title}</b></a> : <b>{e.title}</b>}, {e.where}</span>
-          <span class="dim">{e.when}</span>
-        </div>
-      ))}
-    </div>
   </section>
 
   <div class="hatch"></div>
